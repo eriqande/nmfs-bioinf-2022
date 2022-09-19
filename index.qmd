@@ -30,7 +30,6 @@ online bioinformatics book](https://eriqande.github.io/eca-bioinf-handbook/essen
 
 * Day 1:
     - Shell Programming (50 Minutes)
-        - Unix shell scripts (refresher on making things executable)
         - Shell variables (setting and extracting values)
         - Exit status, and chaining commands with `&&`
         - Redirection of stdout and stderr, and pipes
@@ -38,7 +37,27 @@ online bioinformatics book](https://eriqande.github.io/eca-bioinf-handbook/essen
         - Capturing output into variables `$(...)`
         - Looping with `for; do ...; done`
         - `bash` functions
+        - Unix shell scripts (refresher on making things executable)
+        - `basename` and `dirname`.
     - Processing text files with `awk` (40 minutes)
-    - Putting these together with some examples.
+    - Putting these together with some examples. (20 minutes)
 * Day 2:
-    - Computing clusters
+    - Computing clusters and Slurm
+        -Homework: read from the beginning of the chapter
+        to the end of section 8.2   [here](https://eriqande.github.io/eca-bioinf-handbook/chap-HPCC.html)
+        - Learning about the cluster and your jobs. `sinfo` and `squeue`
+        - Write a convenience bash function or two: `myjobs` and `alljobs`
+        - Getting an interactive session on a compute node `srun`
+        - Environment modules on SEDNA
+        - Submitting jobs to the queue `sbatch`
+        - Job arrays.
+        - A useful script for orchestrating job arrays from a spreadsheet
+
+* Day 3:
+    - An introduction to Snakemake
+        - Will somewhat follow [these slides](https://eriqande.github.io/con-gen-2022/slides/snake-slides.html#/section)
+        - BUT, it will be modified to show use of SEDNA's environment modules
+        and also to show use of a profile for dispatching jobs to Slurm from
+        Snakemake.
+
+
