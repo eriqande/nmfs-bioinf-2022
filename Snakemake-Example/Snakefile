@@ -58,7 +58,7 @@ rule trim_reads:
   envmodules:
     "bio/trimmomatic/0.39"
   shell:
-    " trimmomatic PE {input} {output} "
+    " java -jar /opt/bioinformatics/bio/trimmomatic/trimmomatic-0.39/trimmomatic-0.39.jar  PE {input} {output} "
     "  ILLUMINACLIP:resources/adapters/TruSeq3-PE-2.fa:2:30:10  "
     "  LEADING:3  "
     "  TRAILING:3  "
