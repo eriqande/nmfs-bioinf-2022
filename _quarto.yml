@@ -1,0 +1,26 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "nmfs-bioinf-2022"
+  author: "Eric C. Anderson"
+  date: "9/19/2022"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+  sidebar:
+    logo: quarto-static/fisheries_header_logo_jul2019.png
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: source
+

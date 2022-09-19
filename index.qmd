@@ -1,0 +1,44 @@
+# Welcome! {.unnumbered}
+
+Welcome to the website for the National Marine Fisheries Service
+Linux, Slurm, and Bioinformatics training to be held virtually
+over three days:
+
+* Day 1: Monday, October 17, 2022. 10 AM - 12 PM PDT
+* Day 2: Tuesday, October 18, 2022. 10 AM - 12:30 PM PDT
+* Day 3: Wednesday, October 19, 2022. 10 AM - 12 PM PDT
+
+
+## Prerequisites
+
+This course will be using the SEDNA high-performance computing
+cluster located at the Northwest Fisheries Science Center. This cluster
+(and, hence, this course)
+is only available to NMFS employees and affiliates. If you are a NMFS
+employee and you are interested in this course, please see 
+[here](https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit#heading=h.qpx57rvxr0sj) for information about how to
+get an account on the cluster. 
+
+This course is intended for people who have already had some exposure
+to Unix or Linux.  You should be reasonably comfortable navigating around 
+the Unix filesystem using the command line.
+For a refresher, please read [this chapter from my
+online bioinformatics book](https://eriqande.github.io/eca-bioinf-handbook/essential-unixlinux-terminal-knowledge.html).
+
+
+## Proposed Course Topics
+
+* Day 1:
+    - Shell Programming (50 Minutes)
+        - Unix shell scripts (refresher on making things executable)
+        - Shell variables (setting and extracting values)
+        - Exit status, and chaining commands with `&&`
+        - Redirection of stdout and stderr, and pipes
+        - Grouping commands with `(...)`
+        - Capturing output into variables `$(...)`
+        - Looping with `for; do ...; done`
+        - `bash` functions
+    - Processing text files with `awk` (40 minutes)
+    - Putting these together with some examples.
+* Day 2:
+    - Computing clusters
