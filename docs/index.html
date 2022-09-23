@@ -183,7 +183,12 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Day 1:
 <ul>
-<li>Shell Programming (50 Minutes)
+<li>Introduction to the SEDNA cluster (15 minutes Krista and Giles)
+<ul>
+<li>Cluster infrastructure and configuration.</li>
+<li>Scientific software and the installation requests</li>
+</ul></li>
+<li>Shell Programming (40 Minutes)
 <ul>
 <li>Shell variables (setting and extracting values)</li>
 <li>Exit status, and chaining commands with <code>&amp;&amp;</code></li>
@@ -195,13 +200,14 @@ ul.task-list li input[type="checkbox"] {
 <li>Unix shell scripts (refresher on making things executable)</li>
 <li><code>basename</code> and <code>dirname</code>.</li>
 </ul></li>
-<li>Processing text files with <code>awk</code> (40 minutes)</li>
+<li>Processing text files with <code>awk</code> (35 minutes)</li>
 <li>Putting these together with some examples. (20 minutes)</li>
 </ul></li>
 <li>Day 2:
 <ul>
-<li>Computing clusters and Slurm (three 33 minute sessions, punctuated by two 10 minute breaks). We will be exploring the use of all of these with some bioinformatic tasks. Like indexing a genome. Mapping some reads, etc. -Homework: read from the beginning of the chapter to the end of section 8.2 <a href="https://eriqande.github.io/eca-bioinf-handbook/chap-HPCC.html">here</a>
+<li>Computing clusters and Slurm (three 33 minute sessions, punctuated by two 10 minute breaks). We will be exploring the use of all of these with some bioinformatic tasks. Like indexing a genome. Mapping some reads, etc.
 <ul>
+<li>Homework: read from the beginning of the chapter to the end of section 8.2 <a href="https://eriqande.github.io/eca-bioinf-handbook/chap-HPCC.html">here</a></li>
 <li>Learning about the cluster and your jobs: <code>sinfo</code> and <code>squeue</code></li>
 <li>Write a convenience bash function or two: <code>myjobs</code> and <code>alljobs</code></li>
 <li>Getting an interactive session on a compute node: <code>srun</code></li>
@@ -209,6 +215,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Submitting jobs to the queue: <code>sbatch</code></li>
 <li>Job arrays.</li>
 <li>A useful script for orchestrating job arrays from a spreadsheet: <code>line-assign.sh</code>. This will build off of what we learned the day before.</li>
+<li><code>scancel</code>: Help! I need to kill that job (or all the jobs) that I just started!</li>
+<li><code>seff</code>: get information on resource use of a job I already ran.</li>
 </ul></li>
 </ul></li>
 <li>Day 3:
