@@ -21,7 +21,7 @@ jobs: 1200
 keep-going: True
 rerun-incomplete: True
 printshellcmds: True
-use-conda: True
+use-envmodules: True
 cluster-status: status-sacct.sh
 cluster-cancel: scancel
 cluster-cancel-nargs: 1000
