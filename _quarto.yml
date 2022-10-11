@@ -8,6 +8,7 @@ book:
   date: "9/19/2022"
   chapters:
     - index.qmd
+    - quick-unix-review.qmd
     - shell-prog.qmd
     - summary.qmd
     - eca-setup-notes.qmd

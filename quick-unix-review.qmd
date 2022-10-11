@@ -1,4 +1,5 @@
-# Shell Programming
+# Quick review of some essential Unix
+
 
 - The bash shell is actually an interpreted programming language.
 - It has variables, for loops, flow control, etc.
