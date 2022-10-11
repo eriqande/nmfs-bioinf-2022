@@ -25,6 +25,14 @@ the Unix filesystem using the command line.
 For a refresher, please read [this chapter from my
 online bioinformatics book](https://eriqande.github.io/eca-bioinf-handbook/essential-unixlinux-terminal-knowledge.html).
 
+My goal is to:
+
+- teach the shell programming constructs and
+the text processing tricks that I find myself using all the time in my 
+day-to-day work
+- provide an introduction to how to use SLURM to do cluster computing
+- On the last day, show how Snakemake works, and how it can be used on the
+SEDNA cluster to simplify your bioinformatics life.
 
 ## Proposed Course Topics
 
