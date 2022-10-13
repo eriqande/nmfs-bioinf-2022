@@ -45,15 +45,16 @@ program on 30 different samples.
 
 To see what those files look like:
 ```{.sh filename="Paste this into your terminal"}
-zcat data/samtools_stats/s001_stats.tsv.gz | less
+gzip -cd data/samtools_stats/s001_stats.tsv.gz | less
 ```
 
-- Hit the SPACE-bar to go down, the `b` key to go back up
+- Hit the SPACE-bar to go down a screenful, the `b` key to go back up
+- Most terminal emulators let you use `up-arrow` and `down-arrow` to go one line at a time, too.
 - Hit the `q` key to quit out of the `less` viewer.
 
 To see it without lines wrapping all over the place try this:
 ```{.sh filename="Paste this into your terminal"}
-zcat data/samtools_stats/s001_stats.tsv.gz | less -S
+gzip -cd data/samtools_stats/s001_stats.tsv.gz | less -S
 ```
 
 - Now you can use the left and right arrows to see different parts of lines
@@ -63,8 +64,9 @@ that are not wrapped on the screen.
 
 ## Unix commands we just saw:
 
-- `zcat`: decompress gzipped file to _stdout_.
-- `less`: page view.  Great to pipe output into. (`SPACE-bar`, `b`, `q`)
+- `gzip -cd`: decompress gzipped file to _stdout_ (this is what `zcat` does, but `zcat` is not
+portable).
+- `less`: page view.  Great to pipe output into. (`SPACE-bar`, `b`, `q`, `down-arrow`, `up-arrow`)
     - `less -S`: option to not wrap lines.  (`left-arrow`, `right-arrow`)
 :::
 
@@ -88,7 +90,7 @@ Unix terminal is a command that has this structure:
 - The options are often given:
     - with a dash plus a single character, like `-l` or `-S` or `-a`, `-v`, `-z`.
         - In most commands that are part of Unix, these single options can be combined,
-         so `-avz`, is the same as `-a -v -z`.
+         so `-cd`, is the same as `-c -d`.
     - with two dashes and a word, like `--long` or `--version`
     - Sometimes options take arguments, like `--cores 20`, but sometimes, they stand alone.  
         - When they stand alone they are sometimes called _flags_.
@@ -103,6 +105,10 @@ Identify the command, options, and arguments in:
 
 ```{.sh}
 tree -d ..
+
+# and
+
+gzip -cd data/samtools_stats/s001_stats.tsv.gz
 ```
 :::
 
@@ -110,10 +116,17 @@ tree -d ..
 
 ## Self-study answer
 
+First case:
+
 - `tree` is the command 
 - `-d` is the option (print only directory names, not files)
 - `..` is the argument (one directory level up)
 
+Second case:
+
+- `gzip` is the command
+- The options are `-c` and `-d`, contracted into `-cd`
+- `data/samtools_stats/s001_stats.tsv.gz` is the argument
 :::
 
 
@@ -142,6 +155,38 @@ string you want and then RETURN.
     - If searching for a single letter option try searching with `[, ]` afterward.
     - For example, to search for the `-d` flag you would type `/`, then `-d[, ]`, then
     hit RETURN.  Try it on the `tree` man page.
+:::
+
+
+::: {.callout-tip}
+
+## Self-study questions
+
+1. Learn about `gzip`
+    - Use man to read information about the `gzip` command
+    - Find information about the `-c` and the `-d` options.
+        - Maybe even search for those using the "slash-pattern" bonus tip from above.
+
+2. Learn about the `ls` command 
+    - Use `man` to see information about the `ls` command, which lists directories and their contents
+    - Find out what the `-R` option does. Maybe even look for it using the Bonus Tip above.
+    - Do the same for the `-Q` option.
+    - Look at what those do by doing `ls -RQ` on your terminal.
+:::
+
+::: {.callout-tip collapse=true}
+
+## Self-study answers
+
+1. 
+    - `man gzip`
+    - To search for `-c`, type `/-c` + return.  You might have better results with `/-c[, ]`.
+        - use `n` or `N` to go forward or backward through the occurrences of `-c`.
+    
+2. 
+    - You would do `man ls`
+    - To search for `-R` in the man pages, a good way to do it would be to type `/-Q` + RETURN, or
+      maybe `/-Q[, ]` + RETURN.
 :::
 
 
@@ -220,7 +265,7 @@ _piping_ the `stdout` from one command in as the `stdin` to the next command.
 
 We have already used the pipe when we did:
 ```{.sh}
-zcat data/samtools_stats/s001_stats.tsv.gz | less
+gzip -cd data/samtools_stats/s001_stats.tsv.gz | less
 ```
 
 Pipe syntax is pretty simple:
@@ -236,7 +281,7 @@ means pipe the `stdout` output of `command1` in as
 - If a Unix command fails, typically the program/command will
 bark at you to tell you why it failed.  This can be very useful.
 - The stream it writes this information to is called `stderr`, which is
-short for `standard error`.
+short for _standard error_.
 - Some bioinformatics programs write progess and log output to `stderr`.
 
 If you are running a program non-interactively, it is **extremely** valuable
@@ -252,7 +297,7 @@ after `stdout`.
 ## Bonus side comment:
 
 As you might imagine, you could redirect `stdout` by using
-`1>` instead of `>`, since it is stream #1.
+`1>` instead of `>`, since `stdout` is stream #1.
 :::
 
 For example, try this:
@@ -260,8 +305,8 @@ For example, try this:
 tree -d --not-a-real-option .. > outputs/repo-tree.txt
 ```
 
-- Aha!  We get a warning note printed on the screen.
-- (`stderr` goes to the screen by default).
+- Aha!  We get a warning note printed on the screen,
+- Because, `stderr` gets printed to the terminal by default.
 - Also `outputs/repo-tree.txt` has been overwritten and is now a file with nothing in it.
 
 So, try this:
@@ -292,4 +337,41 @@ to enjoy coding in R).
 given, they are separated by little `==> filename <==` lines, which is super convenient
 if you want to look at the top of a lot of files.
     - `head -n XX`: print the first XX lines (instead of 10).
+:::
+
+
+::: {.callout-tip}
+
+## Self-study questions
+
+1. Decompress `data/samtools_stats/s001_stats.tsv.gz` onto `stdout` using the
+`gzip -cd` command _and_ pipe the output into `wc` to count how many lines words,
+and characters are in the file.
+2. Do the same that you did above, but redirect the `stdout` to a file `so.txt` and
+`stderr` to a file `se.txt` in the current working directory.
+:::
+
+::: {.callout-tip collapse=true}
+
+## Self-study answers
+
+These could be done like this:
+
+1. `gzip -cd data/samtools_stats/s001_stats.tsv.gz | wc`
+2. `gzip -cd data/samtools_stats/s001_stats.tsv.gz | wc > so.txt 2>se.txt`
+
+As an interesting side note, this will only redirect stderr for the `wc`
+command into `se.txt`.  If the first command fails, its `stderr` will to to
+the screen.  Try this:
+```{.sh filename="Paste this into your shell"}
+gzip -cd --bogus-option data/samtools_stats/s001_stats.tsv.gz | wc > so.txt 2>se.txt
+```
+
+An interesting fact is that you can redirect `stderr` from the first command
+before the pipe.  So, to redirict `stderr` for the `gzip` command into a file
+called `ze.txt`, we could do:
+```{.sh filename="Paste this into your shell"}
+gzip -cd --bogus-option data/samtools_stats/s001_stats.tsv.gz 2>ze.txt | wc > so.txt 2>se.txt
+```
+Have a look at the contents of `ze.txt`.
 :::

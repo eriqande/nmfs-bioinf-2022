@@ -2,16 +2,205 @@
 
 - The bash shell is actually an interpreted programming language.
 - It has variables, `for` loops, flow control, etc.
-- Here, we survey a few of the most useful constructs
+- Here, we survey just a few of the most useful constructs that let
+us to a lot of things, and particularly allow us to tackle
+repetitive tasks with grace.
 
 
 
 ## Variables
 
-Stored as strings. In some contexts can be used like numbers.
+The bash shell can store strings into variables.  These variables can
+be accessed later.
+
+### Assigning variable values
+
+- bash is remarkably picky about how to assign a value to a variable.
+- Use the equals sign _with no spaces around it!_
+
+Here, we can assign a value to a variable called PHONE:
+```{.sh filename="Paste this into your shell"}
+PHONE=974-222-4444
+```
+
+In this case the digits and dashes `974-222-4444` are treated as just
+a string of characters and assigned to the variable `PHONE`.
+
+### Accessing variable values
+
+- The process of accessing the values stored in the variable is called
+"variable substitution.
+- It means: "Substitute the value for the variable where it appears on the command line."
+- In many programming languages, you can just write a variable's name and know that
+its value will be accessed, like in R:
+```{.r}
+Variable <- 16
+sqrt(Variable)
+```
+- **However, in bash, variable substitution is achieved by prepending `$` to the variable's name.**
+
+Witness:
+```{.sh filename="Paste this into your shell"}
+echo The value of PHONE is: $PHONE
+```
+
+Cool!
+
+- Remember: if you make a substitution to the menu at a fancy restaurant, it is going to cost you
+some dollars.  Same way when you make a variable substitution in bash: it costs you a dollar sign
+and you have to pay up front.
+
+
+### Valid bash variable names
+
+The bash shell demands that the names of variables:
+
+- Start with `_` (an underscore) or a letter
+- Then include only `_`, letters, or numbers
+
+```{.sh}
+# good variable names
+MY_JOBS
+_NOW
+STRING
+i
+i_2
+i2
+
+# cannot be variable names
+1_node
+4THIS
+BIG-VAR
+file-name
+Sh**t!
+```
+
+## Strings with spaces, etc:  Quoting.
+
+- If you want to assign a string to a variable that has spaces in it
+you can quote the string, which holds it together as one "unit."
+
+::: {.callout-warning collapse=true}
+
+## Bonus Info:
+
+When the bash shell is interpreting a line of input, it breaks
+it into chunks called _tokens_ which are separated by white space
+(spaces and TABS).  If you wrap a series of words in quotation
+marks, it turns them all into a single token.
+:::
+
+For example:
+```{.sh filename="Paste this into your shell"}
+Mandela_Quote="The greatest glory in living lies not in never falling, but in rising every time we fall."
+echo $Mandela_Quote
+```
+
 
 ## Variable substitution and `"` vs `'`
 
+We have two types of quotes:
+
+- single quotes, like `'`
+- double quotes, like `"`
+
+They both chunk their contents into a single unit, but
+they behave very differently _with respect to variable
+substition_.
+
+- Single Quotes: surly and strict, you can't substitute 
+values for variables inside of these.
+
+Example:
+```{.sh filename="Paste this into your shell"}
+DESSERT="apple pie"
+echo 'Dessert tonight is $DESSERT'
+```
+
+
+- Double Quotes: soft and friendly, you CAN substitute 
+values for variables inside of these.
+
+Example:
+```{.sh filename="Paste this into your shell"}
+DESSERT="apple pie"
+echo "Dessert tonight is $DESSERT"
+```
+
+::: {.callout-tip}
+
+## Self study
+
+Define the shell variables `NAME`, `FOOD`, and `ACTIVITY` so that
+when you run the following command, it makes sense:
+```{.sh filename="After definining the three variables, run this command"}
+echo "My name is $NAME. I like to eat $FOOD, and I enjoy $ACTIVITY." 
+```
+:::
+
+::: {.callout-tip collapse=true}
+
+## Self Study answer
+
+For my case, I could put:
+```{.sh}
+NAME=Eric
+FOOD="steamed broccoli"
+ACTIVITY="inline skating long distances"
+```
+:::
+
+
+## Variables are not just to be echoed!
+
+Invariably, when learning how to use shell variables, all the
+examples have you using `echo` to print the value of the
+variable.  How boring and misleading.
+
+It is important to understand that after a value gets substituted
+onto the command line, the shell goes right ahead and evaluates
+the resulting command line.
+
+So, you can record shell variables that are command lines that
+do something, themselves, once they are run as a command line.
+
+For example, here we make a variable whose value is the command
+to decompress a file to stdout:
+```{.sh filename="Paste this into your shell"}
+MyComm="gzip -cd data/samtools_stats/s001_stats.tsv.gz"
+```
+And now if you just substitute that variable onto the command line
+```{.sh filename="Type this at the command line"}
+$MyComm
+```
+the uncompressed contents of the file `data/samtools_stats/s001_stats.tsv.gz` go
+zooming by on your screen.
+
+### Some subtlety about evaluation of substituted values
+
+If the value of the variable that is being evaluated includes _pipes_, 
+_redirections_, or variable assignment statements, then if you just subtituting
+it into the command line, it won't properly be evaluated as a command line
+in full.  For example, if `MyComm` was trying to decompress the file and
+pipe it to `less`, it doesn't work as expected:
+```{.sh filename="Paste this into your shell"}
+MyComm="gzip -cd data/samtools_stats/s001_stats.tsv.gz | less -S"
+```
+And now if you just substitute that variable onto the command line
+the shell gets confused, because it doesn't recognize the pipe as a pipe!
+```{.sh filename="Type this at the command line"}
+$MyComm
+```
+
+However, you can use the `eval` keyword before `$MyComm` to ensure
+that the shell recognizes that you intend for it to evaluate pipes,
+redirects, shell variable assignment, etc. in the substituted variable
+value as it normally would:
+```{.sh filename="Type this at the command line"}
+eval $MyComm
+```
+
+We will end up using this later.
 
 ## For loops
 
