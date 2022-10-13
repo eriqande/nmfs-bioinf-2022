@@ -202,13 +202,148 @@ eval $MyComm
 
 We will end up using this later.
 
+
+## Multiple commands on one line with `;`
+
+- You can put a `;` after a command, and it will behave like a line ending---the
+shell will run that command, and then go to the next.
+
+Example:
+```{.sh filname="Paste this into your terminal"}
+echo "Let us do this command and 2 others"; echo "here is number 2"; echo "and the third"
+```
+
+This comes in handy.
+
+
+## Repetition
+
+Let's face it, bioinformatics, or any sort of data analysis or
+processing often involves doing the _same_ thing to a number of
+_different_ inputs.
+
+Most unix utilities and designed so that if you give it multiple inputs
+it will do the same thing to each and report the results in a way that is
+easy to understand.
+
+For example, to see how many lines, words, and characters are in each Quarto
+(the successor to RMarkdown) document that I used to make this website, we
+can use `wc` on all the files with a `.qmd` extension that are one directory
+level above where we are currently:
+```{.sh filename="Paste this into your shell"}
+wc ../*.qmd
+```
+
+This is nice.
+
 ## For loops
 
-loop over the .gz files and zcat | wc.
+Sometimes, however, we have more complex operations to do, so we can't
+just provide multiple files to a single Unix utility.
+
+For example, let's say we want to know how many lines are in each of the
+samtools stats files in the `data/samtools_stats` directory.  We can't use
+`wc` directly, because these files are gzipped, and the result we get won't be
+equal to the number of lines, words, and characters in each file.
+
+For repetition in these cases, bash has a `for` loop.  Its syntax looks like this:
+```{.sh}
+for VAR in thing1 thing2 ... thingN; do
+  some command where $VAR substitutes each of the N things in turn
+done
+```
+
+The important "structural" parts of that are:
+
+- the `for`
+- the `in`
+- the semicolon after all the things
+- the `do`
+- the `done`
+
+Here is an example:
+```{.sh filename="Paste this into your terminal"}
+for LIKE in trout butterflies "blue skies" "mathematical notation"; do 
+  echo "I like $LIKE."
+done
+```
+
+
+Note that this is written over multiple lines, but we can substitute
+`;` for the ends of statements and put it all on one line. (Useful if we are
+just hacking away on the command line...)
+```{.sh filename="This does the same as the above one"}
+for LIKE in trout butterflies "blue skies" "mathematical notation"; do echo "I like $LIKE."; done
+```
+
+Note! Don't put a semicolon after `do`.
+
+::: {.callout-tip}
+
+## Self study
+
+We want to give the number of text lines, words, and characters from all
+the samtools_stats files.  
+
+**Prep:** Here is a command that prints the name of each
+file. 
+```{.sh filename="Paste this into the terminal"}
+for FILE in data/samtools_stats/*.gz; do echo $FILE; done
+```
+
+**Task:** I have added the `-n` option to the `echo` command which
+makes it not print a line ending. Your
+task is to replace YOUR_STUFF_HERE with an appropriate shell command
+to decompress each file and then print the number of lines, words, and characters
+in it:
+```{.sh filename="Paste this, edit YOUR_STUFF_HERE, and run it"}
+for FILE in data/samtools_stats/*.gz; do echo -n $FILE; YOUR_STUFF_HERE; done
+```
+
+:::
+
+::: {.callout-tip collapse=true}
+
+## Self Study answer
+
+Your edited command line should look like this:
+```{.sh}
+for FILE in data/samtools_stats/*.gz; do echo -n $FILE; gzip -cd $FILE | wc; done
+```
+
+:::
+
 
 ## Redirect `stdout` from the `done`
 
-## basename
+Here is something that is not always obvious: you can redirect or
+pipe the `stdout` of the whole for loop by using `>` or `|` immediately
+after the `done` keyword.
+
+Using the example from the self study above:
+```{.sh filename="Paste this into your terminal"}
+for FILE in data/samtools_stats/*.gz; do 
+  echo -n $FILE; gzip -cd $FILE | wc; 
+done > word_counts.txt
+```
+
+Now look at what is in `word_counts.txt`.
+
+## A few useful topics, rapidly
+
+### basename
+
+- If you have a path name to a file `this_dir/that_dir/my_file3.txt`, but you
+want to have the string for just the file name, `my_file3.txt`, you can use the
+`basename` command: 
+```{.sh filename="Try these"}
+basename this_dir/that_dir/my_file3.txt
+basename ~/Documents/git-repos/CKMRpop/R/plot_conn_comps.R
+```
+
+### Capture `stdout` into a token to put on the command line
+
+
 
 ## Fancier variable substitution
 
