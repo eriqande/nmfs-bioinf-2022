@@ -1,4 +1,4 @@
-# Quick Unix review
+# Quick Unix Review
 
 We are going to take 15 or 20 minutes to do a whirlwind
 review of some crucial Unix topics

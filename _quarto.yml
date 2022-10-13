@@ -10,6 +10,7 @@ book:
     - index.qmd
     - quick-unix-review.qmd
     - shell-prog.qmd
+    - awk-intro.qmd
     - summary.qmd
     - eca-setup-notes.qmd
     - references.qmd
