@@ -1,10 +1,7 @@
-# Quick review of some essential Unix
+# Quick Unix review
 
-
-- The bash shell is actually an interpreted programming language.
-- It has variables, for loops, flow control, etc.
-- Let's get familiar with this!
-
+We are going to take 15 or 20 minutes to do a whirlwind
+review of some crucial Unix topics
 
 ## Setting up our workspace
 
@@ -12,8 +9,7 @@
 that we be using.
 - It also contains all these notes.
 - I want everyone to download it to their home directory and then
-`cd` into its `playground` directory, where we will be playing for the
-next two days.
+`cd` into its `playground` directory, where we will be playing today and tomorrow.
 
 After logging onto SEDNA:
 ```{.sh filename="Paste this into your shell"}
@@ -39,9 +35,6 @@ The `data` directory has a few things that we will be using for examples.
 - `git`: run git subcommands, like `clone` with this. In the above case it clones
 the repository that is found at the GitHub URL.
 - `tree`: Super cool "text-graphical" directory listing
-- `less`: page view.  Great to pipe output into. (`SPACE-bar`, `b`, `q`)
-    - `less -S`: option to not wrap lines.  (`left-arrow`, `right-arrow`)
-
 :::
 
 ## A motivating example
@@ -60,7 +53,7 @@ zcat data/samtools_stats/s001_stats.tsv.gz | less
 
 To see it without lines wrapping all over the place try this:
 ```{.sh filename="Paste this into your terminal"}
-zcat data/samtools_stats/s001_stats.tsv.gz | less
+zcat data/samtools_stats/s001_stats.tsv.gz | less -S
 ```
 
 - Now you can use the left and right arrows to see different parts of lines
@@ -71,9 +64,8 @@ that are not wrapped on the screen.
 ## Unix commands we just saw:
 
 - `zcat`: decompress gzipped file to _stdout_.
-- `less`: page view.  Great to pipe output into.
-    - `less -S`: option to not wrap lines.
-
+- `less`: page view.  Great to pipe output into. (`SPACE-bar`, `b`, `q`)
+    - `less -S`: option to not wrap lines.  (`left-arrow`, `right-arrow`)
 :::
 
 ### (One of) Our Missions...
@@ -95,7 +87,7 @@ Unix terminal is a command that has this structure:
 - The `command` is the name of the command itself (like `cd` or `less`).
 - The options are often given:
     - with a dash plus a single character, like `-l` or `-S` or `-a`, `-v`, `-z`.
-    - In most commands that are part of Unix, these single options can be combined,
+        - In most commands that are part of Unix, these single options can be combined,
          so `-avz`, is the same as `-a -v -z`.
     - with two dashes and a word, like `--long` or `--version`
     - Sometimes options take arguments, like `--cores 20`, but sometimes, they stand alone.  
@@ -133,7 +125,24 @@ with the `man` command.  For example:
 man tree
 ```
 - That gives you more information than you will ever want to know.
-- It starts with a synopsis of all the options, etc.
+- It starts with a synopsis of the syntax, which can feel _very_ intimidating.
+
+::: {.callout-warning collapse=true}
+
+## Bonus Tips:
+
+- Man uses the `less` viewer for presenting contents of the man pages.
+
+- When you are viewing `man` pages, you can scroll down with SPACE-bar and
+up with `b`, and get out with `q`, just like in `less`
+
+- To search for patterns in the manual pages, you can type `/` then the
+string you want and then RETURN.
+    - When in pattern-searching mode, use `n` to go to the next occurrence, and `N` to the previous.
+    - If searching for a single letter option try searching with `[, ]` afterward.
+    - For example, to search for the `-d` flag you would type `/`, then `-d[, ]`, then
+    hit RETURN.  Try it on the `tree` man page.
+:::
 
 
 ## Streams and redirection
@@ -161,7 +170,7 @@ less outputs/repo-tree.txt
 ```
 
 Aha! Instead of writing the output to the screen, it just puts it in the file
-`less outputs/repo-tree.txt`, as we told it to.
+`outputs/repo-tree.txt`, as we told it to.
 
 ::: {.callout-important}
 
@@ -186,6 +195,17 @@ echo "And then add another line" >> outputs/repo-tree.txt
 ```
 
 
+::: {.callout-note collapse=true}
+
+## Unix commands we just saw:
+
+- `mkdir`: make a new directory
+    - (check out the `-p` option, which means "make any necessary parent directories
+      and don't complain if the directory already exists.")
+- `echo`: print the argument (usually a string) to `stdout`.
+:::
+
+
 ## Pipes: redirecting into another Unix command
 
 As we have said, many Unix utilities take files as their arguments, and they
@@ -202,3 +222,74 @@ We have already used the pipe when we did:
 ```{.sh}
 zcat data/samtools_stats/s001_stats.tsv.gz | less
 ```
+
+Pipe syntax is pretty simple:
+```{.sh}
+command1 | command2
+```
+means pipe the `stdout` output of `command1` in as
+`stdin` input for `command2`.
+
+
+## `stderr`: The stream Unix uses to yell at you
+
+- If a Unix command fails, typically the program/command will
+bark at you to tell you why it failed.  This can be very useful.
+- The stream it writes this information to is called `stderr`, which is
+short for `standard error`.
+- Some bioinformatics programs write progess and log output to `stderr`.
+
+If you are running a program non-interactively, it is **extremely** valuable
+and important to redirect `stderr` to a file, so you can come back later
+to see what went wrong, if your job failed.
+
+- `stderr` is redirected with `2>`.
+- Think of the 2 as meaning that `stderr` is the second-most important stream,
+after `stdout`.
+
+::: {.callout-warning collapse=true}
+
+## Bonus side comment:
+
+As you might imagine, you could redirect `stdout` by using
+`1>` instead of `>`, since it is stream #1.
+:::
+
+For example, try this:
+```{.sh filename="Paste this into your shell"}
+tree -d --not-a-real-option .. > outputs/repo-tree.txt
+```
+
+- Aha!  We get a warning note printed on the screen.
+- (`stderr` goes to the screen by default).
+- Also `outputs/repo-tree.txt` has been overwritten and is now a file with nothing in it.
+
+So, try this:
+```{.sh filename="Paste this into your shell"}
+tree -d --not-a-real-option .. > outputs/repo-tree.txt 2>outputs/error.txt
+```
+
+Now, look at the contents of both `outputs/error.txt` and `outputs/repo-tree.txt`:
+```{.sh filename="Paste this into your shell"}
+head outputs/repo-tree.txt outputs/error.txt
+```
+
+
+
+
+::: {.callout-note collapse=true}
+
+## Stream operators and commands that we just saw:
+
+- `> path/to/file`: redirect `stdout` to file at `path/to/file`.  This _overwrites_
+any file already at `path/to/file`.
+- `>> path/to/file`: redirect `stdout` to _append_ to file at `path/to/file`.  If `path/to/file` does not exist, it creates it and then adds the contents of `stdout` to it.
+- `2> path/to/file`: redirect `stderr` to the file at `path/to/file`.
+- `|`: the uber-useful Unix pipe.  (Just as an aside, when R finally got a similar 
+construct---the `%>%` from the 'magrittr' package---it became much easier for Unixy people
+to enjoy coding in R). 
+- `head`: print the first ten lines of a file to `stdout`. If multiple file arguments are
+given, they are separated by little `==> filename <==` lines, which is super convenient
+if you want to look at the top of a lot of files.
+    - `head -n XX`: print the first XX lines (instead of 10).
+:::
