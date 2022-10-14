@@ -1,0 +1,12 @@
+# A Brief `awk` Intro
+
+- `awk` is a lighweight, completely awesome, little
+  scripting language that is perfect for ripping through
+  large text files with a minimal memory footprint.
+- We will only scratch the surface of it, here, but
+  I hope it encourages `awk` newcomers to explore it more.
+- `awk` can make many tasks on the command line simple,
+  fast, and fun.
+- For a more detailed introduction, you might find
+  [this chapter](https://eriqande.github.io/eca-bioinf-handbook/sed-awk-and-regular-expressions.html) of my Bioinformatics Handbook
+  of some use. (And there are many other resources online, as well).

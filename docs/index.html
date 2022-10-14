@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.189">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -32,7 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./quick-unix-review.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -104,12 +104,27 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./quick-unix-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quick Unix Review</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./shell-prog.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./awk-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Brief <code>awk</code> Intro</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eca-setup-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Notes on Eric’s Setup Process</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -177,6 +192,12 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
 <p>This course will be using the SEDNA high-performance computing cluster located at the Northwest Fisheries Science Center. This cluster (and, hence, this course) is only available to NMFS employees and affiliates. If you are a NMFS employee and you are interested in this course, please see <a href="https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit#heading=h.qpx57rvxr0sj">here</a> for information about how to get an account on the cluster.</p>
 <p>This course is intended for people who have already had some exposure to Unix or Linux. You should be reasonably comfortable navigating around the Unix filesystem using the command line. For a refresher, please read <a href="https://eriqande.github.io/eca-bioinf-handbook/essential-unixlinux-terminal-knowledge.html">this chapter from my online bioinformatics book</a>.</p>
+<p>My goal is to:</p>
+<ul>
+<li>teach the shell programming constructs and the text processing tricks that I find myself using all the time in my day-to-day work</li>
+<li>provide an introduction to how to use SLURM to do cluster computing</li>
+<li>On the last day, show how Snakemake works, and how it can be used on the SEDNA cluster to simplify your bioinformatics life.</li>
+</ul>
 </section>
 <section id="proposed-course-topics" class="level2">
 <h2 class="anchored" data-anchor-id="proposed-course-topics">Proposed Course Topics</h2>
@@ -336,8 +357,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./quick-unix-review.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quick Unix Review</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
