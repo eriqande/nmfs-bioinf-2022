@@ -1,4 +1,4 @@
-# Shell Programming
+# Shell Programming {#shell-prog}
 
 - The bash shell is actually an interpreted programming language.
 - It has variables, `for` loops, flow control, etc.

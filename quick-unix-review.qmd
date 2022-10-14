@@ -1,4 +1,4 @@
-# Quick Unix Review
+# Quick Unix Review {#quick-unix-review}
 
 We are going to take 15 or 20 minutes to do a whirlwind
 review of some crucial Unix topics
@@ -21,7 +21,7 @@ cd nmfs-bioinf-2022/playground
 - This is where our working directory will be for the next two days.
 - Use the `tree` utility to see the files that we have to play with within
 this playground:
-```{.sh filename="Type this command at you prompt"}
+```{.sh filename="Type this command at your prompt"}
 tree
 ```
 
@@ -75,7 +75,8 @@ portable).
 It is pretty typical that Bioinformatic outputs will be spread as small bits of
 information across multiple files.
 
-One motivating example is summarizing the number of properly paired reads,
+One motivating example is summarizing the total number of reads mapped, the
+number of properly paired reads,
 and the total number of bases mapped, in all 30 samples, _in a table_.
 
 ## The anatomy of a Unix command

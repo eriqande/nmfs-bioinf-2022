@@ -36,24 +36,15 @@ SEDNA cluster to simplify your bioinformatics life.
 
 ## Proposed Course Topics
 
-* Day 1:
+
+* Day 1: Intro, Unix-review, shell programming, `awk`
     - Introduction to the SEDNA cluster (15 minutes Krista and Giles)
         - Cluster infrastructure and configuration.
         - Scientific software and the installation requests
-    - Shell Programming (40 Minutes)
-        - Shell variables (setting and extracting values)
-        - Exit status, and chaining commands with `&&`
-        - Redirection of stdout and stderr, and pipes
-        - Grouping commands with `(...)`
-        - Capturing output into variables `$(...)`, and the need to use
-        `eval` if you want to properly evaluate some constructs within them.
-        - Looping with `for; do ...; done`
-        - `bash` functions
-        - Unix shell scripts (refresher on making things executable)
-        - `basename` and `dirname`.
-    - Processing text files with `awk` (35 minutes)
-    - Putting these together with some examples. (20 minutes)
-* Day 2:
+    - [Quick Unix Review](quick-unix-review.qmd#quick-unix-review) (25 minutes)
+    - [Shell Programming](shell-prog.qmd#shell-prog) (50 Minutes)
+    - [Processing text files with `awk`](awk-intro.qmd#awk-intro) (30 minutes)
+* Day 2: A little bash stuff, then SLURM, SLURM, SLURM
     - Computing clusters and Slurm (three 33 minute sessions,
     punctuated by two 10 minute breaks).  We will be exploring the
     use of all of these with some bioinformatic tasks.  Like indexing
