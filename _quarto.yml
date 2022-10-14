@@ -11,6 +11,7 @@ book:
     - quick-unix-review.qmd
     - shell-prog.qmd
     - awk-intro.qmd
+    - scripts-and-functions.qmd
     - summary.qmd
     - eca-setup-notes.qmd
     - references.qmd

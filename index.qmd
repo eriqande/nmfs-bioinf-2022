@@ -45,6 +45,7 @@ SEDNA cluster to simplify your bioinformatics life.
     - [Shell Programming](shell-prog.qmd#shell-prog) (50 Minutes)
     - [Processing text files with `awk`](awk-intro.qmd#awk-intro) (30 minutes)
 * Day 2: A little bash stuff, then SLURM, SLURM, SLURM
+    - [Shell scripts and bash functions](scripts-and-functions.qmd#script-func)
     - Computing clusters and Slurm (three 33 minute sessions,
     punctuated by two 10 minute breaks).  We will be exploring the
     use of all of these with some bioinformatic tasks.  Like indexing
