@@ -3,6 +3,23 @@
 We are going to take 15 or 20 minutes to do a whirlwind
 review of some crucial Unix topics
 
+
+## What is `bash`?
+
+We start by acknowledging that there are many different flavors of
+Unix and Linux.  I will refer to them all simply as Unix or unix.
+
+Also, there are a number of different _shells_ for Unix.  The shell is the
+part that interprets commands.
+
+We will be talking about the `bash` shell.  This is the default shell on
+SEDNA, and it is also the most popular shell for bioinformatics.  
+
+Bash stands for "Bourne-again shell".  It is an update to an earlier
+shell called the Bourne shell.
+
+
+
 ## Setting up our workspace
 
 - I have prepared a repository with a few different example data files
@@ -17,6 +34,15 @@ cd ~
 git clone https://github.com/eriqande/nmfs-bioinf-2022.git
 cd nmfs-bioinf-2022/playground
 ```
+
+::: {.callout-warning}
+
+## Important
+
+When we say "Paste this into your shell" or "Type this at your command prompt"
+we also implicitly mean "Hit RETURN afterward."
+
+:::
 
 - This is where our working directory will be for the next two days.
 - Use the `tree` utility to see the files that we have to play with within
@@ -283,7 +309,8 @@ means pipe the `stdout` output of `command1` in as
 bark at you to tell you why it failed.  This can be very useful.
 - The stream it writes this information to is called `stderr`, which is
 short for _standard error_.
-- Some bioinformatics programs write progess and log output to `stderr`.
+- Some bioinformatics programs write progess and log output to `stderr`,
+in addition to actual error messages.
 
 If you are running a program non-interactively, it is **extremely** valuable
 and important to redirect `stderr` to a file, so you can come back later
@@ -369,7 +396,7 @@ gzip -cd --bogus-option data/samtools_stats/s001_stats.tsv.gz | wc > so.txt 2>se
 ```
 
 An interesting fact is that you can redirect `stderr` from the first command
-before the pipe.  So, to redirict `stderr` for the `gzip` command into a file
+before the pipe.  So, to redirect `stderr` for the `gzip` command into a file
 called `ze.txt`, we could do:
 ```{.sh filename="Paste this into your shell"}
 gzip -cd --bogus-option data/samtools_stats/s001_stats.tsv.gz 2>ze.txt | wc > so.txt 2>se.txt

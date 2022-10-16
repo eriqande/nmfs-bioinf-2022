@@ -23,8 +23,23 @@ Here, we can assign a value to a variable called PHONE:
 PHONE=974-222-4444
 ```
 
-In this case the digits and dashes `974-222-4444` are treated as just
+In this case, the digits and dashes `974-222-4444` are treated as just
 a string of characters and assigned to the variable `PHONE`.
+
+::: {.callout-warning}
+
+## Let's make some mistakes
+
+Paste these commands into the shell and see what happens:
+```{.sh filename="Paste these mistakes into the shell and think about what is happening."}
+PHONE = 974-222-4444
+PHONE =974-222-4444
+PHONE= 974-222-4444
+```
+
+What does this tell us about how bash interprets commands with an equals sign?
+
+:::
 
 ### Accessing variable values
 
@@ -61,7 +76,7 @@ The bash shell demands that the names of variables:
 ```{.sh}
 # good variable names
 MY_JOBS
-_NOW
+_Now
 STRING
 i
 i_2
@@ -74,6 +89,34 @@ BIG-VAR
 file-name
 Sh**t!
 ```
+
+::: {.callout-tip}
+
+## Self-study
+
+Choose one of the good variable names from the list above and
+assign the value `Good` to it.
+
+Choose of the bad variable names from the list above and
+try to assign the value `Bad` to it.
+
+:::
+
+::: {.callout-tip collapse=true}
+
+## Self-study answers
+
+Here is an example.
+```{.sh filename = "This works"}
+_Now=Good
+```
+
+Here is an example.
+```{.sh filename = "This does not work"}
+BIG-VAR=Bad
+```
+
+:::
 
 ## Strings with spaces, etc:  Quoting.
 
@@ -179,7 +222,7 @@ zooming by on your screen.
 ### Some subtlety about evaluation of substituted values
 
 If the value of the variable that is being evaluated includes _pipes_, 
-_redirections_, or variable assignment statements, then if you just subtituting
+_redirections_, or _variable assignment_ statements, then if you just substitute
 it into the command line, it won't properly be evaluated as a command line
 in full.  For example, if `MyComm` was trying to decompress the file and
 pipe it to `less`, it doesn't work as expected:
@@ -217,6 +260,31 @@ echo "Let us do this command and 2 others"; echo "here is number 2"; echo "and t
 
 This comes in handy.
 
+
+::: {.callout-warning}
+
+## More about line endings like `;`
+
+There are two other things you might find at the end of a line:  `&` and `&&`
+
+- `&` at the end of the line means "run the command, but don't wait for it to finish.
+    - This runs the command "in the background" in some sense.
+    - This is not used very often when doing bioinformatics in a SLURM-driving system like that on SEDNA
+- `&&` at the end of a command means "only run the _next_ command if the _previous one did not fail._
+    - This is very useful for making sure that you don't keep running later commands if an earlier one failed.
+    - There is also a `||` that is useful in this context, which is all about "exit status" of Unix commands, which
+      is beyond our purview today.
+      
+Examples:
+```{.sh filename="With just semicolons...Paste it into your shell"}
+echo "Yawp before it fails."; ls --not-option data ; echo "Yawp after it fails."
+```
+
+```{.sh filename="With the &&'s after each line...Paste it into your shell"}
+echo "Yawp before it fails." && ls --not-option data && echo "Yawp after it fails."
+```
+
+:::
 
 ## Repetition
 
@@ -319,7 +387,7 @@ for FILE in data/samtools_stats/*.gz; do echo -n $FILE; gzip -cd $FILE | wc; don
 ## Redirect `stdout` from the `done`
 
 Here is something that is not always obvious: you can redirect or
-pipe the `stdout` of the whole for loop by using `>` or `|` immediately
+pipe the `stdout` of the whole `for` loop by using `>` or `|` immediately
 after the `done` keyword.
 
 Using the example from the self study above:
@@ -371,7 +439,7 @@ echo $WCOUT
 ## Unix commands we just saw:
 
 - `date`: prints the current time and date to `stdout`.
-- `sleep`: causes the shell to pause for however seconds you tell it to,
+- `sleep`: causes the shell to pause for however many seconds you tell it to,
   like `sleep 3` for three seconds, `sleep 180` for three minutes.
 :::
 
@@ -427,6 +495,31 @@ path=data/samtools_stats/s007_stats.tsv.gz
 echo $(basename ${path/_stats.tsv.gz/})
 ```
 Whoa! On that last one we nested a `${//}` inside a `$()`!
+
+::: {.callout-warning }
+
+## Hot tip!
+
+You can use `*` the way that you might when _globbing_ filenames
+on the command line in the _pattern_ for variable substitution with
+`${var/pattern/replacement}`:
+
+```{.sh filename="If we want to extract just the s001 part..."}
+STRING="A-whole-lot-of-junk-before-then_s001_and-a-whole-lot_of-other-garbage.63713973"
+
+# remove all the garbage in the beginning
+N1=${STRING/*then_/}
+
+# see what we have at this point
+echo $N1
+
+# remove the remaining junk off the end
+N2=${N1/_and-*}
+
+# see what we ended up with
+echo $N2
+```
+:::
 
 
 ### Grouping multiple commands with `(...)`

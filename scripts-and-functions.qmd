@@ -67,7 +67,7 @@ cat sam-stats.sh
 
 ::: {.callout-warning}
 
-## What's this `#!` at the top of the file
+### What's this `#!` at the top of the file
 
 That is colloquially referred to as the `shebang` line.
 
@@ -83,7 +83,7 @@ is found on Unix or Linux system.
 :::
 
 
-## Script files must be executable
+### Script files must be executable
 
 The Unix operating system distinguishes between files that
 just hold data, and files that can the run or "executed" by the
@@ -110,7 +110,7 @@ we see:
 The `x` in the first field of that line indicates that the file is executable
 by the user.
 
-## Running a script 
+### Running a script 
 
 To run a script that is executable, you type the path to it.  
 
@@ -122,7 +122,7 @@ the computer looks for executable scripts, we have to write it like this:
 
 That runs our script.
 
-## Scripts are more useful if you can specify the inputs
+### Scripts are more useful if you can specify the inputs
 
 So, that runs our script and produces results, but that is not
 so useful.  We already had those results, in a sense.
@@ -184,3 +184,65 @@ them:
 ```{.sh filename="This should work on SEDNA, Paste it into your shell"}
 ./scripts/sam-stat-pp.sh "/share/all/eriq/big_sam_stats/s*.gz"
 ```
+
+That is fast.  
+
+If we wanted to redirect that into a file we could do so easily.
+
+
+## Bash functions
+
+Like most programming languages, you can define functions in bash.
+
+The syntax for defining a function named `MyFunc` is:
+```{.sh filename="Just read this"}
+function MyFunc {
+  ...code that MyFunc executes...
+}
+```
+In this regard, it has a similar syntax to R.  
+
+Once defined, you can use the name of the function (in the above
+case, `MyFunc`) as if it were just another Unix command.
+
+### Example: congratulate yourself on making it through your day
+
+Here is a gratuitous example: we make a bash function called
+`congrats` that tells us what time it is and encourages us to keep
+getting through our day:
+```{.sh filename="Paste this into your terminal"}
+function congrats { echo "It is now $(date).  Congrats on making it this far in your day."; }
+```
+
+::: {.callout-warning}
+
+## Warning
+
+Curly braces in bash are extremely finicky.  They don't like to be near
+other characters.  In the above, the space after the `{` is critical,
+as is the `;` before the `}`.  (The last `}` needs to have a `;` before it
+if it does not have a line ending before it).
+
+:::
+
+
+### Bash functions take positional parameters too
+
+We can rewrite our function as `congrats2` so that it can use
+two arguments, the first a name, and the second an adjective:
+```{.sh filename="Paste this into your terminal"}
+function congrats2 { 
+  echo "It is now $(date).  Congrats, $1, you are $2."
+}
+```
+
+Now, you can use that function and supply it with whatever names and adjectives
+you would like:
+```{.sh filename="Paste these in and see what it does."}
+congrats2 Fred splendid
+congrats2 Eric tired
+congrats2 Amy amazing
+```
+
+We will write a few functions, later, to simplify our life in SLURM.
+

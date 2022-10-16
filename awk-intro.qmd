@@ -43,6 +43,16 @@ in parentheses:
 
 - `$(13)` refers to the thirteenth column
 
+::: {.callout-important}
+
+## Important
+
+These variables within an `awk` script are not related to
+substituted variables in bash.  They just happen to share
+a preceding `$`.  But they are being interpreted by different
+programming languages (one by `bash` the other by `awk`).
+
+:::
 
 ### So what?
 
@@ -80,12 +90,32 @@ Note that you can pass options (like `-v` or `-F`) to `awk`.  They go right afte
 `awk` and before the first single quotation mark.
 
 Also, the carriage returns inside the single quotation marks are only there for
-easy reading.  You could also write last example as:
+easy reading.  You could also write the last example as:
 ```{.sh filename="Don't try running this. It is just for explanation."}
 cmd | awk 'pattern1  {action1} pattern2  {action2}'
 ```
 ...which is great if you are hacking on the command line, but once you have
 a lot of pattern-action pairs, it gets harder to read.
+
+::: {.callout-tip}
+
+## Self-study
+
+Thinking back to the previous session when we talked about the difference
+between grouping strings with `'` vs with `"`, why do you think it is important
+that the `awk` script is grouped with `'`?
+:::
+
+
+::: {.callout-tip collapse=true}
+
+## Brief answer
+
+As we saw, we will be referring to different fields like `$8` within
+the awk script.  If we used `"` to group the script, the shell might try
+to do variable substitution on any `$`'s in there.
+
+:::
 
 ## Enough talking, let's start doing
 
@@ -101,12 +131,32 @@ gzip -cd data/samtools_stats/s001_stats.tsv.gz | awk '$1=="SN" {print}'
 
 That is cool.  
 
+::: {.callout-tip}
+
+## Self-study
+
+Make sure that you can identify the _pattern_ and the _action_ in the
+above `awk` script.
+:::
+
+::: {.callout-tip collapse=true}
+
+## Answer:
+
+- The _pattern_ is `$1=="SN"`
+- The _action_ is `print`
+
+This brings up the important point that the "is equals" operator
+in `awk` is `==` (two consecutive equals signs...just like in R)
+:::
+ 
+
+### Printing the lines we are interested in
+
 How about if we wanted to pick out just a few particular lines from there?
 
 Well, we can also match lines by `regular expression` (which you can think
 of as a very fancy form of Unix word-searching.)
-
-### Printing the lines we are interested in
 
 Let's say that we want information on the total number of reads mapped, the
 number of properly paired reads, and the total number of bases mapped using
@@ -127,7 +177,11 @@ gzip -cd data/samtools_stats/s001_stats.tsv.gz | awk '
 '
 ```
 
-**Big Note** regular expressions are lovely and wonderful, but occasionally
+::: {.callout-warning }
+
+## Big Note: 
+
+Regular expressions are lovely and wonderful, but occasionally
 frustrating.  In `awk`'s case, parentheses have special meanings in the
 regular expressions, so we have to precede each one in the pattern with
 a backslash.
@@ -136,6 +190,10 @@ Regular expressions are a bit beyond the scope of what we will be talking about
 today (entire books are devoted to the topic) but I encourage everyone to
 learn about them.
 
+They are incredibly useful and they are used in multiple programming languages
+(R, python, perl, etc.)
+
+:::
 
 ### Printing just the values we are interested in
 
@@ -173,6 +231,17 @@ gzip -cd data/samtools_stats/s001_stats.tsv.gz | awk '
 '
 ```
 
+
+::: {.callout-warning}
+
+## For the programmers out there
+
+Variables in `awk` are untyped and do not be declared.  Basically
+you can put them anywhere.  If code calls for the value from a variable
+that has not has anything assigned to it yet, the variable returns a
+`0` in a numerical context, and an empty string in a string context.
+
+:::
 
 ### That's great. Can we add the sample name in there?
 
@@ -272,11 +341,60 @@ samtools view bam/s001.bam | awk '
 It's really compact and requires very little memory to do this.
 (You couldn't read a whole BAM file into R and hope to deal with it).
 
+::: {.callout-warning}
 
+### All arrays in `awk` are associative arrays
+
+If you come from an R programming background, you will typically think
+of arrays as vectors that are indexed from 1 to `n`, where `n` is the length
+of the vector. 
+
+This is not how arrays are implemented in `awk`.  Rather all arrays are
+_associative arrays_, which are also called _hash arrays_, or, in Python _dictionaries_.
+Or, if you are familiar with R, you can think of an associative array as an
+array that has elements that can only be accessed via their names attribute,
+rather than by indexing them with a number.
+
+So, in awk, if we write:
+```{.sh filename="Don't paste this anywhere! We are just talking about awk"}
+var["this"] = "Boing!"
+```
+This will create an array called `var` (if one does not already exist) and
+then it will set the value of element in `var` that is associated with the
+string `"this"` to the string `"Boing!"`.  
+
+At the same time, if you do this:
+```{.sh filename="Don't paste this anywhere! We are just talking about awk"}
+var[30] = 67
+```
+then we are not assigning the value of `67` to the 30-th element of `var`.
+Rather, we are assigning the value `67` to the element of `var` that is
+associated with the string `"30"`.  
+
+It can take a little getting used to, but it is very useful for counting things.
+
+:::
 
 ## Wrap-Up
 
 That was just a brief whirlwind tour of how one can
-use bash and `awk` together to automate tasks that come up in 
+use bash and `awk` together to automate tasks that come up on an
+everyday basis when doing bioinformatics. 
+
+
+## Looking toward tomorrow
+
+The bulk of day #2 is going to be focused on working within a cluster
+environment, and specifically on using SLURM for launching jobs on the
+SEDNA cluster.
+
+To prepare for tomorrow, please be sure to read
+[Chapter 8](https://eriqande.github.io/eca-bioinf-handbook/chap-HPCC.html)
+from beginning and up to and including section 8.2.   This is just a small
+bit to read, but it should set you up for an understanding of why and how
+computing clusters work differently than your desktop machine when it comes to
+allocating resources for computation.
+
+
 
 

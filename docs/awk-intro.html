@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./summary.html" rel="next">
+<link href="./scripts-and-functions.html" rel="next">
 <link href="./shell-prog.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -181,12 +181,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./scripts-and-functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bash scripts and functions</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eca-setup-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Notes on Eric’s Setup Process</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eca-setup-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Notes on Eric’s Setup Process</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -223,6 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#lets-look-at-an-example-bam-file" id="toc-lets-look-at-an-example-bam-file" class="nav-link" data-scroll-target="#lets-look-at-an-example-bam-file"><span class="toc-section-number">3.3.1</span>  Let’s look at an example bam file</a></li>
   </ul></li>
   <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="toc-section-number">3.4</span>  Wrap-Up</a></li>
+  <li><a href="#looking-toward-tomorrow" id="toc-looking-toward-tomorrow" class="nav-link" data-scroll-target="#looking-toward-tomorrow"><span class="toc-section-number">3.5</span>  Looking toward tomorrow</a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Brief <code>awk</code> Intro</span></h1>
+<h1 class="title"><span id="awk-intro" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Brief <code>awk</code> Intro</span></span></h1>
 </div>
 
 
@@ -280,6 +286,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>$(13)</code> refers to the thirteenth column</li>
 </ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These variables within an <code>awk</code> script are not related to substituted variables in bash. They just happen to share a preceding <code>$</code>. But they are being interpreted by different programming languages (one by <code>bash</code> the other by <code>awk</code>).</p>
+</div>
+</div>
 </section>
 <section id="so-what" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="so-what"><span class="header-section-number">3.1.2</span> So what?</h3>
@@ -315,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that you can pass options (like <code>-v</code> or <code>-F</code>) to <code>awk</code>. They go right after the <code>awk</code> and before the first single quotation mark.</p>
-<p>Also, the carriage returns inside the single quotation marks are only there for easy reading. You could also write last example as:</p>
+<p>Also, the carriage returns inside the single quotation marks are only there for easy reading. You could also write the last example as:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Don't try running this. It is just for explanation.</strong></pre>
@@ -323,6 +342,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'pattern1  {action1} pattern2  {action2}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>…which is great if you are hacking on the command line, but once you have a lot of pattern-action pairs, it gets harder to read.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Self-study
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Thinking back to the previous session when we talked about the difference between grouping strings with <code>'</code> vs with <code>"</code>, why do you think it is important that the <code>awk</code> script is grouped with <code>'</code>?</p>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Brief answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>As we saw, we will be referring to different fields like <code>$8</code> within the awk script. If we used <code>"</code> to group the script, the shell might try to do variable substitution on any <code>$</code>’s in there.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="enough-talking-lets-start-doing" class="level2" data-number="3.2">
@@ -338,11 +386,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-cd</span> data/samtools_stats/s001_stats.tsv.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'$1=="SN" {print}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That is cool.</p>
-<p>How about if we wanted to pick out just a few particular lines from there?</p>
-<p>Well, we can also match lines by <code>regular expression</code> (which you can think of as a very fancy form of Unix word-searching.)</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Self-study
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure that you can identify the <em>pattern</em> and the <em>action</em> in the above <code>awk</code> script.</p>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Answer:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>The <em>pattern</em> is <code>$1=="SN"</code></li>
+<li>The <em>action</em> is <code>print</code></li>
+</ul>
+<p>This brings up the important point that the “is equals” operator in <code>awk</code> is <code>==</code> (two consecutive equals signs…just like in R)</p>
+</div>
+</div>
+</div>
 </section>
 <section id="printing-the-lines-we-are-interested-in" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="printing-the-lines-we-are-interested-in"><span class="header-section-number">3.2.2</span> Printing the lines we are interested in</h3>
+<p>How about if we wanted to pick out just a few particular lines from there?</p>
+<p>Well, we can also match lines by <code>regular expression</code> (which you can think of as a very fancy form of Unix word-searching.)</p>
 <p>Let’s say that we want information on the total number of reads mapped, the number of properly paired reads, and the total number of bases mapped using the (cigar) criterion.</p>
 <p>We can see those lines in there. And we can target them by matching strings associated with them. The awk syntax puts these regular expressions in the pattern between forward slashes.</p>
 <p>So, we want to match lines that have the first field equal to <code>SN</code> and also match other strings. We do that like this:</p>
@@ -356,8 +437,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">  $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {print}</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Big Note</strong> regular expressions are lovely and wonderful, but occasionally frustrating. In <code>awk</code>’s case, parentheses have special meanings in the regular expressions, so we have to precede each one in the pattern with a backslash.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Big Note:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Regular expressions are lovely and wonderful, but occasionally frustrating. In <code>awk</code>’s case, parentheses have special meanings in the regular expressions, so we have to precede each one in the pattern with a backslash.</p>
 <p>Regular expressions are a bit beyond the scope of what we will be talking about today (entire books are devoted to the topic) but I encourage everyone to learn about them.</p>
+<p>They are incredibly useful and they are used in multiple programming languages (R, python, perl, etc.)</p>
+</div>
+</div>
 </section>
 <section id="printing-just-the-values-we-are-interested-in" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="printing-just-the-values-we-are-interested-in"><span class="header-section-number">3.2.3</span> Printing just the values we are interested in</h3>
@@ -389,6 +483,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {bmc = $5}</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">  END {print rm, rpp, bmc}</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+For the programmers out there
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Variables in <code>awk</code> are untyped and do not be declared. Basically you can put them anywhere. If code calls for the value from a variable that has not has anything assigned to it yet, the variable returns a <code>0</code> in a numerical context, and an empty string in a string context.</p>
+</div>
 </div>
 </section>
 <section id="thats-great.-can-we-add-the-sample-name-in-there" class="level3" data-number="3.2.5">
@@ -474,11 +581,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It’s really compact and requires very little memory to do this. (You couldn’t read a whole BAM file into R and hope to deal with it).</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+All arrays in <code>awk</code> are associative arrays
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you come from an R programming background, you will typically think of arrays as vectors that are indexed from 1 to <code>n</code>, where <code>n</code> is the length of the vector.</p>
+<p>This is not how arrays are implemented in <code>awk</code>. Rather all arrays are <em>associative arrays</em>, which are also called <em>hash arrays</em>, or, in Python <em>dictionaries</em>. Or, if you are familiar with R, you can think of an associative array as an array that has elements that can only be accessed via their names attribute, rather than by indexing them with a number.</p>
+<p>So, in awk, if we write:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Don't paste this anywhere! We are just talking about awk</strong></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="va">var</span><span class="op">[</span><span class="st">"this"</span><span class="op">]</span> <span class="ex">=</span> <span class="st">"Boing!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will create an array called <code>var</code> (if one does not already exist) and then it will set the value of element in <code>var</code> that is associated with the string <code>"this"</code> to the string <code>"Boing!"</code>.</p>
+<p>At the same time, if you do this:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Don't paste this anywhere! We are just talking about awk</strong></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="va">var</span><span class="op">[</span><span class="dv">30</span><span class="op">]</span> <span class="ex">=</span> 67</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>then we are not assigning the value of <code>67</code> to the 30-th element of <code>var</code>. Rather, we are assigning the value <code>67</code> to the element of <code>var</code> that is associated with the string <code>"30"</code>.</p>
+<p>It can take a little getting used to, but it is very useful for counting things.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="wrap-up" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">3.4</span> Wrap-Up</h2>
-<p>That was just a brief whirlwind tour of how one can use bash and <code>awk</code> together to automate tasks that come up in</p>
+<p>That was just a brief whirlwind tour of how one can use bash and <code>awk</code> together to automate tasks that come up on an everyday basis when doing bioinformatics.</p>
+</section>
+<section id="looking-toward-tomorrow" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="looking-toward-tomorrow"><span class="header-section-number">3.5</span> Looking toward tomorrow</h2>
+<p>The bulk of day #2 is going to be focused on working within a cluster environment, and specifically on using SLURM for launching jobs on the SEDNA cluster.</p>
+<p>To prepare for tomorrow, please be sure to read <a href="https://eriqande.github.io/eca-bioinf-handbook/chap-HPCC.html">Chapter 8</a> from beginning and up to and including section 8.2. This is just a small bit to read, but it should set you up for an understanding of why and how computing clusters work differently than your desktop machine when it comes to allocating resources for computation.</p>
 
 
 </section>
@@ -589,8 +732,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./summary.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./scripts-and-functions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bash scripts and functions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
