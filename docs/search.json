@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "nmfs-bioinf-2022",
     "section": "",
-    "text": "Welcome to the website for the National Marine Fisheries Service Linux, Slurm, and Bioinformatics training to be held virtually over three days:\n\nDay 1: Monday, October 17, 2022. 10 AM - 12 PM PDT\nDay 2: Tuesday, October 18, 2022. 10 AM - 12:30 PM PDT\nDay 3: Wednesday, October 19, 2022. 10 AM - 12 PM PDT\n\n\n\nThis course will be using the Sedna high-performance computing cluster located at the Northwest Fisheries Science Center. This cluster (and, hence, this course) is only available to NMFS employees and affiliates. If you are a NMFS employee and you are interested in this course, please see here for information about how to get an account on the cluster.\nThis course is intended for people who have already had some exposure to Unix or Linux. You should be reasonably comfortable navigating around the Unix filesystem using the command line. For a refresher, please read this chapter from my online bioinformatics book.\nMy goal is to:\n\nteach the shell programming constructs and the text processing tricks that I find myself using all the time in my day-to-day work\nprovide an introduction to how to use SLURM to do cluster computing\nOn the last day, show how Snakemake works, and how it can be used on the Sedna cluster to simplify your bioinformatics life.\n\n\n\n\n\nDay 1: Intro, Unix-review, shell programming, awk\n\nIntroduction to the Sedna cluster (15 minutes Krista and Giles)\n\nCluster infrastructure and configuration.\nScientific software and the installation requests\n\nQuick Unix Review (25 minutes)\nShell Programming (50 Minutes)\nProcessing text files with awk (30 minutes)\n\nDay 2: A little bash stuff, then SLURM, SLURM, SLURM\n\nShell scripts and bash functions\nComputing clusters and Slurm (three 33 minute sessions, punctuated by two 10 minute breaks). We will be exploring the use of all of these with some bioinformatic tasks. Like indexing a genome. Mapping some reads, etc.\n\nHomework: read from the beginning of the chapter to the end of section 8.2 here\nLearning about the cluster and your jobs: sinfo and squeue\nWrite a convenience bash function or two: myjobs and alljobs\nGetting an interactive session on a compute node: srun\nEnvironment modules on Sedna: module\nSubmitting jobs to the queue: sbatch\nJob arrays.\nA useful script for orchestrating job arrays from a spreadsheet: line-assign.sh. This will build off of what we learned the day before.\nscancel: Help! I need to kill that job (or all the jobs) that I just started!\nseff: get information on resource use of a job I already ran.\n\n\nDay 3:\n\nAn introduction to Snakemake\n\nWill somewhat follow these slides\nBUT, it will be modified to show use of Sedna’s environment modules and also to show use of a profile for dispatching jobs to Slurm from Snakemake."
+    "text": "Welcome to the website for the National Marine Fisheries Service Linux, Slurm, and Bioinformatics training to be held virtually over three days:\n\nDay 1: Monday, October 17, 2022. 10 AM - 12 PM PDT\nDay 2: Tuesday, October 18, 2022. 10 AM - 12:30 PM PDT\nDay 3: Wednesday, October 19, 2022. 10 AM - 12 PM PDT\n\n\n\nThis course will be using the Sedna high-performance computing cluster located at the Northwest Fisheries Science Center. This cluster (and, hence, this course) is only available to NMFS employees and affiliates. If you are a NMFS employee and you are interested in this course, please see here for information about how to get an account on the cluster.\nThis course is intended for people who have already had some exposure to Unix or Linux. You should be reasonably comfortable navigating around the Unix filesystem using the command line. For a refresher, please read this chapter from my online bioinformatics book.\nMy goal is to:\n\nteach the shell programming constructs and the text processing tricks that I find myself using all the time in my day-to-day work\nprovide an introduction to how to use SLURM to do cluster computing\nOn the last day, show how Snakemake works, and how it can be used on the Sedna cluster to simplify your bioinformatics life.\n\n\n\n\n\nDay 1: Intro, Unix-review, shell programming, awk\n\nIntroduction to the Sedna cluster (15 minutes Krista and Giles)\n\nCluster infrastructure and configuration.\nScientific software and the installation requests\n\nQuick Unix Review (25 minutes)\nShell Programming (50 Minutes)\nProcessing text files with awk (30 minutes)\n\nDay 2: A little bash stuff, then Sedna and SLURM\n\nShell scripts and bash functions (20 minutes)\nComputing clusters, Sedna, SLURM, and modules (40 minutes) sessions, punctuated by two 10 minute breaks). We will be exploring the use of all of these with some bioinformatic tasks. Like indexing a genome. Mapping some reads, etc.\n\nHomework: read from the beginning of the chapter to the end of section 8.2 here\nLearning about the cluster and your jobs: sinfo and squeue\nWrite a convenience bash function or two: myjobs and alljobs\nGetting an interactive session on a compute node: srun\nEnvironment modules on Sedna: module\nSubmitting jobs to the queue: sbatch\nJob arrays.\nA useful script for orchestrating job arrays from a spreadsheet: line-assign.sh. This will build off of what we learned the day before.\nscancel: Help! I need to kill that job (or all the jobs) that I just started!\nseff: get information on resource use of a job I already ran.\n\n\nDay 3:\n\nAn introduction to Snakemake\n\nWill somewhat follow these slides\nBUT, it will be modified to show use of Sedna’s environment modules and also to show use of a profile for dispatching jobs to Slurm from Snakemake."
   },
   {
     "objectID": "quick-unix-review.html",
@@ -212,23 +212,121 @@
   {
     "objectID": "slurm.html",
     "href": "slurm.html",
-    "title": "5  SLURM",
+    "title": "5  Sedna and SLURM intro",
     "section": "",
     "text": "SLURM stands for “Simple Linux Utility for Resource Management”\nIt is the “queueing system” used to equitable provide compute resources on the Sedna HPCC."
   },
   {
     "objectID": "slurm.html#why-do-we-need-slurm",
     "href": "slurm.html#why-do-we-need-slurm",
-    "title": "5  SLURM",
+    "title": "5  Sedna and SLURM intro",
     "section": "5.1 Why do we need SLURM?",
     "text": "5.1 Why do we need SLURM?\n\nThe fundamental problem of cluster computing.\nA cluster does not operate like your laptop.\nMost compute-intensive jobs run most efficiently on a dedicated processor or processors."
   },
   {
     "objectID": "slurm.html#hpcc-architecture-in-a-nutshell",
     "href": "slurm.html#hpcc-architecture-in-a-nutshell",
-    "title": "5  SLURM",
+    "title": "5  Sedna and SLURM intro",
     "section": "5.2 HPCC Architecture in a Nutshell",
-    "text": "5.2 HPCC Architecture in a Nutshell\n\n\nNodes: the closest thing to what you think of as a computer. (“Pizza-boxes” with no displays).\n\nEach node is attached via a fast connection to centralized attached storage (A big set of hard drives attached via “Infiniband.”)\nWithin each node are some numbers of Cores or CPUs\n\nCores/CPUs are the actual processing units within a node. (Usually 20 to 24)\n\n\nSedna, like almost all other HPCCs has a login node\n\nThe login node is dedicated to allowing people to communicate with HPCC.\nDO NOT do computationally intensive, or input/output-intensive jobs on the login node\nNot surprisingly, when you login to Sedna you are on the login node.\n\n\n\n\n\n\n\n\nHot tip!\n\n\n\nIn the default configuration on Sedna, your command prompt at the shell tells you which node you are logged into:"
+    "text": "5.2 HPCC Architecture in a Nutshell\n\n\nNodes: the closest thing to what you think of as a computer. (“Pizza-boxes” with no displays).\n\nEach node is attached via a fast connection to centralized attached storage (A big set of hard drives attached via “Infiniband.”)\nWithin each node are some numbers of Cores or CPUs\n\nCores/CPUs are the actual processing units within a node. (Usually 20 to 24)\n\n\nSedna, like almost all other HPCCs has a login node\n\nThe login node is dedicated to allowing people to communicate with HPCC.\nDO NOT do computationally intensive, or input/output-intensive jobs on the login node\nNot surprisingly, when you login to Sedna you are on the login node.\n\n\n\n\n\n\n\n\nHot tip!\n\n\n\nIn the default configuration on Sedna, your command prompt at the shell tells you which node you are logged into. The default command prompt looks like:\n[username@computer directory]\nSo, for example, mine at the moment is:\n[eanderson@sedna playground]$\nWhich tells me that I am user eanderson and I am logged in to sedna in the directory whose basename is playground.\nThe login node for Sedna is named sedna. So, this is telling me that I am logged into the login node of Sedna.\n\n\n\n\n\n\n\n\nSelf study\n\n\n\nInvestigate your own command prompt and make sure you understand what the different parts in it mean."
+  },
+  {
+    "objectID": "slurm.html#say-it-again-dont-do-heavy-computing-on-the-login-nodes",
+    "href": "slurm.html#say-it-again-dont-do-heavy-computing-on-the-login-nodes",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.3 Say it again: Don’t do heavy computing on the login nodes!",
+    "text": "5.3 Say it again: Don’t do heavy computing on the login nodes!\nIf you run a big job that is computationally intensive on the login node, it can interfere with other people being able to access the cluster.\nDon’t do it!!\nThat is all fine and well, but how do we avoid computing on the login nodes?"
+  },
+  {
+    "objectID": "slurm.html#do-your-computation-on-the-compute-nodes",
+    "href": "slurm.html#do-your-computation-on-the-compute-nodes",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.4 Do your computation on the compute nodes",
+    "text": "5.4 Do your computation on the compute nodes\n\nTo run jobs on the compute node you need to ask SLURM to give you “compute resources” to run the job.\nThe basic axes of “compute resources” are:\n\nThe number of cores to use.\nThe maximum amount of RAM memory you might need.\nThe amount of time that you will need those resources for.\n\nTo prepare for the next part of the course, each one of us is going to “check out” 2 cores for 3 hours for interactive work.\n\nInteractive here means that we will have a Unix shell that has access to compute power on the cores that we checked out.\n\n\nHere is the command to checkout 2 cores for 3 hours for interactive use:\n\n\nPaste this into your shell\n\nsrun -c 2 -t 03:00:00 --pty /bin/bash\n\n\n\n\n\n\n\nSelf study:\n\n\n\nHave a look at your command prompt now. It should show that you are logged in to nodeXX where XX is a number like 04 or 33."
+  },
+  {
+    "objectID": "slurm.html#what-does-sedna-have-under-the-hood",
+    "href": "slurm.html#what-does-sedna-have-under-the-hood",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.5 What does Sedna have under the hood?",
+    "text": "5.5 What does Sedna have under the hood?\nSedna is not an outrageously large cluster, but it is well-maintained and provides a lot of computing power.\nThe nodes in Sedna are broken into three different partitions.\nA partition is a collection of nodes that tend to be similar.\n\nnode partition: This is a collection of 36 nodes:\n\nnode01 – node28: “standard compute nodes”\nnode29 – node36: “standard compute nodes with twice as much memory”\n\nhimem partition: Four nodes with a boatload of memory for high-memory jobs\n\nhimem01 – himem04\n\nbionode partition: legacy machines from an old NWFSC cluster\n\nMost of us probably don’t have access to this (it is a NWFSC thing I think)\nWhen I check, it seems like a lot of the nodes are down, occasionally.\nBut I have been able to checkout resources on it."
+  },
+  {
+    "objectID": "slurm.html#ask-slurm-about-what-nodes-are-available-and-how-busy-they-are",
+    "href": "slurm.html#ask-slurm-about-what-nodes-are-available-and-how-busy-they-are",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.6 Ask SLURM about what nodes are available, and how busy they are",
+    "text": "5.6 Ask SLURM about what nodes are available, and how busy they are\nWhen I login to Sedna, before launching and jobs or working on anything, I always like to get a summary of how hard Sedna is currently working.\nFor this we have the sinfo command:\n\n\nType this at your command prompt\n\nsinfo\n\nThe answer will look somethign like this:\nPARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST\nnode*        up   infinite      5    mix node[01,29-31,33]\nnode*        up   infinite      1  alloc node32\nnode*        up   infinite     30   idle node[02-28,34-36]\nhimem        up   infinite      1    mix himem01\nhimem        up   infinite      3   idle himem[02-04]\nbionode      up   infinite      8  down* bionode[10-11,13-18]\nbionode      up   infinite      1  drain bionode12\nbionode      up   infinite     10   idle bionode[01-09,19]\nThis is a hugely informative summary for being so compact.\n\nThe output is sorted by partition.\nWithin each partition it tells us how many nodes are in different states:\nThe main states:\n\nidle: just sitting there with all cores available for checkout,\nmix: some, but not all, cores are checkout out and in use,\nalloc: all the cores on the node are checkout out and in use.\n\nOther states you might see:\n\ndown: node is unavailable because it is not working properly,\ndrain: node is not available because the sys-admins are not letting any new jobs to start because they are going to be working on the system soon, etc.\n\nThe node partition is starred node* because it is the default partition.\nNotation like node[01,29-31,33] gives the specific node numbers, compactly.\n\n\n\n\n\n\n\nSelf-study\n\n\n\nReview how many nodes are currently in use."
+  },
+  {
+    "objectID": "slurm.html#more-detailed-sinfo-output",
+    "href": "slurm.html#more-detailed-sinfo-output",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.7 More detailed sinfo output",
+    "text": "5.7 More detailed sinfo output\nSometimes you want more information about what is going on with the cluster. sinfo can do that, too, but the syntax is hard to remember and even harder to type.\nHere is a bash function we will define called slinfo for (s-long-info) that uses sinfo to provide more detailed output.\n\n\nPaste this into your shell\n\nfunction slinfo {\n  sinfo -N -O nodelist,cpusstate,memory,allocmem\n}\n\nOnce you have done that:\n\n\nType this at your command prompt\n\nslinfo\n\nThis gives information about each node.\n\nIn CPUS(A/I/O/T):\n\nA = allocated\nI = idle\nO = offline\nT = total\n\nMEMORY is total RAM available on the node (in Megabytes)\nALLOCMEM is the total RAM allocated to jobs."
+  },
+  {
+    "objectID": "slurm.html#summarize-what-sedna-is-doing-by-job",
+    "href": "slurm.html#summarize-what-sedna-is-doing-by-job",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.8 Summarize what Sedna is doing by job",
+    "text": "5.8 Summarize what Sedna is doing by job\nSLURM keeps track of individual jobs that get submitted.\nFor SLURM, each job is basically a request for resources.\nIf SLURM finds the requested resources are available, it provides the resources and starts the job.\nIf resources are not available because other jobs are running, the reqested job enters the “queue” in at WAITING state.\nWe can see how many jobs are running and how many are waiting, by using the SLURM squeue command:\n(By the way, notice that pattern: all SLURM command start with an s).\n\n\nType this at your command prompt\n\nsqueue\n\nThis tells us a little about all the jobs that are currently allocated resources or are waiting for resources.\nOne thing to note: - Every job is assigned a JOBID. Which is a unique integer (that gets assigned successively). - And jobs might have a job NAME."
+  },
+  {
+    "objectID": "slurm.html#i-find-the-standard-squeue-output-lacking",
+    "href": "slurm.html#i-find-the-standard-squeue-output-lacking",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.9 I find the standard squeue output lacking",
+    "text": "5.9 I find the standard squeue output lacking\nThe standard way that squeue presents information is not super informative, especially if the job names are not very short.\nOnce again, we make a bash function, alljobs, that runs squeue but provides more information.\n\n\nPaste this at your command prompt\n\nfunction alljobs {\n    if [ $# -ne 1 ]; then\n      JL=10;\n  else\n      JL=$1;\n  fi;\n    squeue -o  \"%.12i %.9P %.${JL}j %.15u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L\";\n}\n\nAlso, if you follow the command with an integer like 20, that is how many spaces the output will allow for the job NAME.\nFor example, try:\n\n\nType this at the command prompt\n\nalljobs 30"
+  },
+  {
+    "objectID": "slurm.html#just-tell-me-about-my-jobs",
+    "href": "slurm.html#just-tell-me-about-my-jobs",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.10 Just tell me about my jobs!",
+    "text": "5.10 Just tell me about my jobs!\nWe can make a similar function that only tells us about our own jobs that are running or waiting in the queue:\n\n\nPaste this into your terminal\n\nfunction myjobs {\n    if [ $# -ne 1 ]; then\n      JL=10;\n  else\n      JL=$1;\n  fi;\n    squeue -u $(whoami) -o  \"%.12i %.9P %.${JL}j %.10u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L %p\";\n}\n\nYou can run that the same way as alljobs, and you should see the 2-core job you started with srun:\n\n\nType this into your shell\n\nmyjobs"
+  },
+  {
+    "objectID": "slurm.html#finding-software-on-a-cluster",
+    "href": "slurm.html#finding-software-on-a-cluster",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.11 Finding Software on a Cluster",
+    "text": "5.11 Finding Software on a Cluster\n\nAnalysis software is not automatically available on a cluster\nOn many clusters you have to install it yourself\nOn Sedna, we are very luck to have a great support crew that will install software for us, and also make it available for everyone else to use.\n\nHowever, software can be complicated. Some software might conflict with other software.\nThe solution: maintain software (and its dependencies) in (somewhat) isolated modules.\nWhat do we mean by this?"
+  },
+  {
+    "objectID": "slurm.html#example-lets-try-running-samtools",
+    "href": "slurm.html#example-lets-try-running-samtools",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.12 Example: Let’s try running samtools",
+    "text": "5.12 Example: Let’s try running samtools\nsamtools is a common bioinformatic utility.\nTypically, if you run it with no arguments, it gives you some usage information.\nHowever, on Sedna, unless you have installed samtools yourself, or have set your environment up to always have it available, when you type samtools at the shell, you will get a response saying that it is not available:\n\n\nType this at the command prompt\n\nsamtools\n\nThe response I get from the computer is:\nbash: samtools: command not found...\nInstall package 'samtools' to provide command 'samtools'? [N/y]\nYou should get that response, and please answer N to the question.\nYou do not want to install samtools.\nInstead, you want to see if it is available in the system modules."
+  },
+  {
+    "objectID": "slurm.html#check-which-software-programs-are-available-in-the-modules",
+    "href": "slurm.html#check-which-software-programs-are-available-in-the-modules",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.13 Check which software programs are available in the modules",
+    "text": "5.13 Check which software programs are available in the modules\nThe command module and its submodules let you interact with the software modules.\nmodule avail tells you what software is available in the modules.\n\n\nType this into your shell\n\nmodule avail\n\nThere is a lot of tasty bioinformatics software there. (A nice change from HPCC’s that primarily serve geoscientists…)\nThe numbers are the version numbers. The (D) after some of them tells us that version is the default."
+  },
+  {
+    "objectID": "slurm.html#load-the-samtools-module",
+    "href": "slurm.html#load-the-samtools-module",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.14 Load the samtools module",
+    "text": "5.14 Load the samtools module\nWe will load the module for version 1.15.1 of samtools. That can be done like this:\n\n\nPaste this into your shell\n\nmodule load bio/samtools/1.15.1\n\n(using the load subcommand of module)\n\n\n\n\n\n\nAbout the default versions\n\n\n\nThe same would have been achieved with\nmodule load bio/samtools\nbecause 1.15.1 is the default samtools version.\nNonetheless, it is typically best from a reproducibility standpoint to be explicit about version numbers of software you are using.\n\n\nNow, that it is loaded, you can run the samtools command and get the usage message.\n\n\nType this at your shell\n\nsamtools\n\n\n\n\n\n\n\nInventory and Unload modules\n\n\n\nTo know which modules you have loaded:\nmodule list\nTo unload all the modules you have loaded\nmodule purge\nThere are many more module commands, but those are the only ones that you really need to know."
+  },
+  {
+    "objectID": "slurm.html#one-note-about-modules",
+    "href": "slurm.html#one-note-about-modules",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.15 One note about modules",
+    "text": "5.15 One note about modules\n\n\n\n\n\n\nLoaded modules are only active in the current session\n\n\n\nIf you open a new shell, or allocate an interactive session on a new core, or logout and log back in again…\n…You will have to reload the modules that you need."
+  },
+  {
+    "objectID": "slurm.html#before-we-go",
+    "href": "slurm.html#before-we-go",
+    "title": "5  Sedna and SLURM intro",
+    "section": "5.16 Before we go…",
+    "text": "5.16 Before we go…\nWe defined three convenience functions in bash: slinfo, alljobs, and myjobs.\nOnce we log out of the current session, or login to a different session, those convenient functions will be lost.\nTo make sure that they are accessible the next time we login, we will put them into our own .bashrc files.\nThe .bashrc file is a file in your home directory in which you can put function definitions and other configurations that will be applied whenever you open a new shell.\nTo add our three convenience functions to your .bashrc file, first copy the following:\n\n\nCopy this onto your clipboard\n\nfunction slinfo {\n  sinfo -N -O nodelist,cpusstate,memory,allocmem\n}\n\nfunction alljobs {\n    if [ $# -ne 1 ]; then\n      JL=10;\n  else\n      JL=$1;\n  fi;\n    squeue -o  \"%.12i %.9P %.${JL}j %.15u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L\";\n}\n\nfunction myjobs {\n    if [ $# -ne 1 ]; then\n      JL=10;\n  else\n      JL=$1;\n  fi;\n    squeue -u $(whoami) -o  \"%.12i %.9P %.${JL}j %.10u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L %p\";\n}\n\nThen type the following into your command prompt to edit your bashrc with nano:\n\n\nType this into your shell\n\nnano ~/.bashrc\n\nThen paste the function definitions into the editor at the bottom of the file, and then do cntrl-X, Y, RETURN to save the file and get out of nano.\nNow, the next time you login you will have all those functions."
   },
   {
     "objectID": "summary.html",
