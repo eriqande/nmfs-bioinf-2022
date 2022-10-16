@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>nmfs-bioinf-2022 - References</title>
+<title>nmfs-bioinf-2022 - 5&nbsp; SLURM</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./eca-setup-notes.html" rel="prev">
+<link href="./summary.html" rel="next">
+<link href="./scripts-and-functions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -88,7 +70,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">References</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SLURM</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -141,7 +123,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./slurm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SLURM</span></a>
+  <a href="./slurm.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SLURM</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -156,7 +138,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
     </ul>
@@ -164,14 +146,21 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-do-we-need-slurm" id="toc-why-do-we-need-slurm" class="nav-link active" data-scroll-target="#why-do-we-need-slurm"><span class="toc-section-number">5.1</span>  Why do we need SLURM?</a></li>
+  <li><a href="#hpcc-architecture-in-a-nutshell" id="toc-hpcc-architecture-in-a-nutshell" class="nav-link" data-scroll-target="#hpcc-architecture-in-a-nutshell"><span class="toc-section-number">5.2</span>  HPCC Architecture in a Nutshell</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">References</h1>
+<h1 class="title"><span id="slurm" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SLURM</span></span></h1>
 </div>
 
 
@@ -185,11 +174,53 @@ div.csl-indent {
 
 </header>
 
-<div id="refs" role="doc-bibliography" style="display: none">
-
+<ul>
+<li>SLURM stands for “Simple Linux Utility for Resource Management”</li>
+<li>It is the “queueing system” used to equitable provide compute resources on the Sedna HPCC.</li>
+</ul>
+<section id="why-do-we-need-slurm" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="why-do-we-need-slurm"><span class="header-section-number">5.1</span> Why do we need SLURM?</h2>
+<ul>
+<li>The fundamental problem of cluster computing.</li>
+<li>A cluster does not operate like your laptop.</li>
+<li>Most compute-intensive jobs run most efficiently on a dedicated processor or processors.</li>
+</ul>
+</section>
+<section id="hpcc-architecture-in-a-nutshell" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="hpcc-architecture-in-a-nutshell"><span class="header-section-number">5.2</span> HPCC Architecture in a Nutshell</h2>
+<p><img src="images/hpcc-diagram.jpg" class="img-fluid"></p>
+<ul>
+<li><strong>Nodes</strong>: the closest thing to what you think of as a computer. (“Pizza-boxes” with no displays).
+<ul>
+<li>Each node is attached via a fast connection to centralized attached storage (A big set of hard drives attached via “Infiniband.”)</li>
+<li>Within each node are some numbers of <strong>Cores</strong> or <strong>CPUs</strong>
+<ul>
+<li>Cores/CPUs are the actual processing units <em>within a node</em>. (Usually 20 to 24)</li>
+</ul></li>
+</ul></li>
+<li>Sedna, like almost all other HPCCs has a <em>login node</em>
+<ul>
+<li>The <em>login node</em> is dedicated to allowing people to communicate with HPCC.</li>
+<li>DO NOT do computationally intensive, or input/output-intensive jobs on the <em>login node</em></li>
+<li>Not surprisingly, when you login to Sedna you are on the login node.</li>
+</ul></li>
+</ul>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Hot tip!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the default configuration on Sedna, your command prompt at the shell tells you which node you are logged into:</p>
+</div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -292,11 +323,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./eca-setup-notes.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Notes on Eric’s Setup Process</span></span>
+      <a href="./scripts-and-functions.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bash scripts and functions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./summary.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

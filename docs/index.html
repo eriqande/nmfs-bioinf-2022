@@ -124,12 +124,17 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./slurm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SLURM</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eca-setup-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Notes on Eric’s Setup Process</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eca-setup-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Notes on Eric’s Setup Process</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -195,13 +200,13 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p>This course will be using the SEDNA high-performance computing cluster located at the Northwest Fisheries Science Center. This cluster (and, hence, this course) is only available to NMFS employees and affiliates. If you are a NMFS employee and you are interested in this course, please see <a href="https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit#heading=h.qpx57rvxr0sj">here</a> for information about how to get an account on the cluster.</p>
+<p>This course will be using the Sedna high-performance computing cluster located at the Northwest Fisheries Science Center. This cluster (and, hence, this course) is only available to NMFS employees and affiliates. If you are a NMFS employee and you are interested in this course, please see <a href="https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit#heading=h.qpx57rvxr0sj">here</a> for information about how to get an account on the cluster.</p>
 <p>This course is intended for people who have already had some exposure to Unix or Linux. You should be reasonably comfortable navigating around the Unix filesystem using the command line. For a refresher, please read <a href="https://eriqande.github.io/eca-bioinf-handbook/essential-unixlinux-terminal-knowledge.html">this chapter from my online bioinformatics book</a>.</p>
 <p>My goal is to:</p>
 <ul>
 <li>teach the shell programming constructs and the text processing tricks that I find myself using all the time in my day-to-day work</li>
 <li>provide an introduction to how to use SLURM to do cluster computing</li>
-<li>On the last day, show how Snakemake works, and how it can be used on the SEDNA cluster to simplify your bioinformatics life.</li>
+<li>On the last day, show how Snakemake works, and how it can be used on the Sedna cluster to simplify your bioinformatics life.</li>
 </ul>
 </section>
 <section id="proposed-course-topics" class="level2">
@@ -209,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Day 1: Intro, Unix-review, shell programming, <code>awk</code>
 <ul>
-<li>Introduction to the SEDNA cluster (15 minutes Krista and Giles)
+<li>Introduction to the Sedna cluster (15 minutes Krista and Giles)
 <ul>
 <li>Cluster infrastructure and configuration.</li>
 <li>Scientific software and the installation requests</li>
@@ -227,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Learning about the cluster and your jobs: <code>sinfo</code> and <code>squeue</code></li>
 <li>Write a convenience bash function or two: <code>myjobs</code> and <code>alljobs</code></li>
 <li>Getting an interactive session on a compute node: <code>srun</code></li>
-<li>Environment modules on SEDNA: <code>module</code></li>
+<li>Environment modules on Sedna: <code>module</code></li>
 <li>Submitting jobs to the queue: <code>sbatch</code></li>
 <li>Job arrays.</li>
 <li>A useful script for orchestrating job arrays from a spreadsheet: <code>line-assign.sh</code>. This will build off of what we learned the day before.</li>
@@ -240,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
 <li>An introduction to Snakemake
 <ul>
 <li>Will somewhat follow <a href="https://eriqande.github.io/con-gen-2022/slides/snake-slides.html#/section">these slides</a></li>
-<li>BUT, it will be modified to show use of SEDNA’s environment modules and also to show use of a profile for dispatching jobs to Slurm from Snakemake.</li>
+<li>BUT, it will be modified to show use of Sedna’s environment modules and also to show use of a profile for dispatching jobs to Slurm from Snakemake.</li>
 </ul></li>
 </ul></li>
 </ul>

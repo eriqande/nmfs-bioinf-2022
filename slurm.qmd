@@ -1,0 +1,35 @@
+# SLURM {#slurm}
+
+- SLURM stands for "Simple Linux Utility for Resource Management"
+- It is the "queueing system" used to equitable provide compute resources
+on the Sedna HPCC.
+
+## Why do we need SLURM?
+
+- The fundamental problem of cluster computing.
+- A cluster does not operate like your laptop.
+- Most compute-intensive jobs run most efficiently on a dedicated processor
+or processors.
+
+
+## HPCC Architecture in a Nutshell
+
+![](images/hpcc-diagram.jpg)
+
+- **Nodes**: the closest thing to what you think of as a computer. ("Pizza-boxes" with no displays).
+    - Each node is attached via a fast connection to centralized attached storage (A big set of hard drives
+      attached via "Infiniband.")
+    - Within each node are some numbers of **Cores** or **CPUs**
+        - Cores/CPUs  are the actual processing units _within a node_. (Usually 20 to 24)
+- Sedna, like almost all other HPCCs has a _login node_
+    - The _login node_ is dedicated to allowing people to communicate with HPCC.
+    - DO NOT do computationally intensive, or input/output-intensive jobs on the _login node_
+    - Not surprisingly, when you login to Sedna you are on the login node.
+    
+::: {.callout-warning} 
+
+## Hot tip!
+
+In the default configuration on Sedna, your command prompt at the shell
+tells you which node you are logged into:
+:::

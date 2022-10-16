@@ -13,7 +13,7 @@ Also, there are a number of different _shells_ for Unix.  The shell is the
 part that interprets commands.
 
 We will be talking about the `bash` shell.  This is the default shell on
-SEDNA, and it is also the most popular shell for bioinformatics.  
+Sedna, and it is also the most popular shell for bioinformatics.  
 
 Bash stands for "Bourne-again shell".  It is an update to an earlier
 shell called the Bourne shell.
@@ -28,7 +28,7 @@ that we be using.
 - I want everyone to download it to their home directory and then
 `cd` into its `playground` directory, where we will be playing today and tomorrow.
 
-After logging onto SEDNA:
+After logging onto Sedna:
 ```{.sh filename="Paste this into your shell"}
 cd ~
 git clone https://github.com/eriqande/nmfs-bioinf-2022.git

@@ -11,7 +11,7 @@ over three days:
 
 ## Prerequisites
 
-This course will be using the SEDNA high-performance computing
+This course will be using the Sedna high-performance computing
 cluster located at the Northwest Fisheries Science Center. This cluster
 (and, hence, this course)
 is only available to NMFS employees and affiliates. If you are a NMFS
@@ -32,13 +32,13 @@ the text processing tricks that I find myself using all the time in my
 day-to-day work
 - provide an introduction to how to use SLURM to do cluster computing
 - On the last day, show how Snakemake works, and how it can be used on the
-SEDNA cluster to simplify your bioinformatics life.
+Sedna cluster to simplify your bioinformatics life.
 
 ## Proposed Course Topics
 
 
 * Day 1: Intro, Unix-review, shell programming, `awk`
-    - Introduction to the SEDNA cluster (15 minutes Krista and Giles)
+    - Introduction to the Sedna cluster (15 minutes Krista and Giles)
         - Cluster infrastructure and configuration.
         - Scientific software and the installation requests
     - [Quick Unix Review](quick-unix-review.qmd#quick-unix-review) (25 minutes)
@@ -55,7 +55,7 @@ SEDNA cluster to simplify your bioinformatics life.
         - Learning about the cluster and your jobs: `sinfo` and `squeue`
         - Write a convenience bash function or two: `myjobs` and `alljobs`
         - Getting an interactive session on a compute node: `srun`
-        - Environment modules on SEDNA: `module`
+        - Environment modules on Sedna: `module`
         - Submitting jobs to the queue: `sbatch`
         - Job arrays.
         - A useful script for orchestrating job arrays from a spreadsheet: `line-assign.sh`.  This will build off of
@@ -66,7 +66,7 @@ SEDNA cluster to simplify your bioinformatics life.
 * Day 3:
     - An introduction to Snakemake
         - Will somewhat follow [these slides](https://eriqande.github.io/con-gen-2022/slides/snake-slides.html#/section)
-        - BUT, it will be modified to show use of SEDNA's environment modules
+        - BUT, it will be modified to show use of Sedna's environment modules
         and also to show use of a profile for dispatching jobs to Slurm from
         Snakemake.
 

@@ -269,7 +269,7 @@ There are two other things you might find at the end of a line:  `&` and `&&`
 
 - `&` at the end of the line means "run the command, but don't wait for it to finish.
     - This runs the command "in the background" in some sense.
-    - This is not used very often when doing bioinformatics in a SLURM-driving system like that on SEDNA
+    - This is not used very often when doing bioinformatics in a SLURM-driving system like that on Sedna
 - `&&` at the end of a command means "only run the _next_ command if the _previous one did not fail._
     - This is very useful for making sure that you don't keep running later commands if an earlier one failed.
     - There is also a `||` that is useful in this context, which is all about "exit status" of Unix commands, which

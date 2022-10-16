@@ -386,7 +386,7 @@ everyday basis when doing bioinformatics.
 
 The bulk of day #2 is going to be focused on working within a cluster
 environment, and specifically on using SLURM for launching jobs on the
-SEDNA cluster.
+Sedna cluster.
 
 To prepare for tomorrow, please be sure to read
 [Chapter 8](https://eriqande.github.io/eca-bioinf-handbook/chap-HPCC.html)
