@@ -196,17 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./eca-setup-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Notes on Eric’s Setup Process</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./slurm-arrays.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Slurm Job Arrays</span></a>
   </div>
 </li>
     </ul>
@@ -233,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#check-which-software-programs-are-available-in-the-modules" id="toc-check-which-software-programs-are-available-in-the-modules" class="nav-link" data-scroll-target="#check-which-software-programs-are-available-in-the-modules"><span class="toc-section-number">5.13</span>  Check which software programs are available in the modules</a></li>
   <li><a href="#load-the-samtools-module" id="toc-load-the-samtools-module" class="nav-link" data-scroll-target="#load-the-samtools-module"><span class="toc-section-number">5.14</span>  Load the samtools module</a></li>
   <li><a href="#one-note-about-modules" id="toc-one-note-about-modules" class="nav-link" data-scroll-target="#one-note-about-modules"><span class="toc-section-number">5.15</span>  One note about modules</a></li>
-  <li><a href="#before-we-go" id="toc-before-we-go" class="nav-link" data-scroll-target="#before-we-go"><span class="toc-section-number">5.16</span>  Before we go…</a></li>
+  <li><a href="#before-we-go-make-our-convenience-functions-available-whenever-we-are-on-sedna" id="toc-before-we-go-make-our-convenience-functions-available-whenever-we-are-on-sedna" class="nav-link" data-scroll-target="#before-we-go-make-our-convenience-functions-available-whenever-we-are-on-sedna"><span class="toc-section-number">5.16</span>  Before we go, make our convenience functions available whenever we are on Sedna</a></li>
   </ul>
 </nav>
     </div>
@@ -645,47 +635,47 @@ Loaded modules are only active in the current session
 </div>
 </div>
 </section>
-<section id="before-we-go" class="level2" data-number="5.16">
-<h2 data-number="5.16" class="anchored" data-anchor-id="before-we-go"><span class="header-section-number">5.16</span> Before we go…</h2>
+<section id="before-we-go-make-our-convenience-functions-available-whenever-we-are-on-sedna" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="before-we-go-make-our-convenience-functions-available-whenever-we-are-on-sedna"><span class="header-section-number">5.16</span> Before we go, make our convenience functions available whenever we are on Sedna</h2>
 <p>We defined three convenience functions in bash: <code>slinfo</code>, <code>alljobs</code>, and <code>myjobs</code>.</p>
-<p>Once we log out of the current session, or login to a different session, those convenient functions will be lost.</p>
+<p>Once we log out of the current session, or login to a different session, those convenience functions will be lost.</p>
 <p>To make sure that they are accessible the next time we login, we will put them into our own <code>.bashrc</code> files.</p>
-<p>The <code>.bashrc</code> file is a file in your home directory in which you can put function definitions and other configurations that will be applied whenever you open a new shell.</p>
-<p>To add our three convenience functions to your <code>.bashrc</code> file, first copy the following:</p>
+<p>The <code>.bashrc</code> file is a file in your home directory in which you can put function definitions and other configurations that will be applied whenever you open a new bash shell.</p>
+<p>To add our three convenience functions to your <code>.bashrc</code> file, first start editing your <code>~/.bashrc</code> file with <code>nano</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Paste this into your shell</strong></pre>
+</div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then come back to this web page and copy the following text:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Copy this onto your clipboard</strong></pre>
 </div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> slinfo</span> <span class="kw">{</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">sinfo</span> <span class="at">-N</span> <span class="at">-O</span> nodelist,cpusstate,memory,allocmem</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> alljobs</span> <span class="kw">{</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">$#</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span>10<span class="kw">;</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span><span class="va">$1</span><span class="kw">;</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span><span class="kw">;</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">squeue</span> <span class="at">-o</span>  <span class="st">"%.12i %.9P %.</span><span class="va">${JL}</span><span class="st">j %.15u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L"</span><span class="kw">;</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> myjobs</span> <span class="kw">{</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">$#</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span>10<span class="kw">;</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span><span class="va">$1</span><span class="kw">;</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span><span class="kw">;</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$(</span><span class="fu">whoami</span><span class="va">)</span> <span class="at">-o</span>  <span class="st">"%.12i %.9P %.</span><span class="va">${JL}</span><span class="st">j %.10u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L %p"</span><span class="kw">;</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> slinfo</span> <span class="kw">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">sinfo</span> <span class="at">-N</span> <span class="at">-O</span> nodelist,cpusstate,memory,allocmem</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> alljobs</span> <span class="kw">{</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">$#</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span>10<span class="kw">;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span><span class="va">$1</span><span class="kw">;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">squeue</span> <span class="at">-o</span>  <span class="st">"%.12i %.9P %.</span><span class="va">${JL}</span><span class="st">j %.15u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L"</span><span class="kw">;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> myjobs</span> <span class="kw">{</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">$#</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span>10<span class="kw">;</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      <span class="va">JL</span><span class="op">=</span><span class="va">$1</span><span class="kw">;</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$(</span><span class="fu">whoami</span><span class="va">)</span> <span class="at">-o</span>  <span class="st">"%.12i %.9P %.</span><span class="va">${JL}</span><span class="st">j %.10u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L %p"</span><span class="kw">;</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then type the following into your command prompt to edit your <code>bashrc</code> with <code>nano</code>:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Type this into your shell</strong></pre>
-</div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then paste the function definitions into the editor at the bottom of the file, and then do <code>cntrl-X</code>, <code>Y</code>, <code>RETURN</code> to save the file and get out of <code>nano</code>.</p>
+<p>Then paste those function definitions into the editor at the bottom of the file (or before your conda block if you have one), and then do <code>cntrl-X</code>, <code>Y</code>, <code>RETURN</code> to save the file and get out of <code>nano</code>.</p>
 <p>Now, the next time you login you will have all those functions.</p>
 
 

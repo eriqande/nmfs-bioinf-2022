@@ -48,11 +48,7 @@ Sedna cluster to simplify your bioinformatics life.
     - [Bash scripts and functions](scripts-and-functions.qmd#script-func) (20 minutes)
     - [Sedna and SLURM intro](slurm.qmd#ssintro) (40 minutes) 
     - [Submitting jobs with `sbatch`](sbatch.qmd#sbatch) (40 minutes)
-        - Submitting jobs to the queue: `sbatch`
-        - `scancel`: Help!  I need to kill that job (or all the jobs) that I just started!
-        - `seff`: get information on resource use of a job I already ran.
-        - `sacct` to learn about jobs that crapped out
-    - Sbatch job arrays
+    - [Slurm Job Arrays](slurm-arrays.qmd#slurm-arrays) (40 minutes)
         - A useful script for orchestrating job arrays from a spreadsheet: `line-assign.sh`.  This will build off of
           what we learned the day before.
 

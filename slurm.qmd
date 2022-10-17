@@ -396,22 +396,28 @@ or logout and log back in again...
 :::
 
 
-## Before we go...
+## Before we go, make our convenience functions available whenever we are on Sedna
 
 We defined three convenience functions in bash: `slinfo`, `alljobs`, and `myjobs`.  
 
 Once we log out of the current session, or login to a different session, those
-convenient functions will be lost.
+convenience functions will be lost.
 
 To make sure that they are accessible the next time we login, we will put them
 into our own `.bashrc` files.  
 
 The `.bashrc` file is a file in your home directory in which you can put function
 definitions and other configurations that will be applied whenever you open a new
-shell.
+bash shell.
 
-To add our three convenience functions to your `.bashrc` file, first copy
-the following:
+To add our three convenience functions to your `.bashrc` file, first start
+editing your `~/.bashrc` file with `nano`.
+```{.sh filename="Paste this into your shell"}
+nano ~/.bashrc
+```
+
+Then come back to this web page and copy
+the following text:
 ```{.sh filename="Copy this onto your clipboard"}
 function slinfo {
   sinfo -N -O nodelist,cpusstate,memory,allocmem
@@ -437,13 +443,10 @@ function myjobs {
 
 ```
 
-Then type the following into your command prompt to edit your `bashrc` with `nano`:
-```{.sh filename="Type this into your shell"}
-nano ~/.bashrc
-```
 
-Then paste the function definitions into the editor at the bottom
-of the file, and then do `cntrl-X`, `Y`, `RETURN` to save the file
+Then paste those function definitions into the editor at the bottom
+of the file (or before your conda block if you have one),
+and then do `cntrl-X`, `Y`, `RETURN` to save the file
 and get out of `nano`.
 
 Now, the next time you login you will have all those functions.

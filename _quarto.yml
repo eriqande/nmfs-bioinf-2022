@@ -14,9 +14,7 @@ book:
     - scripts-and-functions.qmd
     - slurm.qmd
     - sbatch.qmd
-    - summary.qmd
-    - eca-setup-notes.qmd
-    - references.qmd
+    - slurm-arrays.qmd
   sidebar:
     logo: quarto-static/fisheries_header_logo_jul2019.png
 
