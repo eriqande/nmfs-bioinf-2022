@@ -403,3 +403,23 @@ gzip -cd --bogus-option data/samtools_stats/s001_stats.tsv.gz 2>ze.txt | wc > so
 ```
 Have a look at the contents of `ze.txt`.
 :::
+
+
+::: {.callout-warning collapse=true}
+## Pro-tip: Redirect `stdout` and `stderr` to the same place
+
+The astute reader might note that if you redirect `stdout` to a file,
+and then redirect `stderr` to the same file, you might end
+up overwriting the contents of `stdout` with `stderr`.
+
+If you want to redirect `stdout` and `stderr` to the same
+place then you first redirect `stdout` to a file, and then
+after that, you say "redirect `stderr` to wherever `stdout` has
+been redirected to," by using `2>&1`.
+
+So it looks like this:
+```{.sh}
+command > file.out 2>&1
+```
+
+:::

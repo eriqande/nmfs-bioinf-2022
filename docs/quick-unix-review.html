@@ -752,6 +752,25 @@ Self-study answers
 </div>
 </div>
 </div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Pro-tip: Redirect <code>stdout</code> and <code>stderr</code> to the same place
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The astute reader might note that if you redirect <code>stdout</code> to a file, and then redirect <code>stderr</code> to the same file, you might end up overwriting the contents of <code>stdout</code> with <code>stderr</code>.</p>
+<p>If you want to redirect <code>stdout</code> and <code>stderr</code> to the same place then you first redirect <code>stdout</code> to a file, and then after that, you say “redirect <code>stderr</code> to wherever <code>stdout</code> has been redirected to,” by using <code>2&gt;&amp;1</code>.</p>
+<p>So it looks like this:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">command</span> <span class="op">&gt;</span> file.out <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 
 
 </section>
