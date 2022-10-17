@@ -13,6 +13,7 @@ book:
     - awk-intro.qmd
     - scripts-and-functions.qmd
     - slurm.qmd
+    - sbatch.qmd
     - summary.qmd
     - eca-setup-notes.qmd
     - references.qmd

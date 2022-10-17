@@ -34,7 +34,7 @@ day-to-day work
 - On the last day, show how Snakemake works, and how it can be used on the
 Sedna cluster to simplify your bioinformatics life.
 
-## Proposed Course Topics
+## Course Topics and Sessions
 
 
 * Day 1: Intro, Unix-review, shell programming, `awk`
@@ -43,25 +43,18 @@ Sedna cluster to simplify your bioinformatics life.
         - Scientific software and the installation requests
     - [Quick Unix Review](quick-unix-review.qmd#quick-unix-review) (25 minutes)
     - [Shell Programming](shell-prog.qmd#shell-prog) (50 Minutes)
-    - [Processing text files with `awk`](awk-intro.qmd#awk-intro) (30 minutes)
+    - [A Brief `awk` Intro](awk-intro.qmd#awk-intro)  Processing text files with `awk` (30 minutes)
 * Day 2: A little bash stuff, then Sedna and SLURM
-    - [Shell scripts and bash functions](scripts-and-functions.qmd#script-func) (20 minutes)
-    - [Computing clusters, Sedna, SLURM, and modules](slurm.qmd#ssintro) (40 minutes) sessions,
-    punctuated by two 10 minute breaks).  We will be exploring the
-    use of all of these with some bioinformatic tasks.  Like indexing
-    a genome. Mapping some reads, etc.
-        - Homework: read from the beginning of the chapter
-        to the end of section 8.2   [here](https://eriqande.github.io/eca-bioinf-handbook/chap-HPCC.html)
-        - Learning about the cluster and your jobs: `sinfo` and `squeue`
-        - Write a convenience bash function or two: `myjobs` and `alljobs`
-        - Getting an interactive session on a compute node: `srun`
-        - Environment modules on Sedna: `module`
+    - [Bash scripts and functions](scripts-and-functions.qmd#script-func) (20 minutes)
+    - [Sedna and SLURM intro](slurm.qmd#ssintro) (40 minutes) 
+    - [Submitting jobs with `sbatch`](sbatch.qmd#sbatch) (40 minutes)
         - Submitting jobs to the queue: `sbatch`
-        - Job arrays.
-        - A useful script for orchestrating job arrays from a spreadsheet: `line-assign.sh`.  This will build off of
-          what we learned the day before.
         - `scancel`: Help!  I need to kill that job (or all the jobs) that I just started!
         - `seff`: get information on resource use of a job I already ran.
+        - `sacct` to learn about jobs that crapped out
+    - Sbatch job arrays
+        - A useful script for orchestrating job arrays from a spreadsheet: `line-assign.sh`.  This will build off of
+          what we learned the day before.
 
 * Day 3:
     - An introduction to Snakemake

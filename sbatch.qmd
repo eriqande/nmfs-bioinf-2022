@@ -1,0 +1,152 @@
+# Submitting jobs with `sbatch` {#sbatch}
+
+- Up till now we have allocated ourselves two cores for
+_interactive_ use.
+
+- This is what you would do if you were going to be doing computationally
+intensive things directly while hacking on the command line....
+- ...or if you were going to start an R session and interactively work
+on some big data on it.
+- etc.
+
+Running an interactive shell on a compute node is also a great way
+to test your scripts.
+
+However, once your scripts are tested, for most of your heavy
+computation, you will want to submit jobs as non-interactive _batch_ jobs
+using SLURM's `sbatch` function.  
+
+## The `sbatch` function and its options
+
+If you do `man sbatch` you will see an insanely large number of options
+and all sorts of complicated stuff.  
+
+You can get by with a fairly minimal set of options for almost everything
+you need to do.  They are:
+
+- `--cpus-per-task=<n>`: the number of cores to use for the job.  The syntax has you
+using it like this `--cpus-per-task=2`
+    - On Sedna, the default is 1.
+- `--mem=<size[units]`: How much total memory for the job. Example: `--mem=4G`
+    - On Sedna, the default is about 4.7 Gb for each requested core.
+- `--time=[D-]HH:MM:SS`: How much time are you requesting?  You don't have to specify days,
+    so you could say, `--time=1-12:00:00` for one day and twelve hours, or you could
+    say `--time=36:00:00`  for 36 hours.
+    - On Sedna, the default is 8 hours. 
+- `--output=<filename pattern>`: Where should anything on `stdout` that is not otherwise redirected be written to?
+- `--error=<filename pattern>`: Where should anything on `stderr` that is not otherwise redirected be written to?
+
+On top of the options,  `sbatch` takes a single required argument, which must be the
+path to a shell script (we know about those!) that the job will run.
+
+::: {.callout-warning}
+
+## Fun fact:
+
+If you pass any arguments after the name of the shell script that you want
+`sbatch` to execute, those are interpreted as arguments to the shell script
+itself.
+
+:::
+
+## What an invocation of `sbatch` could look like
+
+So, if we wanted to schedule a script called `MyScript.sh` to run with 4 cores
+and memory of 80Gb, with an allowance of 16 hours, and we wanted to tell
+SLURM where to capture any otherwise un-redirected `stdout` and `stderr`, we
+would type something like this:
+```{.sh filename="Don't bother copying or pasting this."}
+sbatch --cpus-per-task=4 --mem=80G --time=16:00:00 --output=myscript_stdout --error myscript_error MyScript.sh
+```
+
+Some points about that:
+
+- Typing all of that is a huge hassle.
+- Most of the options will be specific to the actual job in `MyScript.sh`
+
+So...`sbatch` allows you to store the options in your shell script on lines
+after the shebang line that are preceded by `#SBATCH`.
+
+Let's look at an example, in the file `scripts/bwa_index.sh`
+```{.sh filename="Contents of the file scripts/bwa_index.sh"}
+`r paste(readLines("playground/scripts/bwa_index.sh"), collapse="\n")`
+```
+
+::: {.callout-warning}
+
+### What's that %j in the output and error options?
+
+In the above script, you will see
+
+```{.sh}
+#SBATCH --output=bwa_index-%j.out
+#SBATCH --error=bwa_index-%j.err
+```
+In this context, the `%j` gets replace by `sbatch` with the
+SLURM `JOBID`.
+
+:::
+
+
+## Let us submit the `bwa_index.sh` job to SLURM
+
+Since all of the `sbatch` options are imbedded within the
+shell script, all that we need to do, now, is:
+```{.sh filename="Paste this into your shell"}
+sbatch scripts/bwa_index.sh resources/genome.fasta
+```
+
+The first argument is the script `scripts/bwa_index.sh` and the
+second, `resources/genome.fasta`, is the path to the genome that
+we want to index with `bwa`.
+
+When this command executes, it returns the SLURM `JOBID`.  Make a note of it.
+
+Once you have launched the job, try using `myjobs` and `alljobs` to see your job running
+in the queue, and also everyone else's. (You don't have much time, because it doesn't take very long).
+
+## How many resources did that job use? --- `seff`
+
+When you first start doing bioinformatics, you will not be very familiar
+with how long each job will run, or how much memory it will need.
+
+That takes some time, but one helpful utility, `seff`, will tell you the
+effective usage of the allocated resources by any _completed_ job.
+
+It's simple to use:
+```{.sh filename="Here is the sytnax"}
+seff slurm-jobid
+```
+
+::: {.callout-tip}
+
+## Self-study
+
+Try that command, `seff slurm-jobid`, replacing `slurm-jobid` with the actual SLURM `JOBID` of the
+job that you just ran.
+
+:::
+
+
+::: {.callout-warning collapse=true}
+
+## More tips on learning about past job resource use
+
+You can also use the `sacct` command.  Check it out with `man sacct`.
+
+You can get information much like `seff` for your recent jobs with:
+```{.sh filename="An example use of sacct"}
+
+sacct  --format JobID,JobName,User,Group,State,Cluster,AllocCPUS,REQMEM,TotalCPU,Elapsed,MaxRSS,ExitCode,NNodes,NTasks -u $(whoami)
+
+```
+
+:::
+
+
+## Let's try submitting a simple job with default sbatch settings
+
+Here
+
+
+## Oh no!  I need to stop my job(s): `scancel`
