@@ -1,7 +1,7 @@
 # Sedna and SLURM intro {#ssintro}
 
 - SLURM stands for "Simple Linux Utility for Resource Management"
-- It is the "queueing system" used to equitable provide compute resources
+- It is the "queueing system" used to equitably provide compute resources
 on the Sedna HPCC.
 
 ## Why do we need SLURM?
@@ -22,7 +22,7 @@ or processors.
     - Within each node are some numbers of **Cores** or **CPUs**
         - Cores/CPUs  are the actual processing units _within a node_. (Usually 20 to 24)
 - Sedna, like almost all other HPCCs has a _login node_
-    - The _login node_ is dedicated to allowing people to communicate with HPCC.
+    - The _login node_ is dedicated to allowing people to communicate with the HPCC.
     - DO NOT do computationally intensive, or input/output-intensive jobs on the _login node_
     - Not surprisingly, when you login to Sedna you are on the login node.
     
@@ -275,7 +275,7 @@ myjobs
 
 - Analysis software is not automatically available on a cluster
 - On many clusters you have to install it yourself
-- On Sedna, we are very luck to have a great support crew that
+- On Sedna, we are very lucky to have a great support crew that
 will install software for us, and also make it available for
 everyone else to use.
 
@@ -285,7 +285,28 @@ conflict with other software.
 The solution: maintain software (and its dependencies)
 in (somewhat) isolated _modules_.
 
-What do we mean by this?
+::: {.callout-important}
+
+## Bioinformatic modules are only available if the MODULEPATH is specified
+
+Here we check to see if the bioinformatics paths on in the MODULEPATH:
+```{.sh filename="Paste this in your shell"}
+echo $MODULEPATH | grep bioinformatics
+```
+
+If that command did not return anything to `stdout`, then you need to
+add a command to your `~/.bashrc` that will add `/opt/bioinformatics/modulefiles`
+to your MODULEPATH. You can do that (as detailed in the [Sedna Google Doc](https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit#))
+like this:
+```{.sh filename="If you need to, paste this into the shell"}
+echo 'export MODULEPATH=${MODULEPATH}:/opt/bioinformatics/modulefiles' >> ~/.bashrc
+```
+And when you are done with that, reload your `.bashrc` to get the change
+to take effect:
+```{.sh filename="If you need to, paste this into the shell"}
+source ~/.bashrc
+```
+:::
 
 ## Example: Let's try running `samtools`
 

@@ -1,8 +1,14 @@
 # Bash scripts and functions {#script-func}
 
-Before we dive into cluster computing the Joy of SLURM,
+Before we dive into cluster computing and the Joy of SLURM,
 we have two last topics to cover: bash shell scripts
 and bash functions.
+
+## Prepare for day two
+
+To make sure that you have all the latest updates from the repository, 
+use git to pull down any new changes. 
+```{.sh }
 
 ## Bash shell scripts
 
@@ -139,11 +145,16 @@ One way to do so involves using _positional parameters_
 
 ### Arguments following a script can be accessed within the script
 
-If you put arguments after a script on the command line, then in the
+If you put arguments after a script on the command line, for example like:
+```{.sh filename="Don't paste this in anywhere"}
+script.sh arg1 some_other_arg  And_another_arg
+```
+then in the
 script itself:
 
-- the value of the first argument is accessible as `$1`
-- the value of the second argument is accessible as `$2`
+- the value of the first argument (`arg1`) is accessible as `$1`
+- the value of the second argument (`some_other_arg1`) is accessible as `$2`
+- the value of the third argument (`And_another_arg`) is accessible as `$3`
 
 ...and so forth for as many arguments as you want.  
 
@@ -230,6 +241,10 @@ if it does not have a line ending before it).
 
 :::
 
+Now, you can just type `congrats` at the command line:
+```{.sh filename="Type this on the command line"}
+congrats
+```
 
 ### Bash functions take positional parameters too
 

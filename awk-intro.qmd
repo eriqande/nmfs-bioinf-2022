@@ -314,7 +314,7 @@ It only has only about 25,000 read in it so that it isn't too large.
 Let's have a look at it with:
 ```{.sh filename="Paste this into your terminal"}
 module load bio/samtools
-samtools view bam/s001.bam | less -S
+samtools view data/bam/s001.bam | less -S
 ```
 
 The `module load bio/samtools` line gives us access to the `samtools` program,
@@ -322,16 +322,40 @@ which we need for turning BAM files into text-based SAM files that we can use.
 Once we have given it in our shell, we have that access until
 we close the shell.  Much more on that tomorrow!
 
+::: {.callout-important collapse=true}
+
+## If that failed you might need to define your MODULEPATH
+
+Here we check to see if the bioinformatics paths on in the MODULEPATH:
+```{.sh filename="Paste this in your shell"}
+echo $MODULEPATH | grep bioinformatics
+```
+
+If that command did not return anything to `stdout`, then you need to
+add a command to your `~/.bashrc` that will add `/opt/bioinformatics/modulefiles`
+to your MODULEPATH. You can do that (as detailed in the [Sedna Google Doc](https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit#))
+like this:
+```{.sh filename="If you need to, paste this into the shell"}
+echo 'export MODULEPATH=${MODULEPATH}:/opt/bioinformatics/modulefiles' >> ~/.bashrc
+```
+And when you are done with that, reload your `.bashrc` to get the change
+to take effect:
+```{.sh filename="If you need to, paste this into the shell"}
+source ~/.bashrc
+```
+:::
+
+
 The mapping quality is in the 5th field.  It is a number that ranges from 0 to 60.
 We can count up how many times each of those numbers occurs using `awk`.
 ```{.sh filename="Here it is all on one line as I wrote it"}
-samtools view bam/s001.bam | awk 'BEGIN {OFS="\t"; print "MAPQ", "NUM", "CUMUL";} {n[$5]++} END {for(i in n) tot+=n[i];  for(i=60;i>=0;i--) {sum+=n[i]; print i, n[i], sum/tot;}}'
+samtools view data/bam/s001.bam | awk 'BEGIN {OFS="\t"; print "MAPQ", "NUM", "CUMUL";} {n[$5]++} END {for(i in n) tot+=n[i];  for(i=60;i>=0;i--) {sum+=n[i]; print i, n[i], sum/tot;}}'
 ```
 
 And
 
 ```{.sh filename="Here it is broken across lines. Paste that in your shell."}
-samtools view bam/s001.bam | awk '
+samtools view data/bam/s001.bam | awk '
   BEGIN {OFS="\t"; print "MAPQ", "NUM", "CUMUL";} 
   {n[$5]++} 
   END {for(i in n) tot+=n[i];  for(i=60;i>=0;i--) {sum+=n[i]; print i,n[i],sum/tot;}}
