@@ -222,8 +222,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#what-an-invocation-of-sbatch-could-look-like" id="toc-what-an-invocation-of-sbatch-could-look-like" class="nav-link" data-scroll-target="#what-an-invocation-of-sbatch-could-look-like"><span class="toc-section-number">6.2</span>  What an invocation of <code>sbatch</code> could look like</a></li>
   <li><a href="#let-us-submit-the-bwa_index.sh-job-to-slurm" id="toc-let-us-submit-the-bwa_index.sh-job-to-slurm" class="nav-link" data-scroll-target="#let-us-submit-the-bwa_index.sh-job-to-slurm"><span class="toc-section-number">6.3</span>  Let us submit the <code>bwa_index.sh</code> job to SLURM</a></li>
   <li><a href="#how-many-resources-did-that-job-use-seff" id="toc-how-many-resources-did-that-job-use-seff" class="nav-link" data-scroll-target="#how-many-resources-did-that-job-use-seff"><span class="toc-section-number">6.4</span>  How many resources did that job use? — <code>seff</code></a></li>
-  <li><a href="#lets-try-submitting-a-simple-job-with-default-sbatch-settings" id="toc-lets-try-submitting-a-simple-job-with-default-sbatch-settings" class="nav-link" data-scroll-target="#lets-try-submitting-a-simple-job-with-default-sbatch-settings"><span class="toc-section-number">6.5</span>  Let’s try submitting a simple job with default sbatch settings</a></li>
+  <li><a href="#a-simple-job-with-default-sbatch-settings" id="toc-a-simple-job-with-default-sbatch-settings" class="nav-link" data-scroll-target="#a-simple-job-with-default-sbatch-settings"><span class="toc-section-number">6.5</span>  A simple job with default sbatch settings</a></li>
   <li><a href="#oh-no-i-need-to-stop-my-jobs-scancel" id="toc-oh-no-i-need-to-stop-my-jobs-scancel" class="nav-link" data-scroll-target="#oh-no-i-need-to-stop-my-jobs-scancel"><span class="toc-section-number">6.6</span>  Oh no! I need to stop my job(s): <code>scancel</code></a></li>
+  <li><a href="#what-happens-if-we-exceed-our-resources" id="toc-what-happens-if-we-exceed-our-resources" class="nav-link" data-scroll-target="#what-happens-if-we-exceed-our-resources"><span class="toc-section-number">6.7</span>  What happens if we exceed our resources?</a></li>
   </ul>
 </nav>
     </div>
@@ -360,6 +361,25 @@ What’s that %j in the output and error options?
 <p>The first argument is the script <code>scripts/bwa_index.sh</code> and the second, <code>resources/genome.fasta</code>, is the path to the genome that we want to index with <code>bwa</code>.</p>
 <p>When this command executes, it returns the SLURM <code>JOBID</code>. Make a note of it.</p>
 <p>Once you have launched the job, try using <code>myjobs</code> and <code>alljobs</code> to see your job running in the queue, and also everyone else’s. (You don’t have much time, because it doesn’t take very long).</p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Hey! That job ran in the current working directory
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Note that our script ran <code>bwa index</code> by passing it the path of a reference genome specified as a <em>relative path</em>: the path was relative to our current working directory.</p>
+<p>One of the wonderful features of SLURM is that, when <code>sbatch</code> runs your script, it does so from the current working directory of the shell in which you ran <code>sbatch</code>.</p>
+<p>(I mention this because the first cluster I used was set up differently, and you had to explicitly tell it to run from the current working directory—which was the source of endless gnashing of teeth)</p>
+</div>
+</div>
+</div>
+<p>Once that job is done, use <code>ls -lrt resources</code> to see all the files that were newly created by the <code>bwa-index.sh</code> script.</p>
 </section>
 <section id="how-many-resources-did-that-job-use-seff" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="how-many-resources-did-that-job-use-seff"><span class="header-section-number">6.4</span> How many resources did that job use? — <code>seff</code></h2>
@@ -386,7 +406,7 @@ Self-study
 </div>
 </div>
 <div class="callout-warning callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -395,7 +415,7 @@ More tips on learning about past job resource use
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You can also use the <code>sacct</code> command. Check it out with <code>man sacct</code>.</p>
 <p>You can get information much like <code>seff</code> for your recent jobs with:</p>
@@ -410,12 +430,51 @@ More tips on learning about past job resource use
 </div>
 </div>
 </section>
-<section id="lets-try-submitting-a-simple-job-with-default-sbatch-settings" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="lets-try-submitting-a-simple-job-with-default-sbatch-settings"><span class="header-section-number">6.5</span> Let’s try submitting a simple job with default sbatch settings</h2>
-<p>Here</p>
+<section id="a-simple-job-with-default-sbatch-settings" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="a-simple-job-with-default-sbatch-settings"><span class="header-section-number">6.5</span> A simple job with default sbatch settings</h2>
+<p>We jumped right into talking about all the most useful options for <code>sbatch</code>.</p>
+<p>However, on Sedna (and, indeed, on most clusters), SLURM defines reasonable defaults for an <code>sbatch</code> job.</p>
+<p>It even sends the <code>output</code> and <code>error</code> to reasonably named files, as we shall see.</p>
+<p>The following lists the contents of a script called <code>simple-15.sh</code> that doesn’t do much:</p>
+<ol type="1">
+<li>It writes out the SLURM_JOB_ID to <code>stdout</code></li>
+<li>It writes a message to <code>stderr</code></li>
+<li>Then it just sits there for 15 minutes.</li>
+</ol>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Contents of scripts/simple-15.sh</strong></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Running with Slurm Job ID: </span><span class="va">$SLURM_JOB_ID</span><span class="st">"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"This line is being written to stderr"</span> <span class="op">&gt;</span> /dev/stderr</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sleep</span> 900</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="oh-no-i-need-to-stop-my-jobs-scancel" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="oh-no-i-need-to-stop-my-jobs-scancel"><span class="header-section-number">6.6</span> Oh no! I need to stop my job(s): <code>scancel</code></h2>
+</section>
+<section id="what-happens-if-we-exceed-our-resources" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="what-happens-if-we-exceed-our-resources"><span class="header-section-number">6.7</span> What happens if we exceed our resources?</h2>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Memory gets allocated with cores or via <code>--mem</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is quite clear that the <code>--mem</code> option to <code>sbatch</code> is intended to increase the memory allocated to the job; however adding cores with <code>--cpus-per-task</code> also increases the memory available.</p>
+<p>On Sedna, your job gets roughly 4700 Mb (4.7 Gb) of RAM for each <em>core</em> that it is allocated on one of the standard compute nodes.</p>
+<p>Note, however, that if the programs running in your job are not multithreaded, then you might not be able to use all those cores. In which case, it might be better to specify additional memory allocation with <code>--mem</code>, and leave the other cores to other users.</p>
+</div>
+</div>
 
 
 </section>

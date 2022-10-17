@@ -354,7 +354,7 @@
     "href": "sbatch.html#let-us-submit-the-bwa_index.sh-job-to-slurm",
     "title": "6  Submitting jobs with sbatch",
     "section": "6.3 Let us submit the bwa_index.sh job to SLURM",
-    "text": "6.3 Let us submit the bwa_index.sh job to SLURM\nSince all of the sbatch options are imbedded within the shell script, all that we need to do, now, is:\n\n\nPaste this into your shell\n\nsbatch scripts/bwa_index.sh resources/genome.fasta\n\nThe first argument is the script scripts/bwa_index.sh and the second, resources/genome.fasta, is the path to the genome that we want to index with bwa.\nWhen this command executes, it returns the SLURM JOBID. Make a note of it.\nOnce you have launched the job, try using myjobs and alljobs to see your job running in the queue, and also everyone else’s. (You don’t have much time, because it doesn’t take very long)."
+    "text": "6.3 Let us submit the bwa_index.sh job to SLURM\nSince all of the sbatch options are imbedded within the shell script, all that we need to do, now, is:\n\n\nPaste this into your shell\n\nsbatch scripts/bwa_index.sh resources/genome.fasta\n\nThe first argument is the script scripts/bwa_index.sh and the second, resources/genome.fasta, is the path to the genome that we want to index with bwa.\nWhen this command executes, it returns the SLURM JOBID. Make a note of it.\nOnce you have launched the job, try using myjobs and alljobs to see your job running in the queue, and also everyone else’s. (You don’t have much time, because it doesn’t take very long).\n\n\n\n\n\n\nHey! That job ran in the current working directory\n\n\n\n\n\nNote that our script ran bwa index by passing it the path of a reference genome specified as a relative path: the path was relative to our current working directory.\nOne of the wonderful features of SLURM is that, when sbatch runs your script, it does so from the current working directory of the shell in which you ran sbatch.\n(I mention this because the first cluster I used was set up differently, and you had to explicitly tell it to run from the current working directory—which was the source of endless gnashing of teeth)\n\n\n\nOnce that job is done, use ls -lrt resources to see all the files that were newly created by the bwa-index.sh script."
   },
   {
     "objectID": "sbatch.html#how-many-resources-did-that-job-use-seff",
@@ -390,5 +390,19 @@
     "title": "8  Notes on Eric’s Setup Process",
     "section": "",
     "text": "These are just notes to myself. People shouldn’t follow these steps…\nI copied my existing ones into ~/BACKUP_PROFILES, then put the default ones into place:\n(base) [sedna: ~]--% cp /etc/skel/.bashrc ./\n(base) [sedna: ~]--% cp /etc/skel/.bash_profile ./\nThen I logged out and back in. Then I ran this line:\neval \"$(/opt/bioinformatics/miniconda3/bin/conda shell.bash hook)\"\nAnd I noted that in this base environment, mamba is available.\nI also listed all the environments, and I have a boatload in my home directory, but the main one that everyone is going to need is:\n/opt/bioinformatics/miniconda3/envs/snakemake-7.7.0\nSo, after that, I added the eval \"$(/opt/bioinformatics/miniconda3/bin/conda shell.bash hook)\" line to my .bashrc and then logged out and back in.\nThen, I tried this:L\n# in: /home/eanderson/Documents/git-repos/nmfs-bioinf-2022/Snakemake-Example\nconda activate /opt/bioinformatics/miniconda3/envs/snakemake-7.7.0\nrm -rf results resources/genome.fasta.* resources/genome.dict\n\n# then\nsnakemake -np --cores 20 --use-envmodules results/vcf/all.vcf\n\n# that knew just what to do.  And I tried that on a node with 20 cores\nsnakemake  --cores 20 --use-envmodules results/vcf/all.vcf"
+  },
+  {
+    "objectID": "sbatch.html#a-simple-job-with-default-sbatch-settings",
+    "href": "sbatch.html#a-simple-job-with-default-sbatch-settings",
+    "title": "6  Submitting jobs with sbatch",
+    "section": "6.5 A simple job with default sbatch settings",
+    "text": "6.5 A simple job with default sbatch settings\nWe jumped right into talking about all the most useful options for sbatch.\nHowever, on Sedna (and, indeed, on most clusters), SLURM defines reasonable defaults for an sbatch job.\nIt even sends the output and error to reasonably named files, as we shall see.\nThe following lists the contents of a script called simple-15.sh that doesn’t do much:\n\nIt writes out the SLURM_JOB_ID to stdout\nIt writes a message to stderr\nThen it just sits there for 15 minutes.\n\n\n\nContents of scripts/simple-15.sh\n\n#!/bin/bash\n\n\necho \"Running with Slurm Job ID: $SLURM_JOB_ID\"\n\necho \"This line is being written to stderr\" > /dev/stderr\n\nsleep 900"
+  },
+  {
+    "objectID": "sbatch.html#what-happens-if-we-exceed-our-resources",
+    "href": "sbatch.html#what-happens-if-we-exceed-our-resources",
+    "title": "6  Submitting jobs with sbatch",
+    "section": "6.7 What happens if we exceed our resources?",
+    "text": "6.7 What happens if we exceed our resources?\n\n\n\n\n\n\nMemory gets allocated with cores or via --mem\n\n\n\nIt is quite clear that the --mem option to sbatch is intended to increase the memory allocated to the job; however adding cores with --cpus-per-task also increases the memory available.\nOn Sedna, your job gets roughly 4700 Mb (4.7 Gb) of RAM for each core that it is allocated on one of the standard compute nodes.\nNote, however, that if the programs running in your job are not multithreaded, then you might not be able to use all those cores. In which case, it might be better to specify additional memory allocation with --mem, and leave the other cores to other users."
   }
 ]

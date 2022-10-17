@@ -105,6 +105,26 @@ When this command executes, it returns the SLURM `JOBID`.  Make a note of it.
 Once you have launched the job, try using `myjobs` and `alljobs` to see your job running
 in the queue, and also everyone else's. (You don't have much time, because it doesn't take very long).
 
+::: {.callout-caution  collapse=true}
+
+## Hey! That job ran in the current working directory
+
+Note that our script ran `bwa index` by passing it the path of a
+reference genome specified as a _relative path_: the path was relative
+to our current working directory.
+
+One of the wonderful features of SLURM is that, when `sbatch` runs your
+script, it does so from the current working directory of the shell in which
+you ran `sbatch`.  
+
+(I mention this because the first cluster I used was set up differently,
+and you had to explicitly tell it to run from the current working directory---which
+was the source of endless gnashing of teeth)
+:::
+
+Once that job is done, use `ls -lrt resources` to see all the files that
+were newly created by the `bwa-index.sh` script.
+
 ## How many resources did that job use? --- `seff`
 
 When you first start doing bioinformatics, you will not be very familiar
@@ -144,9 +164,55 @@ sacct  --format JobID,JobName,User,Group,State,Cluster,AllocCPUS,REQMEM,TotalCPU
 :::
 
 
-## Let's try submitting a simple job with default sbatch settings
+## A simple job with default sbatch settings
 
-Here
+We jumped right into talking about all the most useful options
+for `sbatch`.
+
+However, on Sedna (and, indeed, on most clusters), SLURM defines reasonable
+defaults for an `sbatch` job.  
+
+It even sends the `output` and `error` to reasonably named files, as we
+shall see.
+
+The following lists the contents of a script called `simple-15.sh`
+that doesn't do much:
+
+1. It writes out the SLURM_JOB_ID to `stdout`
+2. It writes a message to `stderr`
+3. Then it just sits there for 15 minutes.
+
+```{.sh filename="Contents of scripts/simple-15.sh"}
+`r paste(readLines("playground/scripts/simple-15.sh"), collapse = "\n")`
+```
+
+Now we will submit that script to run as a SLURM job with:
+```{.sh filename="Paste this into your shell"}
+sbatch scripts/simple-15.sh
+```
 
 
 ## Oh no!  I need to stop my job(s): `scancel`
+
+
+## What happens if we exceed our resources?
+
+
+::: {.callout-warning }
+
+## Memory gets allocated with cores or via `--mem`
+
+It is quite clear that the `--mem` option to `sbatch` is
+intended to increase the memory allocated to the job; however
+adding cores with `--cpus-per-task` also increases the memory
+available.
+
+On Sedna, your job gets roughly 4700 Mb (4.7 Gb) of RAM for each
+_core_ that it is allocated on one of the standard compute nodes.
+
+Note, however, that if the programs running in your job are not
+multithreaded, then you might not be able to use all those cores.
+In which case, it might be better to specify additional memory allocation with
+`--mem`, and leave the other cores to other users.
+
+:::
