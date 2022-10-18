@@ -1,0 +1,5 @@
+index	out_name	fq1	fq2	LB	Lane	Sample
+1	samp_A	data/fastq/A_R1.fastq.gz	data/fastq/A_R2.fastq.gz	Lib-1	3	Fish-18
+2	samp_B	data/fastq/B_R1.fastq.gz	data/fastq/B_R2.fastq.gz	Lib-1	3	Fish-21
+3	samp_C	data/fastq/C_R1.fastq.gz	data/fastq/C_R2.fastq.gz	Lib-1	3	Fish-27
+

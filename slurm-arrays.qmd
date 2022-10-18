@@ -28,3 +28,127 @@ environment of an array job:
 - `SLURM_ARRAY_JOB_ID`: the overall JOB_ID for the whole array
 - `SLURM_ARRAY_TASK_ID`: the index that runs from 1 to 10 in this case
 - `SLURM_JOB_ID`: The underlying job_id 
+
+Go ahead and run that:
+```{.sh filename="Paste this into you shell"}
+sbatch scripts/array_example.sh
+```
+And then use `myjobs` and `alljobs` to see what is happening on the cluster.
+
+When that job is done, look at the values written to the
+first 3 files:
+```{.sh filename="Paste this into you shell"}
+head results/array_example/output_{1..3}.txt
+```
+
+::: {.callout-note collapse=true}
+
+## Cool syntax: `{1..3}`
+
+On the shell, if you do something like:
+
+- `{2..7}`: that will expand to `2 3 4 5 6 7`
+- `{a..g}`: that will expand to `a b c d e f g`
+- `{0001..0015}`: that will expand to `0001 0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015`
+- `{F..M}`: that will expand to `F G H I J K L M`
+
+:::
+
+From this, we can infer that:
+
+- `SLURM_ARRAY_JOB_ID`: is a unique number that refers to the _entire set_ of jobs in the array
+- `SLURM_ARRAY_TASK_ID`: is the integer that is being cycled over in the array job
+- `SLURM_JOB_ID`: is a unique SLURM_JOB_ID of the specific array task.
+
+Also, in `alljobs` and `myjobs` you say that jobs can be referred to
+like `331989_4`.  That is `SLURM_ARRAY_JOB_ID` + underscore + `SLURM_ARRAY_TASK_ID`.
+
+In the slurm output files specified like:
+```{.sh}
+SBATCH --output=my_output_%A_%a
+```
+
+- `%A` expands to `SLURM_ARRAY_JOB_ID`
+- `%a` expands to `SLURM_ARRAY_TASK_ID`
+
+If you need to cancel a particular array task using `scancel` you would
+typically use `SLURM_ARRAY_JOB_ID` + underscore + `SLURM_ARRAY_TASK_ID`.
+
+## Variations on the `<array_spec>`
+
+There are some important variations to how you can specify that
+array numbers:
+
+- `--array=1-50`: simple, consecutive numbers
+- `--array=1-10:3`: 1 through 10 by threes, (so `1,4,7,10`)
+- `--array=1,2,3,6,9,15` non-consecutive numbers
+- `--array=1-21:10,100-200:50`: non-consecutive ranges.  It becomes (`1,11,21,100,150,200`)
+- `--array=1-10,4`: WARNING, this becomes `1,2,3,4,5,6,7,8,9,10,4`.  SLURM does not check that
+the array numbers are unique, so task array 4 would be run twice (possibly concurrently overwriting
+the output.)
+- `--array=1-20%5` VERY IMPORTANT SYNTAX:  Run the jobs, but don't ever have more the 5 running at a time.
+This is useful for making sure your jobs don't consume every last CPU on Sedna.
+
+Let's try putting all these together.  Read the following command and
+figure out what the array spec is doing:
+```{.sh filename="Paste this into you shell"}
+sbatch --array=100,200,300-400:10%5 scripts/array_example.sh
+```
+Then use `myjobs` and `alljobs` to see what is going on in the cluster.
+
+Do you ever have more than 5 jobs running?
+
+## Translating Array Indexes to Job Instances
+
+- The user is left to translate what a job array index of, say, 7, means in terms of what actions that array task should take.
+- Quite often you will want to map an array index to a different file to analyze, or perhaps a different region of a chromosome to do variant calling on, etc.
+- A flexible and generic way of doing this mapping from array indexes to job specifics is to first define the variables (things like filenames, etc.) required by each array task in a simple TAB-delimited text file in which the first row holds the names of the variables in different TAB-separated columns, and each row below that holds the values that those variables should take for different values of the array index.
+- The array index itself should be listed in the first column.
+
+### An example TAB-delimited file
+
+Let's explore the following file, which is at `inputs/fq-samples.tsv`:
+```{.sh filename="Contents of inputs/fq-samples.tsv"}
+`r paste(readLines("playground/inputs/fq-samples.tsv"), collapse = "\n")`
+```
+
+Something that would be really handy would be a little shell script
+that would pick out a particular line of that file that corresponded to
+the value in the `index` column and then define
+the shell variables `out_name`, `fq1`, `fq2`, `LB`, `Lane`, and `Sample` so that they
+could be used in an array script.
+
+Yesterday, we learned all the bash and `awk` machinery that would make that
+easy to do!
+
+### The `line-assign.sh` script
+
+Within the repository is a script called `scripts/line-assign.sh`, that looks like this:
+```{.sh filename="Contents of inputs/fq-samples.tsv"}
+`r paste(readLines("playground/scripts/line-assign.sh"), collapse = "\n")`
+```
+
+Let's see what sorts of results this produces:
+```{.sh filename="Paste this into your shell"}
+ ./scripts/line-assign.sh 3 inputs/fq-samples.tsv
+```
+Whoa! It returns a command line that assigns values to a lot of shell variables.
+
+So, if we wanted to run that command line, we would have to precede it with
+the `eval` keyword.  Let's do that like this:
+```{.sh filename="Paste this into your shell"}
+COMM=$(./scripts/line-assign.sh 3 inputs/fq-samples.tsv)
+eval $COMM
+```
+
+Now, that you have done that, you can see that a lot of variables
+have been assigned
+```{.sh filename="Paste this into your shell"}
+echo $index
+echo $out_name
+echo $fq1
+echo $fq2
+echo $LB
+echo $Lane
+echo $Sample
+```
