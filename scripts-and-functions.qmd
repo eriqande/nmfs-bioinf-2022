@@ -37,19 +37,6 @@ but this is not required.
 
 Now we copy our commands into `nano`.
 ```{.sh filename="Copy this onto your clipboard and paste it into nano in your terminal"}
-for FILE in data/samtools_stats/*.gz; do
-  gzip -cd $FILE | awk -v samp=$(basename ${FILE/_stats.tsv.gz/}) '
-    $1=="SN" && /reads mapped:/ {rm = $4}
-    $1=="SN" && /reads properly paired:/ {rpp = $5}
-    $1=="SN" && /bases mapped \(cigar\):/ {bmc = $5}
-    END {print samp, rm, rpp, bmc}
-  '
-done
-```
-
-Once that is done, use the arrow keys to go to the very top of the file and type
-`#!/bin/bash` on it and hit return twice, so that your file in `nano` looks like this:
-```{.sh filename="This is what the contents of the file in nano should look like"}
 #!/bin/bash
 
 for FILE in data/samtools_stats/*.gz; do
@@ -61,6 +48,7 @@ for FILE in data/samtools_stats/*.gz; do
   '
 done
 ```
+
 
 Then:
 

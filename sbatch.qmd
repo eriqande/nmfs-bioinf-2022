@@ -197,19 +197,38 @@ that doesn't do much:
 `r paste(readLines("playground/scripts/simple-15.sh"), collapse = "\n")`
 ```
 
+::: {.callout-warning}
+
+## Scripts running under SLURM have access to `SLURM_*` environment variables
+
+When a job is run by SLURM, it is done so in a shell environment that has
+a number of extra shell variables defined.  In the above, we print the value
+of one of those: `SLURM_JOB_ID`.
+
+:::
+
 Now we will submit that script to run as a SLURM job with:
 ```{.sh filename="Paste this into your shell"}
 sbatch scripts/simple-15.sh
 ```
 
-We see that `stderr` gets written immediately to `slurm-%j.out`
+Now, use `myjobs` to see how many cores this job is using (1) and
+how much memory (4700 Mb).  Those are the default values.
+
+
+By default, both `stdout` and `stderr` get written to `slurm-%j.out`
 (where `%j%` is replaced with the SLURM_JOB_ID).
+
+You can see that is in that by doing:
+```{.sh filename="Type this, but replace 331979 with whathever your actual SLURM job id is"}
+cat slurm-331979.out
+```
+
+We see that `stderr` gets written to `slurm-%j.out` immediately.
 The `stdout` stream is supposed to get written there, as well, but
 it seems that there is some hard-core buffering that goes on with slurm:
 we can see the output in `simple-15.stdout`, but not in `slurm-%j.out`.
 
-Now, use `myjobs` to see how many cores this job is using (1) and
-how much memory (4700 Mb).  Those are the default values.
 
 ::: {.callout-warning }
 
@@ -250,10 +269,40 @@ scancel 329656
 Please do that now!
 :::
 
+
+## A note about memory
+
+::: {.callout-warning }
+
+## Memory gets allocated with cores or via `--mem`
+
+It is quite clear that the `--mem` option to `sbatch` is
+intended to increase the memory allocated to the job; however
+adding cores with `--cpus-per-task`, without adding any options
+to dictate memory use, also increases the memory
+available.
+
+On Sedna's standard compute nodes, which each have 20 cores,
+if you ask for $x$ cores, the total amount of memory your job will
+get is about $\frac{x}{20} T$, where $T$ is a little less than
+the total memory on the machine. 
+
+On the standard memory compute nodes, that means your job gets
+roughly 4700 Mb (4.7 Gb) of RAM for each
+_core_ that it is allocated.  (9400 Mb or 9.4 Gb for each
+core on the "higher-memory" standard compute nodes, `node[29-36]`)
+
+Note, however, that if the programs running in your job are not
+multithreaded, then you might not be able to use all those cores.
+In which case, it might be better to specify additional memory allocation with
+`--mem`, and leave the other cores to other users. (?)
+
+:::
+
 ## What happens if we exceed our resources?
 
 R uses 8 bytes for each numeric value it stores in a vector. But it also seems
-to do some fancy stuff with delayed evaluation and such, so it is hard to know
+to do some fancy stuff with delayed evaluation, etc. So it is hard to know
 exactly how much system RAM R's process will use.
 
 Nonetheless, I have found that the following R commands will exceed 4700 Mb of RAM:
@@ -327,10 +376,12 @@ same time, override the time it is allotted with this command:
 sbatch --mem=16G --time=01:00:00 scripts/r-too-much-mem.sh
 ```
 
-After running that, use your `myjobs` function to see that the `MIN_MEMORY` is `12G`
+After running that, use your `myjobs` function to see that the `MIN_MEMORY` is `16G`
 and the `TIME_LIMIT` is 1 hour.
 
-When it is done, run `myacct` to see that it successfully completed.
+When it is done, run `myacct` to see that it successfully completed, and
+look in the output file `outputs/r-too-much.out` to see that it printed
+the first 10 of one billion random numbers with 1 added to them.
 
 ## Let's run out of time
 
@@ -352,7 +403,7 @@ you can recognize them when you see them later.
 
 So, try this:
 ```{.sh filename="Paste this into your shell"}
-sbatch --time=00:01:00 scripts/simple-15.sh
+sbatch --mem=16G --time=00:01:00 scripts/simple-15.sh
 ```
 
 That will fail in a minute, after which, use `myacct` to see what
@@ -361,7 +412,7 @@ it says about how it failed.
 It will tell you that the main script hit a `TIMEOUT` and the batch job
 running in that script was `CANCELLED`
 
-## Last words: Never try to redirect `sbatch`'s `output` or `error` to a path that does not exist
+## A major gotcha: Do not `sbatch`'s `output` or `error` to a path that does not exist
 
 ::: {.callout-important}
 
@@ -372,7 +423,7 @@ If you try something like:
 #SBATCH output=outputs/mydir/outfile.txt
 #SBATCH error=outputs/mydir/errfile.txt
 ```
-but do so without having actually made the direcory `outputs/mydir`, then
+but do so without having actually made the directory `outputs/mydir`, then
 `sbatch` will fail, and it won't be able to write out why it failed.
 
 This is dynamite.  If you ever find that your `sbatch` jobs are failing
@@ -386,4 +437,38 @@ executed.
 
 :::
 
+
+## Schedule multiple jobs with `sbatch` using a `for` loop
+
+We now consider a small job of mapping some paired end reads to the
+genome that we indexed a few steps ago.
+
+Let's review the shell code in `scripts/bwa-map.sh`:
+```{.sh filename="Contents of file scripts/bwa_map.sh"}
+`r paste(readLines("playground/scripts/bwa_map.sh"), collapse = "\n")`
+```
+
+Note that we are using backslashes (`\`) at the ends of the lines
+so that we can break a long line up onto separate lines of text.
+
+Also note that grouping of commands by parentheses.
+
+This script is run by passing it `A`, `B`, or `C` as the first
+postitional parameter.
+
+So, if we wanted to schedule all three of those mapping jobs, we
+could do:
+```{.sh filename="Paste this code into your shell"}
+for S in A B C; do sbatch scripts/bwa_map.sh $S; done
+```
+
+When that is done, check what is running with `myjobs` and `alljobs`.
+
+## Final thought
+
+Though multiple jobs can be submitted via `sbatch` easily using this
+sort of `for` loop construct, there is another way of launching multiple
+repetitions of the same job in SLURM: using _job arrays_
+
+We will discuss that in the next section.
 

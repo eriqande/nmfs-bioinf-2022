@@ -124,6 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -215,10 +216,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#how-many-resources-did-that-job-use-seff" id="toc-how-many-resources-did-that-job-use-seff" class="nav-link" data-scroll-target="#how-many-resources-did-that-job-use-seff"><span class="toc-section-number">6.5</span>  How many resources did that job use? — <code>seff</code></a></li>
   <li><a href="#a-simple-job-with-default-sbatch-settings" id="toc-a-simple-job-with-default-sbatch-settings" class="nav-link" data-scroll-target="#a-simple-job-with-default-sbatch-settings"><span class="toc-section-number">6.6</span>  A simple job with default sbatch settings</a></li>
   <li><a href="#oh-no-i-need-to-stop-my-jobs-scancel" id="toc-oh-no-i-need-to-stop-my-jobs-scancel" class="nav-link" data-scroll-target="#oh-no-i-need-to-stop-my-jobs-scancel"><span class="toc-section-number">6.7</span>  Oh no! I need to stop my job(s): <code>scancel</code></a></li>
-  <li><a href="#what-happens-if-we-exceed-our-resources" id="toc-what-happens-if-we-exceed-our-resources" class="nav-link" data-scroll-target="#what-happens-if-we-exceed-our-resources"><span class="toc-section-number">6.8</span>  What happens if we exceed our resources?</a></li>
-  <li><a href="#sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file" id="toc-sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file" class="nav-link" data-scroll-target="#sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file"><span class="toc-section-number">6.9</span>  <code>sbatch</code> options on the command line will override the <code>#SBATCH</code> directives in the file</a></li>
-  <li><a href="#lets-run-out-of-time" id="toc-lets-run-out-of-time" class="nav-link" data-scroll-target="#lets-run-out-of-time"><span class="toc-section-number">6.10</span>  Let’s run out of time</a></li>
-  <li><a href="#last-words-never-try-to-redirect-sbatchs-output-or-error-to-a-path-that-does-not-exist" id="toc-last-words-never-try-to-redirect-sbatchs-output-or-error-to-a-path-that-does-not-exist" class="nav-link" data-scroll-target="#last-words-never-try-to-redirect-sbatchs-output-or-error-to-a-path-that-does-not-exist"><span class="toc-section-number">6.11</span>  Last words: Never try to redirect <code>sbatch</code>’s <code>output</code> or <code>error</code> to a path that does not exist</a></li>
+  <li><a href="#a-note-about-memory" id="toc-a-note-about-memory" class="nav-link" data-scroll-target="#a-note-about-memory"><span class="toc-section-number">6.8</span>  A note about memory</a></li>
+  <li><a href="#what-happens-if-we-exceed-our-resources" id="toc-what-happens-if-we-exceed-our-resources" class="nav-link" data-scroll-target="#what-happens-if-we-exceed-our-resources"><span class="toc-section-number">6.9</span>  What happens if we exceed our resources?</a></li>
+  <li><a href="#sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file" id="toc-sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file" class="nav-link" data-scroll-target="#sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file"><span class="toc-section-number">6.10</span>  <code>sbatch</code> options on the command line will override the <code>#SBATCH</code> directives in the file</a></li>
+  <li><a href="#lets-run-out-of-time" id="toc-lets-run-out-of-time" class="nav-link" data-scroll-target="#lets-run-out-of-time"><span class="toc-section-number">6.11</span>  Let’s run out of time</a></li>
+  <li><a href="#a-major-gotcha-do-not-sbatchs-output-or-error-to-a-path-that-does-not-exist" id="toc-a-major-gotcha-do-not-sbatchs-output-or-error-to-a-path-that-does-not-exist" class="nav-link" data-scroll-target="#a-major-gotcha-do-not-sbatchs-output-or-error-to-a-path-that-does-not-exist"><span class="toc-section-number">6.12</span>  A major gotcha: Do not <code>sbatch</code>’s <code>output</code> or <code>error</code> to a path that does not exist</a></li>
+  <li><a href="#schedule-multiple-jobs-with-sbatch-using-a-for-loop" id="toc-schedule-multiple-jobs-with-sbatch-using-a-for-loop" class="nav-link" data-scroll-target="#schedule-multiple-jobs-with-sbatch-using-a-for-loop"><span class="toc-section-number">6.13</span>  Schedule multiple jobs with <code>sbatch</code> using a <code>for</code> loop</a></li>
+  <li><a href="#final-thought" id="toc-final-thought" class="nav-link" data-scroll-target="#final-thought"><span class="toc-section-number">6.14</span>  Final thought</a></li>
   </ul>
 </nav>
     </div>
@@ -462,6 +466,19 @@ More tips on learning about past job resource use
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sleep</span> 900</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Scripts running under SLURM have access to <code>SLURM_*</code> environment variables
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When a job is run by SLURM, it is done so in a shell environment that has a number of extra shell variables defined. In the above, we print the value of one of those: <code>SLURM_JOB_ID</code>.</p>
+</div>
+</div>
 <p>Now we will submit that script to run as a SLURM job with:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -469,8 +486,16 @@ More tips on learning about past job resource use
 </div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/simple-15.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We see that <code>stderr</code> gets written immediately to <code>slurm-%j.out</code> (where <code>%j%</code> is replaced with the SLURM_JOB_ID). The <code>stdout</code> stream is supposed to get written there, as well, but it seems that there is some hard-core buffering that goes on with slurm: we can see the output in <code>simple-15.stdout</code>, but not in <code>slurm-%j.out</code>.</p>
 <p>Now, use <code>myjobs</code> to see how many cores this job is using (1) and how much memory (4700 Mb). Those are the default values.</p>
+<p>By default, both <code>stdout</code> and <code>stderr</code> get written to <code>slurm-%j.out</code> (where <code>%j%</code> is replaced with the SLURM_JOB_ID).</p>
+<p>You can see that is in that by doing:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Type this, but replace 331979 with whathever your actual SLURM job id is</strong></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> slurm-331979.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We see that <code>stderr</code> gets written to <code>slurm-%j.out</code> immediately. The <code>stdout</code> stream is supposed to get written there, as well, but it seems that there is some hard-core buffering that goes on with slurm: we can see the output in <code>simple-15.stdout</code>, but not in <code>slurm-%j.out</code>.</p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -502,17 +527,36 @@ Cancelling jobs started with <code>sbatch</code>
 <div class="callout-body-container callout-body">
 <p>If you have the job number (which is returned when <code>sbatch</code> launched the job or which you can see on the corresponding line of <code>myjobs</code>) you can use <code>scancel</code> followed by the job number.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 329656</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 329656</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>…but you have to replace the number above with your job’s job number.</p>
 <p>Please do that now!</p>
 </div>
 </div>
 </section>
-<section id="what-happens-if-we-exceed-our-resources" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="what-happens-if-we-exceed-our-resources"><span class="header-section-number">6.8</span> What happens if we exceed our resources?</h2>
-<p>R uses 8 bytes for each numeric value it stores in a vector. But it also seems to do some fancy stuff with delayed evaluation and such, so it is hard to know exactly how much system RAM R’s process will use.</p>
+<section id="a-note-about-memory" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="a-note-about-memory"><span class="header-section-number">6.8</span> A note about memory</h2>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Memory gets allocated with cores or via <code>--mem</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is quite clear that the <code>--mem</code> option to <code>sbatch</code> is intended to increase the memory allocated to the job; however adding cores with <code>--cpus-per-task</code>, without adding any options to dictate memory use, also increases the memory available.</p>
+<p>On Sedna’s standard compute nodes, which each have 20 cores, if you ask for <span class="math inline">\(x\)</span> cores, the total amount of memory your job will get is about <span class="math inline">\(\frac{x}{20} T\)</span>, where <span class="math inline">\(T\)</span> is a little less than the total memory on the machine.</p>
+<p>On the standard memory compute nodes, that means your job gets roughly 4700 Mb (4.7 Gb) of RAM for each <em>core</em> that it is allocated. (9400 Mb or 9.4 Gb for each core on the “higher-memory” standard compute nodes, <code>node[29-36]</code>)</p>
+<p>Note, however, that if the programs running in your job are not multithreaded, then you might not be able to use all those cores. In which case, it might be better to specify additional memory allocation with <code>--mem</code>, and leave the other cores to other users. (?)</p>
+</div>
+</div>
+</section>
+<section id="what-happens-if-we-exceed-our-resources" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="what-happens-if-we-exceed-our-resources"><span class="header-section-number">6.9</span> What happens if we exceed our resources?</h2>
+<p>R uses 8 bytes for each numeric value it stores in a vector. But it also seems to do some fancy stuff with delayed evaluation, etc. So it is hard to know exactly how much system RAM R’s process will use.</p>
 <p>Nonetheless, I have found that the following R commands will exceed 4700 Mb of RAM:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e9</span>); y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span>; y[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e9</span>); y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span>; y[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Somewhere in the <code>y &lt;- x + 1</code> command, memory usage will exceed the default 4700 Mb (4.7 Gb) of RAM that SLURM allows by default.</p>
 <p>So, what we are going to do here is run those commands in an <code>sbatch</code> script and see what happens. (You will probably exceed your allocated memory while doing bioinformatics, so you might as well get used to what that looks like.)</p>
 <p>Here is a listing of a shell script to run under <code>sbatch</code> to exceed our memory usage:</p>
@@ -520,27 +564,27 @@ Cancelling jobs started with <code>sbatch</code>
 <div class="code-with-filename-file">
 <pre><strong>Contents of scripts/r-too-much-mem.sh</strong></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=2:00:00</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=r-too-much-mem-%j.out</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=r-too-much-mem-%j.err</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> outputs</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="va">EDIR</span><span class="op">=</span>results/log/r-too-much-mem</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$EDIR</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load R/4.0.3</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">"x &lt;- runif(1e9); y &lt;- x + 1; y[1:10]"</span> <span class="op">&gt;</span> outputs/r-too-much.out <span class="dv">2</span><span class="op">&gt;</span> <span class="va">$EDIR</span>/log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=2:00:00</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=r-too-much-mem-%j.out</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=r-too-much-mem-%j.err</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> outputs</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="va">EDIR</span><span class="op">=</span>results/log/r-too-much-mem</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$EDIR</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load R/4.0.3</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">"x &lt;- runif(1e9); y &lt;- x + 1; y[1:10]"</span> <span class="op">&gt;</span> outputs/r-too-much.out <span class="dv">2</span><span class="op">&gt;</span> <span class="va">$EDIR</span>/log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Run it like this:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Paste this into your shell</strong></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/r-too-much-mem.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/r-too-much-mem.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It takes about a minute before it runs out of memory. During the time, check that it is still running using <code>myjobs</code>.</p>
 <p>Once you see it is no longer running, check on the status of that job using <code>myacct 15</code>. The bottom line of output should show the results for that last job:</p>
@@ -562,7 +606,7 @@ Self study
 </div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -571,18 +615,18 @@ Self study answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You need to allocate more memory to the job. You can do this by adding an sbatch directive line like:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=12G</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=12G</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>amongst all the other sbatch directives. I don’t know if 12G of ram will be enough, but it might be. You could try it.</p>
 <p><strong>OR</strong> as we will see below, you could add that memory option on the command line.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file"><span class="header-section-number">6.9</span> <code>sbatch</code> options on the command line will override the <code>#SBATCH</code> directives in the file</h2>
+<section id="sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="sbatch-options-on-the-command-line-will-override-the-sbatch-directives-in-the-file"><span class="header-section-number">6.10</span> <code>sbatch</code> options on the command line will override the <code>#SBATCH</code> directives in the file</h2>
 <p>You can mix and match <code>sbatch</code> options on the command line with <code>sbatch</code> options in the <code>#SBATCH</code> directives in the script.</p>
 <p><strong>The option on the command line takes precedence over the same option in the file.</strong></p>
 <p>So, we could provide sufficient memory to <code>scripts/r-too-much-mem.sh</code> and at the same time, override the time it is allotted with this command:</p>
@@ -590,16 +634,16 @@ Self study answer
 <div class="code-with-filename-file">
 <pre><strong>Paste this into your shell</strong></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--mem</span><span class="op">=</span>16G <span class="at">--time</span><span class="op">=</span>01:00:00 scripts/r-too-much-mem.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--mem</span><span class="op">=</span>16G <span class="at">--time</span><span class="op">=</span>01:00:00 scripts/r-too-much-mem.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After running that, use your <code>myjobs</code> function to see that the <code>MIN_MEMORY</code> is <code>12G</code> and the <code>TIME_LIMIT</code> is 1 hour.</p>
-<p>When it is done, run <code>myacct</code> to see that it successfully completed.</p>
+<p>After running that, use your <code>myjobs</code> function to see that the <code>MIN_MEMORY</code> is <code>16G</code> and the <code>TIME_LIMIT</code> is 1 hour.</p>
+<p>When it is done, run <code>myacct</code> to see that it successfully completed, and look in the output file <code>outputs/r-too-much.out</code> to see that it printed the first 10 of one billion random numbers with 1 added to them.</p>
 </section>
-<section id="lets-run-out-of-time" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="lets-run-out-of-time"><span class="header-section-number">6.10</span> Let’s run out of time</h2>
+<section id="lets-run-out-of-time" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="lets-run-out-of-time"><span class="header-section-number">6.11</span> Let’s run out of time</h2>
 <p>We are going to rerun our <code>simple-15.sh</code> script, but only allocate one minute for it. So we should see it fail after only 1 minute.</p>
 <div class="callout-warning callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -608,7 +652,7 @@ Eric, why are making us run so many jobs that fail?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let’s be honest, as you embark on your bioinformatic career with SLURM, you are going to spend a significant amount of your time dealing with jobs that fail.</p>
 <p>You might as well see jobs failing in several different ways so that you can recognize them when you see them later.</p>
@@ -620,13 +664,13 @@ Eric, why are making us run so many jobs that fail?
 <div class="code-with-filename-file">
 <pre><strong>Paste this into your shell</strong></pre>
 </div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--time</span><span class="op">=</span>00:01:00 scripts/simple-15.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--mem</span><span class="op">=</span>16G <span class="at">--time</span><span class="op">=</span>00:01:00 scripts/simple-15.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That will fail in a minute, after which, use <code>myacct</code> to see what it says about how it failed.</p>
 <p>It will tell you that the main script hit a <code>TIMEOUT</code> and the batch job running in that script was <code>CANCELLED</code></p>
 </section>
-<section id="last-words-never-try-to-redirect-sbatchs-output-or-error-to-a-path-that-does-not-exist" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="last-words-never-try-to-redirect-sbatchs-output-or-error-to-a-path-that-does-not-exist"><span class="header-section-number">6.11</span> Last words: Never try to redirect <code>sbatch</code>’s <code>output</code> or <code>error</code> to a path that does not exist</h2>
+<section id="a-major-gotcha-do-not-sbatchs-output-or-error-to-a-path-that-does-not-exist" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="a-major-gotcha-do-not-sbatchs-output-or-error-to-a-path-that-does-not-exist"><span class="header-section-number">6.12</span> A major gotcha: Do not <code>sbatch</code>’s <code>output</code> or <code>error</code> to a path that does not exist</h2>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -638,13 +682,74 @@ Beware!
 </div>
 <div class="callout-body-container callout-body">
 <p>If you try something like:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH output=outputs/mydir/outfile.txt</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH error=outputs/mydir/errfile.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>but do so without having actually made the direcory <code>outputs/mydir</code>, then <code>sbatch</code> will fail, and it won’t be able to write out why it failed.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH output=outputs/mydir/outfile.txt</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH error=outputs/mydir/errfile.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>but do so without having actually made the directory <code>outputs/mydir</code>, then <code>sbatch</code> will fail, and it won’t be able to write out why it failed.</p>
 <p>This is dynamite. If you ever find that your <code>sbatch</code> jobs are failing immediately but with no reasonable error messages anywhere, check to make sure that you aren’t sending SLURM’s <code>output</code> or <code>error</code> to a directory that does not exist.</p>
 <p>Note that you <em>cannot</em> make <code>outputs/mydir</code> within your script, because SLURM needs those directories before your script even gets executed.</p>
 </div>
 </div>
+</section>
+<section id="schedule-multiple-jobs-with-sbatch-using-a-for-loop" class="level2" data-number="6.13">
+<h2 data-number="6.13" class="anchored" data-anchor-id="schedule-multiple-jobs-with-sbatch-using-a-for-loop"><span class="header-section-number">6.13</span> Schedule multiple jobs with <code>sbatch</code> using a <code>for</code> loop</h2>
+<p>We now consider a small job of mapping some paired end reads to the genome that we indexed a few steps ago.</p>
+<p>Let’s review the shell code in <code>scripts/bwa-map.sh</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Contents of file scripts/bwa_map.sh</strong></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=1:00:00</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=bwa_map-%j.out</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=bwa_map-%j.err</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># this is a little script to map a pair of fastq files</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># that in in data/fastq.  They are named as</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># {A,B,C}_R{1,2}.fastq.gz</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># The first positional parameter ($1)</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># should be A, B, or C.</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># load the module that gives us the bwa software</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load aligners/bwa/0.7.17</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/samtools/1.15.1</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># make a directory for log output if it does not already exist</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="va">LDIR</span><span class="op">=</span>results/log/bwa_map</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="va">ODIR</span><span class="op">=</span>results/mapped</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$LDIR</span> <span class="va">$ODIR</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="va">SAMP</span><span class="op">=</span><span class="va">$1</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co"># run bwa mem on the input and pipe it to samtools to sort it</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem resources/genome.fasta <span class="dt">\</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  data/fastq/<span class="va">${SAMP}</span>_R1.fastq.gz <span class="dt">\</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  data/fastq/<span class="va">${SAMP}</span>_R2.fastq.gz  <span class="dv">2</span><span class="op">&gt;</span> <span class="va">$LDIR</span>/bwa_mem_<span class="va">${SAMP}</span>.log <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> view <span class="at">-u</span> <span class="at">-</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> sort <span class="at">-o</span> <span class="va">$ODIR</span>/<span class="va">$SAMP</span>.bam</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> <span class="dv">2</span><span class="op">&gt;</span> <span class="va">$LDIR</span>/samtools_<span class="va">$SAMP</span>.log</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that we are using backslashes (<code>\</code>) at the ends of the lines so that we can break a long line up onto separate lines of text.</p>
+<p>Also note that grouping of commands by parentheses.</p>
+<p>This script is run by passing it <code>A</code>, <code>B</code>, or <code>C</code> as the first postitional parameter.</p>
+<p>So, if we wanted to schedule all three of those mapping jobs, we could do:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Paste this code into your shell</strong></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> S <span class="kw">in</span> A B C<span class="kw">;</span> <span class="cf">do</span> <span class="ex">sbatch</span> scripts/bwa_map.sh <span class="va">$S</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When that is done, check what is running with <code>myjobs</code> and <code>alljobs</code>.</p>
+</section>
+<section id="final-thought" class="level2" data-number="6.14">
+<h2 data-number="6.14" class="anchored" data-anchor-id="final-thought"><span class="header-section-number">6.14</span> Final thought</h2>
+<p>Though multiple jobs can be submitted via <code>sbatch</code> easily using this sort of <code>for</code> loop construct, there is another way of launching multiple repetitions of the same job in SLURM: using <em>job arrays</em></p>
+<p>We will discuss that in the next section.</p>
 
 
 </section>

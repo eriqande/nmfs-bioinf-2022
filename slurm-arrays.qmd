@@ -1,4 +1,30 @@
 # Slurm Job Arrays {#slurm-arrays}
 
-Not completed yet.
+- The `sbatch` command takes an `--array=<array_spec>` option
+that let's you quickly launch---and easily manage---different
+instances of a single job that are all differentiated by
+a unique integer.
+- That integer is accessible within the script as the environment
+variable `SLURM_ARRAY_TASK_ID`.
+- We will see a little shell/awk script that is very helpful in
+this context.
 
+
+## `sbatch`'s `--array` option
+
+When you give `sbatch` the `--array=1-10` option, say, then
+it runs your job 10 times, each time with the environment variable
+`SLURM_ARRAY_TASK_ID` set to a different number between
+1 and 10.  
+
+Let's see a quick example, using the following script:
+```{.sh filename="Contents of scripts/array_example.sh"}
+`r paste(readLines("playground/scripts/array_example.sh"), collapse = "\n")`
+```
+
+This is helpful to see a few of the variables that are defined in the
+environment of an array job:
+
+- `SLURM_ARRAY_JOB_ID`: the overall JOB_ID for the whole array
+- `SLURM_ARRAY_TASK_ID`: the index that runs from 1 to 10 in this case
+- `SLURM_JOB_ID`: The underlying job_id 
