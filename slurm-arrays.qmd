@@ -13,7 +13,7 @@ this context.
 ## `sbatch`'s `--array` option
 
 When you give `sbatch` the `--array=1-10` option, say, then
-it runs your job 10 times, each time with the environment variable
+it runs your job 10 separate times, each time with the environment variable
 `SLURM_ARRAY_TASK_ID` set to a different number between
 1 and 10.  
 
@@ -62,6 +62,7 @@ From this, we can infer that:
 
 Also, in `alljobs` and `myjobs` you say that jobs can be referred to
 like `331989_4`.  That is `SLURM_ARRAY_JOB_ID` + underscore + `SLURM_ARRAY_TASK_ID`.
+For example: `scancel 376578_12`.
 
 In the slurm output files specified like:
 ```{.sh}
@@ -142,13 +143,78 @@ eval $COMM
 ```
 
 Now, that you have done that, you can see that a lot of variables
-have been assigned
+have been assigned the values on the `index == 3` line of our TSV file:
 ```{.sh filename="Paste this into your shell"}
-echo $index
-echo $out_name
-echo $fq1
-echo $fq2
-echo $LB
-echo $Lane
-echo $Sample
+(
+echo "index:    $index"
+echo "out_name: $out_name"
+echo "fq1:      $fq1"
+echo "fq2:      $fq2"
+echo "LB:       $LB"
+echo "Lane:     $Lane"
+echo "Sample:   $Sample"
+)
 ```
+
+Holy Smokes! These are variables that we could use in a job array script.
+
+In this case, we can assign values to the pesky Read Group string for `bwa mem`.
+
+## Putting it all together: a read-mapping job array
+
+We can now elaborate on our simple `bwa_map.sh` shell script
+and turn that into a SLURM job array script.
+
+Here is what it looks like:
+```{.sh filename="Contents of scripts/bwa_map_array.sh"}
+`r paste(readLines("playground/scripts/bwa_map_array.sh"), collapse = "\n")`
+```
+
+The main things to note there are:
+
+- The `SLURM_ARRAY_TASK_ID` is used to pick out the right line from our TSV
+file of information
+- The slurm output and error have been changed to use `%A_%a` notation.
+- There is a `#SBATCH --array=1-3` directive, now
+- The shell code that runs `bwa` and `samtools` uses  the variables that were
+defined by `eval`-ing the results of the call to the `line-assign.sh` script.
+
+Let's launch that job array and see how it goes:
+```{.sh filename="Paste this into your shell"}
+sbatch scripts/bwa_map_array.sh
+```
+Then check with `myjobs` and `alljobs` to see what is happening on Sedna.
+
+That runs really fast.
+
+Afterward you can check that the results exist:
+```{.sh filename="Paste this into your shell"}
+tree results/mapped
+```
+
+And you can look at the logs for `bwa mem`:
+```{.sh filename="Paste this into your shell"}
+tail  results/log/bwa_map_array/bwa_mem_samp_*
+```
+
+To see what one of the output files looks like:
+```{.sh filename="You could type or paste this"}
+module load bio/samtools/1.15.1
+samtools view results/mapped/samp_B.bam | less -S
+```
+
+Use the left and right arrows, and space bar and backspace to see all parts of the file.
+
+Remember to hit `q` to get out of the `less` viewer.
+
+## Wrap Up
+
+So, that was a quick tour of the capabilities of `sbatch`.
+
+Oddly enough, I haven't directly launched any jobs using `sbatch` (apart from the 
+example jobs for this course) in many months, because I drive all my bioinformatics
+projects using Snakemake, which sends my jobs to SLURM for me.
+
+I will give y'all a brief introduction to Snakemake tomorrow!
+
+
