@@ -6,9 +6,13 @@ and bash functions.
 
 ## Prepare for day two
 
-To make sure that you have all the latest updates from the repository, 
+Get back to our playground directory. Then,
+to make sure that you have all the latest updates from the repository, 
 use git to pull down any new changes. 
-```{.sh }
+```{.sh filename="Paste this in to be sure you have the most up-to-date resources"}
+cd ~/nmfs-bioinf-2022/playground
+git pull origin main
+```
 
 ## Bash shell scripts
 

@@ -84,8 +84,8 @@ In the above script, you will see
 #SBATCH --output=bwa_index-%j.out
 #SBATCH --error=bwa_index-%j.err
 ```
-In this context, the `%j` gets replace by `sbatch` with the
-SLURM `JOBID`.
+In this context, the `%j` gets replaced by `sbatch` with the
+`SLURM_JOB_ID`.
 
 :::
 
@@ -102,7 +102,7 @@ The first argument is the script `scripts/bwa_index.sh` and the
 second, `resources/genome.fasta`, is the path to the genome that
 we want to index with `bwa`.
 
-When this command executes, it returns the SLURM `JOBID`.  Make a note of it.
+When this command executes, it returns the `SLURM_JOB_ID`.  Make a note of it.
 
 Once you have launched the job, try using `myjobs` and `alljobs` to see your job running
 in the queue, and also everyone else's. (You don't have much time, because it doesn't take very long).
@@ -144,7 +144,7 @@ seff slurm-jobid
 
 ## Self-study
 
-Try that command, `seff slurm-jobid`, replacing `slurm-jobid` with the actual SLURM `JOBID` of the
+Try that command, `seff slurm-jobid`, replacing `slurm-jobid` with the actual `SLURM_JOB_ID` of the
 job that you just ran.
 
 :::

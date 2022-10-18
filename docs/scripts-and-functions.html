@@ -208,18 +208,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bash-shell-scripts" id="toc-bash-shell-scripts" class="nav-link active" data-scroll-target="#bash-shell-scripts"><span class="toc-section-number">4.1</span>  Bash shell scripts</a>
+  <li><a href="#prepare-for-day-two" id="toc-prepare-for-day-two" class="nav-link active" data-scroll-target="#prepare-for-day-two"><span class="toc-section-number">4.1</span>  Prepare for day two</a></li>
+  <li><a href="#bash-shell-scripts" id="toc-bash-shell-scripts" class="nav-link" data-scroll-target="#bash-shell-scripts"><span class="toc-section-number">4.2</span>  Bash shell scripts</a>
   <ul class="collapse">
-  <li><a href="#script-files-must-be-executable" id="toc-script-files-must-be-executable" class="nav-link" data-scroll-target="#script-files-must-be-executable"><span class="toc-section-number">4.1.1</span>  Script files must be executable</a></li>
-  <li><a href="#running-a-script" id="toc-running-a-script" class="nav-link" data-scroll-target="#running-a-script"><span class="toc-section-number">4.1.2</span>  Running a script</a></li>
-  <li><a href="#scripts-are-more-useful-if-you-can-specify-the-inputs" id="toc-scripts-are-more-useful-if-you-can-specify-the-inputs" class="nav-link" data-scroll-target="#scripts-are-more-useful-if-you-can-specify-the-inputs"><span class="toc-section-number">4.1.3</span>  Scripts are more useful if you can specify the inputs</a></li>
-  <li><a href="#arguments-following-a-script-can-be-accessed-within-the-script" id="toc-arguments-following-a-script-can-be-accessed-within-the-script" class="nav-link" data-scroll-target="#arguments-following-a-script-can-be-accessed-within-the-script"><span class="toc-section-number">4.1.4</span>  Arguments following a script can be accessed within the script</a></li>
-  <li><a href="#now-we-can-use-it-on-other-samtools-stats-files" id="toc-now-we-can-use-it-on-other-samtools-stats-files" class="nav-link" data-scroll-target="#now-we-can-use-it-on-other-samtools-stats-files"><span class="toc-section-number">4.1.5</span>  Now we can use it on other samtools stats files</a></li>
+  <li><a href="#script-files-must-be-executable" id="toc-script-files-must-be-executable" class="nav-link" data-scroll-target="#script-files-must-be-executable"><span class="toc-section-number">4.2.1</span>  Script files must be executable</a></li>
+  <li><a href="#running-a-script" id="toc-running-a-script" class="nav-link" data-scroll-target="#running-a-script"><span class="toc-section-number">4.2.2</span>  Running a script</a></li>
+  <li><a href="#scripts-are-more-useful-if-you-can-specify-the-inputs" id="toc-scripts-are-more-useful-if-you-can-specify-the-inputs" class="nav-link" data-scroll-target="#scripts-are-more-useful-if-you-can-specify-the-inputs"><span class="toc-section-number">4.2.3</span>  Scripts are more useful if you can specify the inputs</a></li>
+  <li><a href="#arguments-following-a-script-can-be-accessed-within-the-script" id="toc-arguments-following-a-script-can-be-accessed-within-the-script" class="nav-link" data-scroll-target="#arguments-following-a-script-can-be-accessed-within-the-script"><span class="toc-section-number">4.2.4</span>  Arguments following a script can be accessed within the script</a></li>
+  <li><a href="#now-we-can-use-it-on-other-samtools-stats-files" id="toc-now-we-can-use-it-on-other-samtools-stats-files" class="nav-link" data-scroll-target="#now-we-can-use-it-on-other-samtools-stats-files"><span class="toc-section-number">4.2.5</span>  Now we can use it on other samtools stats files</a></li>
   </ul></li>
-  <li><a href="#bash-functions" id="toc-bash-functions" class="nav-link" data-scroll-target="#bash-functions"><span class="toc-section-number">4.2</span>  Bash functions</a>
+  <li><a href="#bash-functions" id="toc-bash-functions" class="nav-link" data-scroll-target="#bash-functions"><span class="toc-section-number">4.3</span>  Bash functions</a>
   <ul class="collapse">
-  <li><a href="#example-congratulate-yourself-on-making-it-through-your-day" id="toc-example-congratulate-yourself-on-making-it-through-your-day" class="nav-link" data-scroll-target="#example-congratulate-yourself-on-making-it-through-your-day"><span class="toc-section-number">4.2.1</span>  Example: congratulate yourself on making it through your day</a></li>
-  <li><a href="#bash-functions-take-positional-parameters-too" id="toc-bash-functions-take-positional-parameters-too" class="nav-link" data-scroll-target="#bash-functions-take-positional-parameters-too"><span class="toc-section-number">4.2.2</span>  Bash functions take positional parameters too</a></li>
+  <li><a href="#example-congratulate-yourself-on-making-it-through-your-day" id="toc-example-congratulate-yourself-on-making-it-through-your-day" class="nav-link" data-scroll-target="#example-congratulate-yourself-on-making-it-through-your-day"><span class="toc-section-number">4.3.1</span>  Example: congratulate yourself on making it through your day</a></li>
+  <li><a href="#bash-functions-take-positional-parameters-too" id="toc-bash-functions-take-positional-parameters-too" class="nav-link" data-scroll-target="#bash-functions-take-positional-parameters-too"><span class="toc-section-number">4.3.2</span>  Bash functions take positional parameters too</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -243,9 +244,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Before we dive into cluster computing the Joy of SLURM, we have two last topics to cover: bash shell scripts and bash functions.</p>
-<section id="bash-shell-scripts" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="bash-shell-scripts"><span class="header-section-number">4.1</span> Bash shell scripts</h2>
+<p>Before we dive into cluster computing and the Joy of SLURM, we have two last topics to cover: bash shell scripts and bash functions.</p>
+<section id="prepare-for-day-two" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="prepare-for-day-two"><span class="header-section-number">4.1</span> Prepare for day two</h2>
+<p>Get back to our playground directory. Then, to make sure that you have all the latest updates from the repository, use git to pull down any new changes.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Paste this in to be sure you have the most up-to-date resources</strong></pre>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/nmfs-bioinf-2022/playground</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="bash-shell-scripts" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="bash-shell-scripts"><span class="header-section-number">4.2</span> Bash shell scripts</h2>
 <p>We have been doing all of our bash scripting by writing commands on the command line.</p>
 <p>Useful bash code can be stored in a text file called a script, and then run like a normal Unix utility.</p>
 <p>To illustrate this, we will copy our samtools-stats-processing commands from before into a file using the <code>nano</code> text editor.</p>
@@ -254,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>Type this at the command line</strong></pre>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This opens a file called <code>sam-stats.sh</code> with a text editor called <code>nano</code>.</p>
 <p>The convention with bash shell scripts is to give them a <code>.sh</code> extension, but this is not required.</p>
@@ -263,30 +275,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>Copy this onto your clipboard and paste it into nano in your terminal</strong></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> data/samtools_stats/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gzip</span> <span class="at">-cd</span> <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> samp=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${FILE</span><span class="op">/</span><span class="ss">_stats.tsv.gz</span><span class="op">/</span><span class="va">})</span> <span class="st">'</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads mapped:/ {rm = $4}</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads properly paired:/ {rpp = $5}</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {bmc = $5}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print samp, rm, rpp, bmc}</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> data/samtools_stats/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gzip</span> <span class="at">-cd</span> <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> samp=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${FILE</span><span class="op">/</span><span class="ss">_stats.tsv.gz</span><span class="op">/</span><span class="va">})</span> <span class="st">'</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads mapped:/ {rm = $4}</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads properly paired:/ {rpp = $5}</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {bmc = $5}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print samp, rm, rpp, bmc}</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once that is done, use the arrow keys to go to the very top of the file and type <code>#!/bin/bash</code> on it and hit return twice, so that your file in <code>nano</code> looks like this:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>This is what the contents of the file in nano should look like</strong></pre>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> data/samtools_stats/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gzip</span> <span class="at">-cd</span> <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> samp=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${FILE</span><span class="op">/</span><span class="ss">_stats.tsv.gz</span><span class="op">/</span><span class="va">})</span> <span class="st">'</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads mapped:/ {rm = $4}</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads properly paired:/ {rpp = $5}</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {bmc = $5}</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print samp, rm, rpp, bmc}</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> data/samtools_stats/<span class="pp">*</span>.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gzip</span> <span class="at">-cd</span> <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> samp=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${FILE</span><span class="op">/</span><span class="ss">_stats.tsv.gz</span><span class="op">/</span><span class="va">})</span> <span class="st">'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads mapped:/ {rm = $4}</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads properly paired:/ {rpp = $5}</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {bmc = $5}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print samp, rm, rpp, bmc}</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then:</p>
 <ol type="1">
@@ -300,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>Type this at the command line</strong></pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -320,8 +332,8 @@ What’s this <code>#!</code> at the top of the file?
 <p>(If bash is the default shell on your system, you may not always need to have the shebang line, but it is good practice to do so.)</p>
 </div>
 </div>
-<section id="script-files-must-be-executable" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="script-files-must-be-executable"><span class="header-section-number">4.1.1</span> Script files must be executable</h3>
+<section id="script-files-must-be-executable" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="script-files-must-be-executable"><span class="header-section-number">4.2.1</span> Script files must be executable</h3>
 <p>The Unix operating system distinguishes between files that just hold data, and files that can the run or be “executed” by the computer.</p>
 <p>For your bash commands in a script to run on the computer, it must be of an executable type.</p>
 <p>We can make the file executable using the <code>chmod</code> command, like this:</p>
@@ -329,43 +341,51 @@ What’s this <code>#!</code> at the top of the file?
 <div class="code-with-filename-file">
 <pre><strong>Paste this into your shell</strong></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+x sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+x sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If we then use <code>ls -l</code> to list the file in long format like this:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Type this in</strong></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>we see:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwxrw-r--</span> 1 eanderson eanderson 317 Oct 14 13:40 sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwxrw-r--</span> 1 eanderson eanderson 317 Oct 14 13:40 sam-stats.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>x</code> in the first field of that line indicates that the file is executable by the user.</p>
 </section>
-<section id="running-a-script" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="running-a-script"><span class="header-section-number">4.1.2</span> Running a script</h3>
+<section id="running-a-script" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="running-a-script"><span class="header-section-number">4.2.2</span> Running a script</h3>
 <p>To run a script that is executable, you type the path to it.</p>
 <p>On Sedna, by default, the current working directory is not a place the computer looks for executable scripts, so we have to prepend <code>./</code> to its path:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Type this on the command line and hit RETURN.</strong></pre>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./sam-stats.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./sam-stats.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That runs our script.</p>
 </section>
-<section id="scripts-are-more-useful-if-you-can-specify-the-inputs" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="scripts-are-more-useful-if-you-can-specify-the-inputs"><span class="header-section-number">4.1.3</span> Scripts are more useful if you can specify the inputs</h3>
+<section id="scripts-are-more-useful-if-you-can-specify-the-inputs" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="scripts-are-more-useful-if-you-can-specify-the-inputs"><span class="header-section-number">4.2.3</span> Scripts are more useful if you can specify the inputs</h3>
 <p>So, that runs our script and produces results, but that is not so useful. We already had those results, in a sense.</p>
 <p>Shell scripts become much more useful when you can change the inputs that go to them.</p>
 <p>One way to do so involves using <em>positional parameters</em></p>
 </section>
-<section id="arguments-following-a-script-can-be-accessed-within-the-script" class="level3" data-number="4.1.4">
-<h3 data-number="4.1.4" class="anchored" data-anchor-id="arguments-following-a-script-can-be-accessed-within-the-script"><span class="header-section-number">4.1.4</span> Arguments following a script can be accessed within the script</h3>
-<p>If you put arguments after a script on the command line, then in the script itself:</p>
+<section id="arguments-following-a-script-can-be-accessed-within-the-script" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="arguments-following-a-script-can-be-accessed-within-the-script"><span class="header-section-number">4.2.4</span> Arguments following a script can be accessed within the script</h3>
+<p>If you put arguments after a script on the command line, for example like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Don't paste this in anywhere</strong></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">script.sh</span> arg1 some_other_arg  And_another_arg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>then in the script itself:</p>
 <ul>
-<li>the value of the first argument is accessible as <code>$1</code></li>
-<li>the value of the second argument is accessible as <code>$2</code></li>
+<li>the value of the first argument (<code>arg1</code>) is accessible as <code>$1</code></li>
+<li>the value of the second argument (<code>some_other_arg1</code>) is accessible as <code>$2</code></li>
+<li>the value of the third argument (<code>And_another_arg</code>) is accessible as <code>$3</code></li>
 </ul>
 <p>…and so forth for as many arguments as you want.</p>
 <p>So, we can rewrite our script as:</p>
@@ -373,16 +393,16 @@ What’s this <code>#!</code> at the top of the file?
 <div class="code-with-filename-file">
 <pre><strong>Just give this a read</strong></pre>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> <span class="va">$1</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gzip</span> <span class="at">-cd</span> <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> samp=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${FILE</span><span class="op">/</span><span class="ss">_stats.tsv.gz</span><span class="op">/</span><span class="va">})</span> <span class="st">'</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads mapped:/ {rm = $4}</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads properly paired:/ {rpp = $5}</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {bmc = $5}</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print samp, rm, rpp, bmc}</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> <span class="va">$1</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gzip</span> <span class="at">-cd</span> <span class="va">$FILE</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> samp=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${FILE</span><span class="op">/</span><span class="ss">_stats.tsv.gz</span><span class="op">/</span><span class="va">})</span> <span class="st">'</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads mapped:/ {rm = $4}</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /reads properly paired:/ {rpp = $5}</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">    $1=="SN" &amp;&amp; /bases mapped \(cigar\):/ {bmc = $5}</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">    END {print samp, rm, rpp, bmc}</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>See that we have replaced <code>data/samtools_stats/*.gz</code> with <code>$1</code>.</p>
 <p>We actually have that very script stored in <code>scripts/sam-stat-pp.sh</code>. And you can use it like this:</p>
@@ -390,12 +410,12 @@ What’s this <code>#!</code> at the top of the file?
 <div class="code-with-filename-file">
 <pre><strong>Paste this into the shell</strong></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/sam-stat-pp.sh</span> <span class="st">"data/samtools_stats/s0*.gz"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/sam-stat-pp.sh</span> <span class="st">"data/samtools_stats/s0*.gz"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, we have passed in <code>"data/samtools_stats/s0*.gz"</code> as the first argument to the script, and, since we have a <code>$1</code> in the script where that goes, it does what it did before.</p>
 </section>
-<section id="now-we-can-use-it-on-other-samtools-stats-files" class="level3" data-number="4.1.5">
-<h3 data-number="4.1.5" class="anchored" data-anchor-id="now-we-can-use-it-on-other-samtools-stats-files"><span class="header-section-number">4.1.5</span> Now we can use it on other samtools stats files</h3>
+<section id="now-we-can-use-it-on-other-samtools-stats-files" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="now-we-can-use-it-on-other-samtools-stats-files"><span class="header-section-number">4.2.5</span> Now we can use it on other samtools stats files</h3>
 <p>It is not very exciting to see it just run again on the same set of files.</p>
 <p>But, now we could direct the script to operate on a different set of files, just by changing the argument that we pass to the script.</p>
 <p>I have put a much larger set of samtools stats files within subdirectory of the <code>/share</code> directory on Sedna. You should be able to list them all with:</p>
@@ -403,7 +423,7 @@ What’s this <code>#!</code> at the top of the file?
 <div class="code-with-filename-file">
 <pre><strong>Paste this into your shell. This should work...</strong></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> /share/all/eriq/big_sam_stats/s<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> /share/all/eriq/big_sam_stats/s<span class="pp">*</span>.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Whoa! 275 files. (They are here on Sedna, in the shared folder, because I didn’t want to put them all on GitHub.)</p>
 <p>But, now, we can summarize them all just by pointing our script to them:</p>
@@ -411,34 +431,34 @@ What’s this <code>#!</code> at the top of the file?
 <div class="code-with-filename-file">
 <pre><strong>This should work on Sedna, Paste it into your shell</strong></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/sam-stat-pp.sh</span> <span class="st">"/share/all/eriq/big_sam_stats/s*.gz"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/sam-stat-pp.sh</span> <span class="st">"/share/all/eriq/big_sam_stats/s*.gz"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That is fast.</p>
 <p>If we wanted to redirect that into a file we could do so easily.</p>
 </section>
 </section>
-<section id="bash-functions" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="bash-functions"><span class="header-section-number">4.2</span> Bash functions</h2>
+<section id="bash-functions" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="bash-functions"><span class="header-section-number">4.3</span> Bash functions</h2>
 <p>Like most programming languages, you can define functions in bash.</p>
 <p>The syntax for defining a function named <code>MyFunc</code> is:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Just read this</strong></pre>
 </div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> MyFunc</span> <span class="kw">{</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">...code</span> that MyFunc executes...</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> MyFunc</span> <span class="kw">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">...code</span> that MyFunc executes...</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this regard, it has a similar syntax to R.</p>
 <p>Once defined, you can use the name of the function (in the above case, <code>MyFunc</code>) as if it were just another Unix command.</p>
-<section id="example-congratulate-yourself-on-making-it-through-your-day" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="example-congratulate-yourself-on-making-it-through-your-day"><span class="header-section-number">4.2.1</span> Example: congratulate yourself on making it through your day</h3>
+<section id="example-congratulate-yourself-on-making-it-through-your-day" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="example-congratulate-yourself-on-making-it-through-your-day"><span class="header-section-number">4.3.1</span> Example: congratulate yourself on making it through your day</h3>
 <p>Here is a gratuitous example: we make a bash function called <code>congrats</code> that tells us what time it is and encourages us to keep getting through our day:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Paste this into your terminal</strong></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> congrats</span> <span class="kw">{</span> <span class="bu">echo</span> <span class="st">"It is now </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">.  Congrats on making it this far in your day."</span><span class="kw">;</span> <span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> congrats</span> <span class="kw">{</span> <span class="bu">echo</span> <span class="st">"It is now </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">.  Congrats on making it this far in your day."</span><span class="kw">;</span> <span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -453,26 +473,33 @@ Warning
 <p>Curly braces in bash are extremely finicky. They don’t like to be near other characters. In the above, the space after the <code>{</code> is critical, as is the <code>;</code> before the <code>}</code>. (The last <code>}</code> needs to have a <code>;</code> before it if it does not have a line ending before it).</p>
 </div>
 </div>
+<p>Now, you can just type <code>congrats</code> at the command line:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Type this on the command line</strong></pre>
+</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">congrats</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="bash-functions-take-positional-parameters-too" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="bash-functions-take-positional-parameters-too"><span class="header-section-number">4.2.2</span> Bash functions take positional parameters too</h3>
+<section id="bash-functions-take-positional-parameters-too" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="bash-functions-take-positional-parameters-too"><span class="header-section-number">4.3.2</span> Bash functions take positional parameters too</h3>
 <p>We can rewrite our function as <code>congrats2</code> so that it can use two arguments, the first a name, and the second an adjective:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Paste this into your terminal</strong></pre>
 </div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> congrats2</span> <span class="kw">{</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"It is now </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">.  Congrats, </span><span class="va">$1</span><span class="st">, you are </span><span class="va">$2</span><span class="st">."</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> congrats2</span> <span class="kw">{</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"It is now </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">.  Congrats, </span><span class="va">$1</span><span class="st">, you are </span><span class="va">$2</span><span class="st">."</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, you can use that function and supply it with whatever names and adjectives you would like:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Paste these in and see what it does.</strong></pre>
 </div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">congrats2</span> Fred splendid</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">congrats2</span> Eric tired</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">congrats2</span> Amy amazing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">congrats2</span> Fred splendid</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">congrats2</span> Eric tired</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">congrats2</span> Amy amazing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will write a few functions, later, to simplify our life in SLURM.</p>
 

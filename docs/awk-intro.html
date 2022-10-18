@@ -559,26 +559,62 @@ For the programmers out there
 <pre><strong>Paste this into your terminal</strong></pre>
 </div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/samtools</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view bam/s001.bam <span class="kw">|</span> <span class="fu">less</span> <span class="at">-S</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view data/bam/s001.bam <span class="kw">|</span> <span class="fu">less</span> <span class="at">-S</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>module load bio/samtools</code> line gives us access to the <code>samtools</code> program, which we need for turning BAM files into text-based SAM files that we can use. Once we have given it in our shell, we have that access until we close the shell. Much more on that tomorrow!</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+If that failed you might need to define your MODULEPATH
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here we check to see if the bioinformatics paths on in the MODULEPATH:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Paste this in your shell</strong></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$MODULEPATH</span> <span class="kw">|</span> <span class="fu">grep</span> bioinformatics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If that command did not return anything to <code>stdout</code>, then you need to add a command to your <code>~/.bashrc</code> that will add <code>/opt/bioinformatics/modulefiles</code> to your MODULEPATH. You can do that (as detailed in the <a href="https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit#">Sedna Google Doc</a>) like this:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>If you need to, paste this into the shell</strong></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'export MODULEPATH=${MODULEPATH}:/opt/bioinformatics/modulefiles'</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And when you are done with that, reload your <code>.bashrc</code> to get the change to take effect:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>If you need to, paste this into the shell</strong></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 <p>The mapping quality is in the 5th field. It is a number that ranges from 0 to 60. We can count up how many times each of those numbers occurs using <code>awk</code>.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Here it is all on one line as I wrote it</strong></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view bam/s001.bam <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"; print "MAPQ", "NUM", "CUMUL";} {n[$5]++} END {for(i in n) tot+=n[i];  for(i=60;i&gt;=0;i--) {sum+=n[i]; print i, n[i], sum/tot;}}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view data/bam/s001.bam <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"; print "MAPQ", "NUM", "CUMUL";} {n[$5]++} END {for(i in n) tot+=n[i];  for(i=60;i&gt;=0;i--) {sum+=n[i]; print i, n[i], sum/tot;}}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Here it is broken across lines. Paste that in your shell.</strong></pre>
 </div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view bam/s001.bam <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">  BEGIN {OFS="\t"; print "MAPQ", "NUM", "CUMUL";} </span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="st">  {n[$5]++} </span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">  END {for(i in n) tot+=n[i];  for(i=60;i&gt;=0;i--) {sum+=n[i]; print i,n[i],sum/tot;}}</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view data/bam/s001.bam <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">  BEGIN {OFS="\t"; print "MAPQ", "NUM", "CUMUL";} </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">  {n[$5]++} </span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">  END {for(i in n) tot+=n[i];  for(i=60;i&gt;=0;i--) {sum+=n[i]; print i,n[i],sum/tot;}}</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It’s really compact and requires very little memory to do this. (You couldn’t read a whole BAM file into R and hope to deal with it).</p>
 <div class="callout-warning callout callout-style-default callout-captioned">
@@ -598,7 +634,7 @@ All arrays in <code>awk</code> are associative arrays
 <div class="code-with-filename-file">
 <pre><strong>Don't paste this anywhere! We are just talking about awk</strong></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="va">var</span><span class="op">[</span><span class="st">"this"</span><span class="op">]</span> <span class="ex">=</span> <span class="st">"Boing!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="va">var</span><span class="op">[</span><span class="st">"this"</span><span class="op">]</span> <span class="ex">=</span> <span class="st">"Boing!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create an array called <code>var</code> (if one does not already exist) and then it will set the value of element in <code>var</code> that is associated with the string <code>"this"</code> to the string <code>"Boing!"</code>.</p>
 <p>At the same time, if you do this:</p>
@@ -606,7 +642,7 @@ All arrays in <code>awk</code> are associative arrays
 <div class="code-with-filename-file">
 <pre><strong>Don't paste this anywhere! We are just talking about awk</strong></pre>
 </div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="va">var</span><span class="op">[</span><span class="dv">30</span><span class="op">]</span> <span class="ex">=</span> 67</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="va">var</span><span class="op">[</span><span class="dv">30</span><span class="op">]</span> <span class="ex">=</span> 67</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>then we are not assigning the value of <code>67</code> to the 30-th element of <code>var</code>. Rather, we are assigning the value <code>67</code> to the element of <code>var</code> that is associated with the string <code>"30"</code>.</p>
 <p>It can take a little getting used to, but it is very useful for counting things.</p>

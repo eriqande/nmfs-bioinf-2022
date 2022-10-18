@@ -108,10 +108,11 @@ A _partition_ is a collection of nodes that tend to be similar.
     - `node29` -- `node36`: "standard compute nodes with twice as much memory"
 - `himem` partition: Four nodes with a boatload of memory for high-memory jobs
     - `himem01` -- `himem04`
-- `bionode` partition: legacy machines from an old NWFSC cluster
-    - Most of us probably don't have access to this (it is a NWFSC thing I think)
+- `bionode` partition: legacy machines from an older NWFSC cluster
+    - I'm not sure if all of us have access to this.
     - When I check, it seems like a lot of the nodes are down, occasionally.
     - But I have been able to checkout resources on it.
+    - Might be an option, but it doesn't perform at the same level as the `node` partition
     
 
 ## Ask SLURM about what nodes are available, and how busy they are
@@ -203,12 +204,12 @@ If SLURM finds the requested resources are available, it
 provides the resources and starts the job.
 
 If resources are not available because other jobs are running,
-the reqested job enters the "queue" in at WAITING state.
+the reqested job enters the "queue" in a WAITING state.
 
 We can see how many jobs are running and how many are
 waiting, by using the SLURM `squeue` command:
 
-(By the way, notice that pattern: all SLURM command start with
+(By the way, notice the pattern? All SLURM command start with
 an `s`).
 
 ```{.sh filename="Type this at your command prompt"}
@@ -219,9 +220,10 @@ This tells us a little about all the jobs that are currently
 allocated resources or are waiting for resources.
 
 **One thing to note**: 
-- Every job is assigned a `JOBID`.
+- Every job is assigned a `SLURM_JOB_ID`.
 Which is a unique integer (that gets assigned successively).
-- And jobs might have a job NAME.
+- And jobs might have a job NAME, that is assigned by the user
+of is the name of the script that the job runs.
 
 ## I find the standard `squeue` output lacking
 
@@ -232,12 +234,12 @@ Once again, we make a bash function, `alljobs`, that runs `squeue` but
 provides more information.  
 ```{.sh filename="Paste this at your command prompt"}
 function alljobs {
-	if [ $# -ne 1 ]; then
-	  JL=10;
+  if [ $# -ne 1 ]; then
+    JL=10;
   else
-	  JL=$1;
+    JL=$1;
   fi;
-	squeue -o  "%.12i %.9P %.${JL}j %.15u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L";
+  squeue -o  "%.12i %.9P %.${JL}j %.15u %.2t %.15M %.6D %.18R %.5C %.12m %.12l %.12L";
 }
 ```
 
@@ -279,17 +281,19 @@ myjobs
 will install software for us, and also make it available for
 everyone else to use.
 
-However, software can be complicated.  Some software might
-conflict with other software.
+However, software can be complicated:
+
+- Some software might conflict with other software.
+- Some users might want different software versions
 
 The solution: maintain software (and its dependencies)
 in (somewhat) isolated _modules_.
 
 ::: {.callout-important}
 
-## Bioinformatic modules are only available if the MODULEPATH is specified
+## Bioinformatic modules on Sedna are only available if the MODULEPATH is specified
 
-Here we check to see if the bioinformatics paths on in the MODULEPATH:
+Here we check to see if the bioinformatics paths are in the MODULEPATH:
 ```{.sh filename="Paste this in your shell"}
 echo $MODULEPATH | grep bioinformatics
 ```
@@ -335,7 +339,7 @@ Instead, you want to see if it is available in the system _modules_.
 
 ## Check which software programs are available in the modules
 
-The command `module` and its submodules let you interact with the
+The command `module` and its subcommands let you interact with the
 software modules.
 
 `module avail` tells you what software is available in the modules.
@@ -403,7 +407,7 @@ you really need to know.
 :::
 
 
-## One note about modules
+## Two notes about modules
 
 ::: {.callout-important }
 
@@ -413,6 +417,27 @@ If you open a new shell, or allocate an interactive session on a new core,
 or logout and log back in again...
 
 ...You will have to reload the modules that you need.
+
+**So**: Any time you write a script that needs some software,
+you should load the module for that software in the initial lines
+of the script.
+
+:::
+
+::: {.callout-warning}
+
+## Modules are not always portable
+
+Not every cluster that you use will have the same
+modules set up in the same way. (Though it does seem that Giles has
+set out modules up according to the accepted best practices!).
+
+So, if you use code you developed for
+Sedna on another cluster, you might have to modify things to ensure that
+software is available.  
+
+The conda package manager is an option if you are going to be running
+your scripts on different clusters.
 
 :::
 

@@ -342,7 +342,7 @@ What’s that %j in the output and error options?
 <p>In the above script, you will see</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=bwa_index-%j.out</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=bwa_index-%j.err</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this context, the <code>%j</code> gets replace by <code>sbatch</code> with the SLURM <code>JOBID</code>.</p>
+<p>In this context, the <code>%j</code> gets replaced by <code>sbatch</code> with the <code>SLURM_JOB_ID</code>.</p>
 </div>
 </div>
 </section>
@@ -356,7 +356,7 @@ What’s that %j in the output and error options?
 <div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> scripts/bwa_index.sh resources/genome.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first argument is the script <code>scripts/bwa_index.sh</code> and the second, <code>resources/genome.fasta</code>, is the path to the genome that we want to index with <code>bwa</code>.</p>
-<p>When this command executes, it returns the SLURM <code>JOBID</code>. Make a note of it.</p>
+<p>When this command executes, it returns the <code>SLURM_JOB_ID</code>. Make a note of it.</p>
 <p>Once you have launched the job, try using <code>myjobs</code> and <code>alljobs</code> to see your job running in the queue, and also everyone else’s. (You don’t have much time, because it doesn’t take very long).</p>
 <div class="callout-caution callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -399,7 +399,7 @@ Self-study
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Try that command, <code>seff slurm-jobid</code>, replacing <code>slurm-jobid</code> with the actual SLURM <code>JOBID</code> of the job that you just ran.</p>
+<p>Try that command, <code>seff slurm-jobid</code>, replacing <code>slurm-jobid</code> with the actual <code>SLURM_JOB_ID</code> of the job that you just ran.</p>
 </div>
 </div>
 <div class="callout-warning callout callout-style-default callout-captioned">
