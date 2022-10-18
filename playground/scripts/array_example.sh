@@ -2,7 +2,7 @@
 #SBATCH --time=00:05:00
 #SBATCH --output=my_output_%A_%a
 #SBATCH --error=my_error_%A_%a
-#SBATCH --array=1-3
+#SBATCH --array=1-10
 
 ODIR=results/array_example
 mkdir -p $ODIR
@@ -16,4 +16,4 @@ mkdir -p $ODIR
   echo
 ) > $ODIR/output_$SLURM_ARRAY_TASK_ID.txt
 
-sleep 30
+sleep 20

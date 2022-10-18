@@ -463,6 +463,7 @@ for S in A B C; do sbatch scripts/bwa_map.sh $S; done
 ```
 
 When that is done, check what is running with `myjobs` and `alljobs`.
+(But do it fast! Because these jobs finish very quickly).
 
 ## Final thought
 
