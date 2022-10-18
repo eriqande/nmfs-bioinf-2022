@@ -195,7 +195,42 @@ them:
 
 That is fast.  
 
-If we wanted to redirect that into a file we could do so easily.
+If we wanted to redirect that into a file we could do so 
+
+::: {.callout-warning collapse=true}
+
+## Fun Tip! -- Record the positional parameters passed to a script.
+
+Sometimes it is nice to know and record the values of all the arguments
+passed to a script that you have written.  This can be done
+by adding something like this to your script:
+```{.sh}
+echo "Script $0 started at $(date) with arguments $* " > /dev/stderr
+```
+In that:
+
+- `$0` is the path to the script
+- `$(date)` puts the current date and time in the line
+- `$*` expands to a single string with all the arguments passed to the script
+- `> /dev/stderr` redirects `stdout` from `echo` to `stderr`
+
+So, for the last script, that might look like:
+```{.sh}
+#!/bin/bash
+
+echo "Script $0 started at $(date) with arguments $* " > /dev/stderr
+
+for FILE in $1; do
+  gzip -cd $FILE | awk -v samp=$(basename ${FILE/_stats.tsv.gz/}) '
+    $1=="SN" && /reads mapped:/ {rm = $4}
+    $1=="SN" && /reads properly paired:/ {rpp = $5}
+    $1=="SN" && /bases mapped \(cigar\):/ {bmc = $5}
+    END {print samp, rm, rpp, bmc}
+  '
+done
+```
+
+:::
 
 
 ## Bash functions

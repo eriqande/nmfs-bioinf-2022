@@ -1,0 +1,56 @@
+﻿10/17/2022    11:06:44 AM    from Paul Moran to Everyone:	Thanks Giles for all your help!
+10/17/2022    11:11:12 AM    from Giles Goetz to Everyone:	Sedna's online documentation
+10/17/2022    11:11:13 AM    from Giles Goetz to Everyone:	https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit?usp=sharing
+10/17/2022    11:12:25 AM    from Eric Anderson to Everyone:	https://eriqande.github.io/nmfs-bioinf-2022/
+10/17/2022    11:20:06 AM    from Giles Goetz to Everyone:	i saw several people running git on sedna
+10/17/2022    11:21:49 AM    from Amy Van Cise to Everyone:	can't install tree without sudo permissions! 
+10/17/2022    11:25:35 AM    from Amy Van Cise to Everyone:	yup! sorry, i forgot i was working on my own computer (hadn't signed into sedna)...up to speed now
+10/17/2022    11:33:58 AM    from Yuan Liu to Everyone:	I am working from home. Milford internet doesnt work really.
+10/17/2022    11:39:31 AM    from Giles Goetz to Everyone:	is anyone from the NEFSC, at the center, connected to Sedna currently?
+10/17/2022    11:40:01 AM    from Yuan Liu to Everyone:	Giles, Brian said he was having trouble connecting from work site.
+10/17/2022    11:41:14 AM    from Katyanne Shoemaker to Everyone:	I thought I was so stupid not able to paste!!!
+10/17/2022    11:41:23 AM    from katherine.mcfarland to Everyone:	If you are using PuTTY on a windows machine then the right click is the past function
+10/17/2022    11:41:27 AM    from Giles Goetz to Everyone:	yah, I was talking to him, I was trying to figure out if it was just Brian or if everyone at NEFSC
+10/17/2022    11:41:53 AM    from Katyanne Shoemaker to Everyone:	Right click on the active line works for me, Yuan
+10/17/2022    11:43:06 AM    from Eric Anderson to Everyone:	MobaXterm
+10/17/2022    11:43:18 AM    from SamGurr to Everyone:	mobaXterm recognizes shift+insert to paste copied text
+10/17/2022    12:00:46 PM    from Krista Nichols to Everyone:	My name is Krista. I like to eat chocolate, and I enjoy the spa.
+10/17/2022    12:00:55 PM    from Paul Moran to Everyone:	My name is Paul. I like to eat ice cream, and I enjoy motorcycle racing.
+10/17/2022    12:00:57 PM    from Joe to Everyone:	My name is Joe Dietrich. I like to eat Greek cuisine, and I enjoy kayaking.
+
+10/17/2022    12:01:03 PM    from Gary Longo to Everyone:	My name is Gary Jr. I like to eat beer, and I enjoy being in the water.
+10/17/2022    12:01:04 PM    from diana baetscher she/her to Everyone:	My name is diana. I like to eat blueberries, and I enjoy skiing.
+10/17/2022    12:01:07 PM    from Sara Schaal to Everyone:	My name is Sara. I like to eat potatoes, and I enjoy dog walks.
+10/17/2022    12:01:08 PM    from Ewann Berntson to Everyone:	My name is Ewann. I like to eat sushi, and I enjoy horses.
+10/17/2022    12:01:09 PM    from Nikki Vollmer to Everyone:	My name is Nikki. I like to eat ice cream, and I enjoy beach volleyball.
+10/17/2022    12:01:13 PM    from Jonathan Whitney to Everyone:	My name is Jon. I like to eat tacos, and I enjoy ocean swimming.
+10/17/2022    12:01:20 PM    from Katyanne Shoemaker to Everyone:	My name is Katy. I like to eat chocolate, and I enjoy kayaking.
+10/17/2022    12:12:20 PM    from Giles Goetz to Everyone:	i've used the bash for loop!
+10/17/2022    12:12:32 PM    from Phil A. Morin he/him to Everyone:	Love 'for loops'!!!
+10/17/2022    12:12:32 PM    from Krista Nichols to Everyone:	I have -- courtesy of Giles' help!
+10/17/2022    12:14:45 PM    from Gary Longo to Everyone:	I have also used for loop courtesy of Sir Giles help!
+10/17/2022    12:19:26 PM    from Giles Goetz to Everyone:	there is a command
+10/17/2022    12:19:30 PM    from Giles Goetz to Everyone:	its called set
+10/17/2022    12:19:52 PM    from Giles Goetz to Everyone:	set will spit out everything though
+10/17/2022    12:20:10 PM    from Giles Goetz to Everyone:	not as far as I know
+10/17/2022    12:20:15 PM    from Giles Goetz to Everyone:	everything is 'local'
+10/17/2022    12:20:54 PM    from Nan Himmelsbach to Everyone:	Great, thanks!
+10/17/2022    12:21:30 PM    from Giles Goetz to Everyone:	one thing you could do is prefix all the variables you define, so like LOCAL.VAR1, VAR2...then when you want to find them you can type
+10/17/2022    12:21:35 PM    from Giles Goetz to Everyone:	set | grep LOCAL.
+10/17/2022    12:21:55 PM    from Giles Goetz to Everyone:	you would have to define some variables first ....
+10/17/2022    13:01:25 PM    from Ewann Berntson to Everyone:	Thank you!
+10/17/2022    13:01:35 PM    from Giles Goetz to Everyone:	Thanks Eric
+10/17/2022    13:01:50 PM    from Amy Van Cise to Everyone:	Thanks Eric! 
+10/17/2022    13:02:21 PM    from Jonathan Whitney to Everyone:	YES! That sounds amazing
+10/17/2022    13:02:49 PM    from Amy Frey to Everyone:	That would be great. Thanks Eric!
+10/17/2022    13:02:59 PM    from Aimee Lang to Everyone:	Thanks Eric - that was so helpful!
+10/17/2022    13:03:00 PM    from diana baetscher she/her to Everyone:	Yes, thank you, Eric!
+10/17/2022    13:03:02 PM    from kim parsons she/her to Everyone:	thanks, eric!
+10/17/2022    13:03:11 PM    from Gary Longo to Everyone:	Super great, thanks Eric!!
+10/17/2022    13:03:13 PM    from Pat Barry to Everyone:	Thanks Eric! 
+10/17/2022    13:03:16 PM    from Amy Van Cise to Everyone:	I would definitely join a monthly bioinfomatics meeting! 
+10/17/2022    13:03:26 PM    from Sara Schaal to Everyone:	Thank you Eric! This was great!
+10/17/2022    13:03:43 PM    from brian smith to Everyone:	Thanks for the refresher Eric!  Looking forward to tomorrow.
+10/17/2022    13:04:33 PM    from Yuan Liu to Everyone:	It was great.! Thank you Eric!
+10/17/2022    13:04:33 PM    from Paul Moran to Everyone:	Thanks and good day, everyone!
+10/17/2022    13:24:21 PM    from Giles Goetz to Everyone:	ps auxww | grep eand | grep tmux

@@ -441,6 +441,9 @@ your scripts on different clusters.
 
 :::
 
+## If you need more software or newer versions on Sedna
+
+You can request software installations by using the [Sedna work request form](https://docs.google.com/forms/d/e/1FAIpQLSf2tDl9nJjihmHX9hM6ytMI3ToldqERVem1ge25-kp3JHw3tQ/viewform?usp=sf_link)
 
 ## Before we go, make our convenience functions available whenever we are on Sedna
 

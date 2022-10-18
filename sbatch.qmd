@@ -89,6 +89,26 @@ In this context, the `%j` gets replaced by `sbatch` with the
 
 :::
 
+::: {.callout-caution collapse=true}
+
+## Get email from SLURM.
+
+One useful feature of SLURM---especially if you are running just a few
+long jobs---is that you can tell it to send you email whenever some event
+occurs related to a job (like it Starts, or Finishes, or Fails).
+
+The SBATCH directives for that look like:
+```{.sh}
+#SBATCH --mail-user=myemail@emailserver.com
+#SBATCH --mail-type=ALL
+```
+where you would replace `myemail@emailserver.com` with your own
+email address.
+
+Note that option `--mail-type` can be tailored to modulate how much email
+you will get from SLURM.
+
+:::
 
 ## Let us submit the `bwa_index.sh` job to SLURM
 

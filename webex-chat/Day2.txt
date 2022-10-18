@@ -1,0 +1,81 @@
+﻿10/18/2022    11:05:18 AM    from Krista Nichols to Everyone:	Link for the repository is here:
+10/18/2022    11:05:19 AM    from Krista Nichols to Everyone:	https://github.com/eriqande/nmfs-bioinf-2022
+10/18/2022    11:08:56 AM    from Krista Nichols to Everyone:	and here for the pretty website for content: https://eriqande.github.io/nmfs-bioinf-2022/
+10/18/2022    11:12:44 AM    from Joe to Everyone:	I have used  notepad++  as a simple editor
+10/18/2022    11:20:34 AM    from Nikki Vollmer to Everyone:	would nohup do what you want?
+10/18/2022    11:25:32 AM    from Nikki Vollmer to Everyone:	I thought the nohup.out file might include the code but i don't think it does
+10/18/2022    11:26:13 AM    from Eric Anderson to Everyone:	echo "Launched $0 at $(date)  with parameters $@" > /dev/stderr
+10/18/2022    11:34:24 AM    from Krista Nichols to Everyone:	sedna documentation and overview: https://docs.google.com/document/d/1nn0T0OWEsQCBoCdaH6DSY69lQSbK3XnPlseyyQuU2Lc/edit?usp=sharing
+10/18/2022    11:43:37 AM    from Ewann Berntson to Everyone:	node 30
+10/18/2022    11:43:38 AM    from Phil A. Morin he/him to Everyone:	 30
+10/18/2022    11:43:39 AM    from Gary Longo to Everyone:	Node 16 for life!
+10/18/2022    11:43:39 AM    from Lynsey Wilcox to Everyone:	30
+10/18/2022    11:43:39 AM    from Yuan Liu to Everyone:	30
+10/18/2022    11:43:40 AM    from Nicolaus Adams to Everyone:	30
+10/18/2022    11:43:40 AM    from kim parsons she/her to Everyone:	16
+10/18/2022    11:43:42 AM    from Katyanne Shoemaker to Everyone:	node 16
+10/18/2022    11:43:43 AM    from Joe to Everyone:	16
+10/18/2022    11:43:43 AM    from Nikki Vollmer to Everyone:	30
+10/18/2022    11:43:43 AM    from brian smith to Everyone:	16
+10/18/2022    11:43:43 AM    from Amy Frey to Everyone:	16
+10/18/2022    11:43:44 AM    from katherine.mcfarland to Everyone:	16
+10/18/2022    11:43:45 AM    from JM to Everyone:	30
+10/18/2022    11:43:45 AM    from Jonathan Whitney to Everyone:	30
+10/18/2022    11:43:45 AM    from Pat Barry he/him to Everyone:	16
+10/18/2022    11:43:46 AM    from Krista Nichols to Everyone:	16
+10/18/2022    11:43:46 AM    from Diana Baetscher to Everyone:	30
+10/18/2022    11:44:10 AM    from Sara Schaal to Everyone:	16
+10/18/2022    12:05:40 PM    from Ewann Berntson to Everyone:	no output--added them!
+10/18/2022    12:05:42 PM    from Katyanne Shoemaker to Everyone:	it works
+10/18/2022    12:05:45 PM    from Pat Barry he/him to Everyone:	Yes
+10/18/2022    12:05:45 PM    from Krista Nichols to Everyone:	yes
+10/18/2022    12:05:46 PM    from katherine.mcfarland to Everyone:	yes
+10/18/2022    12:05:46 PM    from Nan Himmelsbach to Everyone:	yes
+10/18/2022    12:05:46 PM    from Jonathan Whitney to Everyone:	yes
+10/18/2022    12:05:47 PM    from Phil A. Morin he/him to Everyone:	yes
+10/18/2022    12:05:48 PM    from Sara Schaal to Everyone:	yep
+10/18/2022    12:05:48 PM    from brian smith to Everyone:	yes 
+10/18/2022    12:05:48 PM    from Lynsey Wilcox to Everyone:	yes
+10/18/2022    12:05:48 PM    from Nikki Vollmer to Everyone:	yes
+10/18/2022    12:05:48 PM    from Diana Baetscher to Everyone:	yes
+10/18/2022    12:05:50 PM    from kim parsons she/her to Everyone:	yes
+10/18/2022    12:05:50 PM    from Amy Frey to Everyone:	yes
+10/18/2022    12:05:52 PM    from Joe to Everyone:	yes
+10/18/2022    12:05:53 PM    from Gary Longo to Everyone:	yes
+10/18/2022    12:05:55 PM    from Ewann Berntson to Everyone:	yes
+10/18/2022    12:07:33 PM    from Phil A. Morin he/him to Everyone:	or just module av
+10/18/2022    12:10:13 PM    from Krista Nichols to Everyone:	Sedna work request form:
+10/18/2022    12:10:15 PM    from Krista Nichols to Everyone:	https://docs.google.com/forms/d/e/1FAIpQLSf2tDl9nJjihmHX9hM6ytMI3ToldqERVem1ge25-kp3JHw3tQ/viewform?usp=sf_link
+10/18/2022    12:16:22 PM    from Giles Goetz to Everyone:	the functions should be able to go anywhere in the file since they don't require other functions or anything external
+10/18/2022    12:17:46 PM    from Giles Goetz to Everyone:	if you start making lots of functions and aliases, you could put them in seperate files and have the .bashrc load them
+10/18/2022    12:19:29 PM    from Krista Nichols to Everyone:	back at 11:25 for sbatch!
+10/18/2022    12:45:03 PM    from Joe to Everyone:	Being able to have the options in the script file seems great! I have only used SGE for jobs and I would always include options as comments in my scripts for my personal memory anyway
+10/18/2022    12:48:01 PM    from Krista Nichols to Everyone:	#SBATCH --mail-user=krista.nichols@noaa.gov
+# See manual for other options for --mail-type
+#SBATCH --mail-type=ALL
+10/18/2022    12:49:18 PM    from Phil A. Morin he/him to Everyone:	#SBATCH --mail-user=phillip.morin@noaa.gov
+10/18/2022    12:49:39 PM    from Giles Goetz to Everyone:	here is from one of the examples in the Sedna document
+10/18/2022    12:49:55 PM    from Giles Goetz to Everyone:	#SBATCH --mail-user=my.email@noaa.gov
+#SBATCH --mail-type=ALL
+
+10/18/2022    12:52:54 PM    from Giles Goetz to Everyone:	#SBATCH -D /scratch/ggoetz/testing/masurca/run1
+
+10/18/2022    12:53:13 PM    from Phil A. Morin he/him to Everyone:	#SBATCH -D /scratch/pmorin/temp
+10/18/2022    12:53:16 PM    from Giles Goetz to Everyone:	-D is --chdir
+10/18/2022    13:16:20 PM    from Ewann Berntson to Everyone:	it told me permission denied?
+10/18/2022    13:16:38 PM    from Katyanne Shoemaker to Everyone:	Is myacct working for others?
+10/18/2022    13:17:34 PM    from Katyanne Shoemaker to Everyone:	ok thanks
+10/18/2022    13:29:55 PM    from Ewann Berntson to Everyone:	Thanks!
+10/18/2022    13:30:12 PM    from kim parsons she/her to Everyone:	thanks Eric!
+10/18/2022    13:30:19 PM    from Katyanne Shoemaker to Everyone:	Excellent, thank you!
+10/18/2022    13:30:22 PM    from Pat Barry he/him to Everyone:	Thanks Eric!
+10/18/2022    13:30:25 PM    from Nan Himmelsbach to Everyone:	Thank you!! 
+10/18/2022    13:30:31 PM    from Aimee Lang to Everyone:	Thanks Eric!
+10/18/2022    13:30:41 PM    from Andrea Schmidt to Everyone:	Thanks so much!!!
+10/18/2022    13:30:45 PM    from Amy Frey to Everyone:	Thank you!!
+10/18/2022    13:30:53 PM    from Diana Baetscher to Everyone:	Thank you, Eric! Many helpful fcts for my .bashrc!
+10/18/2022    13:31:44 PM    from Gary Longo to Everyone:	Thanks, Eric!!!
+10/18/2022    13:31:59 PM    from brian smith to Everyone:	Thank you!!
+10/18/2022    13:32:04 PM    from Sara Schaal to Everyone:	Thank you Eric (:
+10/18/2022    13:32:04 PM    from Yuan Liu to Everyone:	haha. 
+10/18/2022    13:32:13 PM    from Yuan Liu to Everyone:	Thank you Eric!
