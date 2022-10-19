@@ -51,9 +51,6 @@ Sedna cluster to simplify your bioinformatics life.
     - [Slurm Job Arrays](slurm-arrays.qmd#slurm-arrays) (40 minutes)
 * Day 3: Job Arrays, then an introduction to Snakemake
     - [Slurm Job Arrays](slurm-arrays.qmd#slurm-arrays) (25 minutes)
-    - Snakemake. Will somewhat follow [these slides](https://eriqande.github.io/con-gen-2022/slides/snake-slides.html#/section)
-    - BUT, it will be modified to show use of Sedna's environment modules
-        and also to show use of a profile for dispatching jobs to Slurm from
-        Snakemake.
+    - [Snakemake Tutorial Introduction](snake.qmd#snake) (90 minutes)
 
 

@@ -15,6 +15,7 @@ book:
     - slurm.qmd
     - sbatch.qmd
     - slurm-arrays.qmd
+    - snake.qmd
   sidebar:
     logo: quarto-static/fisheries_header_logo_jul2019.png
 

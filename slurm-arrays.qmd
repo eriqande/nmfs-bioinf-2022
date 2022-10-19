@@ -215,6 +215,6 @@ Oddly enough, I haven't directly launched any jobs using `sbatch` (apart from th
 example jobs for this course) in many months, because I drive all my bioinformatics
 projects using Snakemake, which sends my jobs to SLURM for me.
 
-I will give y'all a brief introduction to Snakemake tomorrow!
+Next up is a brief introduction to Snakemake!
 
 
