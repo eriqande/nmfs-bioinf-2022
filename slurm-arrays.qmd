@@ -139,7 +139,7 @@ easy to do!
 ### The `line-assign.sh` script
 
 Within the repository is a script called `scripts/line-assign.sh`, that looks like this:
-```{.sh filename="Contents of inputs/fq-samples.tsv"}
+```{.sh filename="Contents of scripts/line-assign.sh"}
 `r paste(readLines("playground/scripts/line-assign.sh"), collapse = "\n")`
 ```
 
