@@ -15,4 +15,4 @@ rather than as a book.
 
 Please clink on this following link:
 
-[Snakemake Slides](https://eriqande.github.io/nmfs-bioinf-2022/snake-slides.html)
+[Snakemake Slides](https://eriqande.github.io/nmfs-bioinf-2022/snake-slides.html#/section)
