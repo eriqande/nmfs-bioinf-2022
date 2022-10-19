@@ -19,8 +19,6 @@ book:
   sidebar:
     logo: quarto-static/fisheries_header_logo_jul2019.png
 
-bibliography: references.bib
-
 format:
   html:
     theme: cosmo

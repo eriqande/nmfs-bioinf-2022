@@ -965,7 +965,7 @@ forces the dry run) dispatching it through SLURM's
 `sbatch` function.
 
 ```{.sh filename="Paste this into your shell"}
-# if that looks good, do the run for real
+# if the dry-run looked good, do the run for real
 snakemake -p --profile hpcc-profiles/slurm/sedna results/vcf/all.vcf
 ```
 
@@ -975,9 +975,6 @@ snakemake -p --profile hpcc-profiles/slurm/sedna results/vcf/all.vcf
 * Python code is allowed in most places in the Snakefile
 * _Input functions_ can be quite useful (or absolutely essential)
 * You can benchmark every job instance of a rule, which records the resources used (time, memory, etc.)
-* Pretty easy integration (once you get past the somewhat scattered documentation)
-with SLURM on your cluster.  (I recommend checking out the resources at
-[https://github.com/jdblischak/smk-simple-slurm](https://github.com/jdblischak/smk-simple-slurm))
 
 
 ## Where to from here? {background-image="quarto-static/slideswoosh-white.png" background-size="contain"}
